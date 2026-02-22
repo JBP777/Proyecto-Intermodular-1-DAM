@@ -119,9 +119,10 @@
 	    WHERE R.colaborador = C.usuario
 	);
 
-	UPDATE COLABORADOR C
-	SET total_resueltas = (
-	    SELECT COUNT(*)
-	    FROM RESOLVER R
-	    WHERE R.colaborador = C.usuario
+
+UPDATE REPORTADOR R
+SET total_creadas = (
+    SELECT COUNT(*)
+    FROM INCIDENCIA I
+    WHERE I.reportador = R.usuario
 );
