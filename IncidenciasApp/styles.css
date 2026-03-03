@@ -1,5 +1,5 @@
 :root {
-    --primary: #FFC010;
+    --primary: #ffcf4b;
     --secondary: #00A082;
     --dark: #2D333D;
     --light: #F5F5F5;
@@ -18,7 +18,7 @@ body {
     color: var(--dark);
 }
 
-/* NAV */
+/* Barra de navegacion */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -26,18 +26,20 @@ body {
     padding: 20px 8%;
     position: sticky;
     top: 0;
-    background: var(--white);
     z-index: 10;
 }
 
-.logo {
-    font-weight: 800;
-    font-size: 1.4rem;
-    color: var(--secondary);
-}
 
 .logo span {
-    color: var(--primary);
+    color:#ffc72d;
+}
+
+.hero h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+    font-weight: normal;
+    margin-bottom: 200px;
+    color: var(--dark);
 }
 
 .nav-links {
@@ -77,33 +79,42 @@ body {
     cursor: pointer;
 }
 
-/* HERO */
+/* Logo — quitar el margin: 100px y centrar */
+.logo {
+    font-weight: 800;
+    font-size: 12.4rem;
+    color: #00A082;
+    margin-top: 70px;
+    text-shadow: #2D333D 2px 2px 0px, #2D333D -2px -2px 0px, #2D333D -2px 2px 0px, #2D333D 4px -2px 0px;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+/* Hero — pasar de grid a flex centrado */
 .hero {
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 60px;
-    padding: 80px 8%;
+    display: flex;
+    margin-top: -200px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 350px 150px;
     background: var(--primary);
     border-radius: 0 0 50px 50px;
 }
 
-.pill {
-    background: rgba(255,255,255,0.4);
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    display: inline-block;
-    margin-bottom: 20px;
+.hero-text {
+    max-width: 680px;
 }
 
-.hero h1 {
-    font-size: 3rem;
-    line-height: 1.1;
-    margin-bottom: 20px;
+.hero p {
+    color: rgba(45, 51, 61, 0.75);
+    font-size: 1rem;
+    line-height: 1.6;
 }
 
 .hero-buttons {
     display: flex;
+    justify-content: center;
     gap: 15px;
     margin-top: 30px;
 }
@@ -137,7 +148,7 @@ body {
     border-radius: 20px;
 }
 
-/* ABOUT */
+/* Sobre nosotros */
 .about {
     padding: 90px 8%;
     text-align: center;
@@ -166,7 +177,7 @@ body {
     box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
-/* CATEGORIES */
+/* Categorias */
 .categories {
     padding: 80px 8%;
 }
@@ -196,7 +207,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* DOWNLOAD */
+/* Descarga */
 .download {
     padding: 100px 8%;
 }
@@ -228,11 +239,72 @@ body {
     border-radius: 15px;
     font-weight: 700;
     cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-/* FOOTER */
+/* Pie de pagina */
 .footer {
     text-align: center;
     padding: 40px;
     color: #777;
+}
+
+/* Formulario de contacto */
+/* Hazme el formulario de contacto mas bonito, moderno con border radius, sombras, colores, etc. */
+
+.form-contacto {
+    background: var(--light);
+    padding: 40px;
+    border-radius: 30px;
+    max-width: 400px;
+    margin: 50px auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+
+}
+
+.form-contacto h2 {
+    margin-bottom: 20px;
+    color: var(--dark);
+}
+
+.form-contacto input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.form-contacto textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.form-contacto input:focus {
+    border-color: var(--secondary);
+    outline: none;
+    box-shadow: 0 0 5px rgba(0,160,130,0.5);
+}
+
+.form-contacto textarea:focus {
+    border-color: var(--secondary);
+    outline: none;
+    box-shadow: 0 0 5px rgba(0,160,130,0.5);
+}
+
+.form-contacto button {
+    background: var(--secondary);
+    color: var(--white);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 100px;
+    transition: background 0.3s, box-shadow 0.3s;
 }
