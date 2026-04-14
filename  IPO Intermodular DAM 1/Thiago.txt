@@ -1,0 +1,66 @@
+THIAGO – Administrador de Sistemas
+
+1. PUESTO DE TRABAJO
+
+Nombre: Administrador de Sistemas y Servidores
+
+Funciones:
+	•	Configuración de Ubuntu Server.
+	•	Asignación de IP fija.
+	•	Instalación y configuración de MySQL.
+	•	Configuración del servidor web.
+	•	Creación de scripts de automatización.
+
+Conocimientos:
+	•	Linux
+	•	Redes
+	•	MySQL
+	•	Bash
+	•	Seguridad básica
+
+
+
+2. TIPO DE CONTRATO
+
+Indefinido a jornada completa.
+
+
+
+3. JORNADA
+
+40 horas semanales.
+
+
+
+4. SALARIO
+
+Base: 1.600 €
+Complemento técnico: 150 €
+Total mensual: 1.750 €
+Total anual: 21.000 €
+
+
+
+5. BENEFICIOS
+	•	Teletrabajo ocasional.
+	•	Formación en ciberseguridad.
+
+
+
+6. RIESGOS
+riesgo : estres tecnico , trabajo prolongado 
+daño : ansiedad , fatiga 
+medida : protocolo de incidencias , pausa activas 
+
+7. OTRAS CONDICIONES
+
+Disponibilidad ante incidencias críticas del servidor.
+
+
+
+8. CONTRATO
+
+Empresa: Incidencias App S.L.
+Trabajador: Thiago
+Inicio: 01/03/2026
+Indefinido jornada completa

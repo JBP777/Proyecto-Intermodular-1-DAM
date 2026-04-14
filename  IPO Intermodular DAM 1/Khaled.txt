@@ -1,0 +1,78 @@
+KHALED – Desarrollador Backend Java
+
+1. PUESTO DE TRABAJO
+
+Nombre del puesto: Desarrollador Backend Java
+
+Funciones:
+	•	Desarrollo de la lógica del programa en Java.
+	•	Aplicación de arquitectura MVC.
+	•	Creación de entidades (Usuario, Incidencia, Comentario).
+	•	Implementación de operaciones CRUD.
+	•	Conexión con base de datos MySQL.
+	•	Validación de formularios.
+
+Conocimientos y habilidades:
+	•	Java
+	•	JDBC
+	•	SQL
+	•	Git y GitHub
+	•	Trabajo en equipo
+	•	Resolución de problemas
+
+
+
+2. TIPO DE CONTRATO
+
+Contrato indefinido a jornada completa.
+Se elige porque es un puesto estructural necesario para el funcionamiento continuo de la empresa.
+
+
+
+3. JORNADA Y HORARIO
+
+40 horas semanales.
+Horario: lunes a viernes de 9:00 a 14:00 y de 15:00 a 18:00.
+
+Cumple el máximo legal establecido en el Estatuto de los Trabajadores.
+
+
+
+4. SALARIO
+
+Salario base: 1.700 € brutos/mes
+Complemento técnico: 200 €
+Total mensual: 1.900 €
+Total anual: 22.800 €
+
+
+
+5. BENEFICIOS DE CONCILIACIÓN
+	•	Teletrabajo 2 días por semana.
+	•	Flexibilidad de entrada.
+	•	30 días naturales de vacaciones.
+	•	Permisos según ley.
+
+
+
+6. RIESGOS LABORALES
+riesgo : sedentarismo , fatiga visual , estres 
+daño : dolor de espalda , dolor de cabeza , ansiedad 
+medida : silla ergonomica , descanso cada dos horas , planificacion del trabajo 
+
+
+7. OTRAS CONDICIONES
+	•	Formación continua pagada por la empresa.
+	•	Revisión salarial anual.
+	•	Posibilidad de promoción interna.
+
+
+
+8. CONTRATO DE TRABAJO
+
+Empresa: Incidencias App S.L.
+Trabajador: Khaled
+Fecha inicio: 01/03/2026
+Tipo: Indefinido jornada completa
+Periodo de prueba: 2 meses
+Salario bruto anual: 22.800 €
