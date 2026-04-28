@@ -21,7 +21,7 @@ import javax.swing.JScrollPane;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class Ventana_Principal_Admin extends JFrame {
+public class Ventana_Principal_Usuario extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -37,7 +37,7 @@ public class Ventana_Principal_Admin extends JFrame {
 	private JTable table;
 	protected DefaultTableModel modelo;
 	
-	public Ventana_Principal_Admin(Ventana_Inicio v) {
+	public Ventana_Principal_Usuario(Ventana_Inicio v) {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -45,6 +45,8 @@ public class Ventana_Principal_Admin extends JFrame {
 				dispose();
 			}
 		});
+		
+		
 		
 		setTitle("FIXIT!");
 		setBounds(100, 100, 800, 528);
@@ -68,12 +70,6 @@ public class Ventana_Principal_Admin extends JFrame {
 		label_IT.setBounds(64, 5, 49, 54);
 		contentPane.add(label_IT);
 		
-		JLabel label_admin = new JLabel("ADMIN");
-		label_admin.setForeground(new Color(128, 0, 0));
-		label_admin.setFont(new Font("Britannic Bold", Font.PLAIN, 19));
-		label_admin.setBounds(109, 11, 58, 54);
-		contentPane.add(label_admin);
-		
 		// TABLA
 		
 		String[] columnas = {"Estado", "Titulo", "Descripcion", "Fecha Creada", "Reportador", "Zona"};
@@ -96,31 +92,45 @@ public class Ventana_Principal_Admin extends JFrame {
 		
 		// BOTONES
 		
-		JButton boton_borrarIncidencia = new JButton("Borrar Incidencia");
+		JButton boton_borrarIncidencia = new JButton("Agregar Incidencia");
 		boton_borrarIncidencia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Ventana_AgregarIncidencia_Usuario v = new Ventana_AgregarIncidencia_Usuario(Ventana_Principal_Usuario.this);
+				v.setVisible(true);
+				dispose();
 			}
 		});
 		boton_borrarIncidencia.setForeground(verdeOscuro);
-		boton_borrarIncidencia.setBackground(new Color(128, 255, 128));
+		boton_borrarIncidencia.setBackground(verdeBrillante);
 		boton_borrarIncidencia.setFont(new Font("Britannic Bold", Font.PLAIN, 12));
 		boton_borrarIncidencia.setBounds(10, 62, 143, 93);
 		contentPane.add(boton_borrarIncidencia);
 		
-		JButton boton_borrarUsuario = new JButton("Borrar Usuario:");
+		JButton boton_borrarUsuario = new JButton("Borrar Incidencia");
 		boton_borrarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana_BorrarUsuario_Admin v = new Ventana_BorrarUsuario_Admin(Ventana_Principal_Admin.this);
-				v.setVisible(true);
-				setVisible(false);
 				
 			}
 		});
-		boton_borrarUsuario.setForeground(new Color(0, 121, 61));
+		boton_borrarUsuario.setForeground(verdeOscuro);
 		boton_borrarUsuario.setFont(new Font("Britannic Bold", Font.PLAIN, 12));
-		boton_borrarUsuario.setBackground(new Color(0, 204, 102));
+		boton_borrarUsuario.setBackground(verdeBrillante);
 		boton_borrarUsuario.setBounds(10, 166, 143, 93);
 		contentPane.add(boton_borrarUsuario);
+		
+		JButton boton_verPerfil = new JButton("Ver Perfil");
+		boton_verPerfil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Ventana_VerPerfil_Usuario v = new Ventana_VerPerfil_Usuario(Ventana_Principal_Usuario.this);
+				v.setVisible(true);
+				dispose();
+			}
+		});
+		boton_verPerfil.setForeground(verdeOscuro);
+		boton_verPerfil.setFont(new Font("Britannic Bold", Font.PLAIN, 12));
+		boton_verPerfil.setBackground(verdeBrillante);
+		boton_verPerfil.setBounds(10, 270, 143, 93);
+		contentPane.add(boton_verPerfil);
 		
 		
 

@@ -18,10 +18,15 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JSpinner;
+import javax.swing.JList;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class Ventana_Principal_Admin extends JFrame {
+public class Ventana_AgregarIncidencia_Usuario extends JFrame {
+	
+	
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -33,11 +38,11 @@ public class Ventana_Principal_Admin extends JFrame {
 	Color verdeBrillante = new Color(0, 204, 102);
 	Color amarilloPastel = new Color(255, 255, 128);
 	Color verdeOscuro = new Color(0, 121, 61);
-	
-	private JTable table;
 	protected DefaultTableModel modelo;
+	private JTextField input_Titulo;
+	private JTextField input_Fecha;
 	
-	public Ventana_Principal_Admin(Ventana_Inicio v) {
+	public Ventana_AgregarIncidencia_Usuario(Ventana_Principal_Usuario v) {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -68,37 +73,48 @@ public class Ventana_Principal_Admin extends JFrame {
 		label_IT.setBounds(64, 5, 49, 54);
 		contentPane.add(label_IT);
 		
-		JLabel label_admin = new JLabel("ADMIN");
-		label_admin.setForeground(new Color(128, 0, 0));
-		label_admin.setFont(new Font("Britannic Bold", Font.PLAIN, 19));
-		label_admin.setBounds(109, 11, 58, 54);
-		contentPane.add(label_admin);
+		JButton boton_verPerfil = new JButton("Ver Perfil");
+		boton_verPerfil.setForeground(verdeOscuro);
+		boton_verPerfil.setFont(new Font("Britannic Bold", Font.PLAIN, 12));
+		boton_verPerfil.setBackground(verdeBrillante);
+		boton_verPerfil.setBounds(10, 270, 143, 93);
+		contentPane.add(boton_verPerfil);
+		
+		JLabel label_Titulo = new JLabel("Titulo:");
+		label_Titulo.setFont(new Font("Tahoma", Font.BOLD, 15));
+		label_Titulo.setBounds(196, 90, 65, 32);
+		contentPane.add(label_Titulo);
+		
+		JLabel label_Descripcion = new JLabel("Descripcion:");
+		label_Descripcion.setFont(new Font("Tahoma", Font.BOLD, 15));
+		label_Descripcion.setBounds(196, 133, 116, 32);
+		contentPane.add(label_Descripcion);
+		
+		JTextArea input_Descripcion = new JTextArea();
+		input_Descripcion.setBounds(196, 166, 237, 54);
+		contentPane.add(input_Descripcion);
+		
+		JLabel label_Fecha = new JLabel("Fecha de Creacion:");
+		label_Fecha.setFont(new Font("Tahoma", Font.BOLD, 15));
+		label_Fecha.setBounds(196, 231, 152, 32);
+		contentPane.add(label_Fecha);
+		
+		JLabel label_Zona = new JLabel("Zona:");
+		label_Zona.setFont(new Font("Tahoma", Font.BOLD, 15));
+		label_Zona.setBounds(196, 284, 152, 32);
+		contentPane.add(label_Zona);
 		
 		// TABLA
 		
 		String[] columnas = {"Estado", "Titulo", "Descripcion", "Fecha Creada", "Reportador", "Zona"};
 		modelo = new DefaultTableModel(columnas, 0);
 		
-		table = new JTable(modelo);
-		table.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		table.setBackground(amarilloPastel);
-		table.setOpaque(true);
-		
-		// Thiago Sesseler: Hace falta verificar como hacer lo del color sin tocar mucha cosa rara.
-		
-		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(163, 59, 611, 419);
-		scrollPane.getViewport().setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		scrollPane.getViewport().setBackground(amarilloPastel); 
-		scrollPane.setBackground(amarilloFondo);
-		scrollPane.getViewport().setForeground(amarilloOscuro);
-		contentPane.add(scrollPane);   
-		
 		// BOTONES
 		
-		JButton boton_borrarIncidencia = new JButton("Borrar Incidencia");
+		JButton boton_borrarIncidencia = new JButton("Agregar Incidencia");
 		boton_borrarIncidencia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		boton_borrarIncidencia.setForeground(verdeOscuro);
@@ -107,20 +123,37 @@ public class Ventana_Principal_Admin extends JFrame {
 		boton_borrarIncidencia.setBounds(10, 62, 143, 93);
 		contentPane.add(boton_borrarIncidencia);
 		
-		JButton boton_borrarUsuario = new JButton("Borrar Usuario:");
+		JButton boton_borrarUsuario = new JButton("Borrar Incidencia");
 		boton_borrarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana_BorrarUsuario_Admin v = new Ventana_BorrarUsuario_Admin(Ventana_Principal_Admin.this);
-				v.setVisible(true);
-				setVisible(false);
 				
 			}
 		});
-		boton_borrarUsuario.setForeground(new Color(0, 121, 61));
+		boton_borrarUsuario.setForeground(verdeOscuro);
 		boton_borrarUsuario.setFont(new Font("Britannic Bold", Font.PLAIN, 12));
-		boton_borrarUsuario.setBackground(new Color(0, 204, 102));
+		boton_borrarUsuario.setBackground(verdeBrillante);
 		boton_borrarUsuario.setBounds(10, 166, 143, 93);
 		contentPane.add(boton_borrarUsuario);
+				
+		// INPUTS
+		
+		input_Titulo = new JTextField();
+		input_Titulo.setBounds(295, 98, 138, 20);
+		contentPane.add(input_Titulo);
+		input_Titulo.setColumns(10);
+		
+		input_Fecha = new JTextField();
+		input_Fecha.setColumns(10);
+		input_Fecha.setBounds(347, 239, 86, 20);
+		contentPane.add(input_Fecha);
+		
+		// LISTA
+		
+		String[] opciones = {"Benidorm", "Altea", "Alfaz del Pi", "Albir", "Alicante", "Valencia", "Calpe", "Denia"};
+		JList lista_Zonas = new JList(opciones);
+		JScrollPane scrollPane = new JScrollPane(lista_Zonas);
+		scrollPane.setBounds(260, 294, 173, 106);
+		contentPane.add(scrollPane);
 		
 		
 

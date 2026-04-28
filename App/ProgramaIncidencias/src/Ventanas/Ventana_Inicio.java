@@ -123,6 +123,11 @@ public class Ventana_Inicio extends JFrame {
 					Ventana_Principal_Admin v = new Ventana_Principal_Admin(Ventana_Inicio.this);
 					v.setVisible(true);
 					setVisible(false);
+				}else if(input_usuario.getText().equalsIgnoreCase("user") && input_contrasena.getText().equalsIgnoreCase("user")) {
+					
+					Ventana_Principal_Usuario vU = new Ventana_Principal_Usuario(Ventana_Inicio.this);
+					vU.setVisible(true);
+					setVisible(false);
 				}
 				
 			}
