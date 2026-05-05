@@ -18,7 +18,7 @@ const traducciones = {
         verCategorias: 'Ver categorías',
 
         // Nosotros
-        nosotrosTitle: '¿Qué es Incidencias App?',
+        nosotrosTitle: '¿Qué es FIXIT?',
         nosotrosIntro: 'Un proyecto creado por Khaled, Thiago y Jesús para facilitar la ayuda técnica y comunitaria de forma rápida y organizada.',
         cards: [
             { h3: 'Zonas',      p: 'Las incidencias se organizan por zonas para llegar a quien realmente puede ayudar.' },
@@ -72,7 +72,7 @@ const traducciones = {
         verCategorias: 'View categories',
 
         // Nosotros
-        nosotrosTitle: 'What is Incidencias App?',
+        nosotrosTitle: 'What is FIXIT?',
         nosotrosIntro: 'A project created by Khaled, Thiago and Jesús to facilitate fast and organized technical and community support.',
         cards: [
             { h3: 'Zones',       p: 'Issues are organized by zones to reach whoever can really help.' },
@@ -311,23 +311,52 @@ function animarNumero(elementId, valorFinal, duracion = 1000) {
 }
 
 // ============================================================
-// Formulario de contacto
+// Formulario de contacto — envía los datos a contacto.php
 // ============================================================
-function handleSubmit(event) {
+async function handleSubmit(event) {
     event.preventDefault();
+
     const form           = document.getElementById('contactForm');
     const successMessage = document.getElementById('successMessage');
-    form.style.opacity = '0.5';
-    setTimeout(() => {
+    const btnEnviar      = form.querySelector('.btn-submit');
+
+    btnEnviar.disabled      = true;
+    btnEnviar.style.opacity = '0.7';
+
+    const formData = new FormData();
+    formData.set('nombre',  document.getElementById('nombre').value);
+    formData.set('email',   document.getElementById('email').value);
+    formData.set('asunto',  document.getElementById('asunto').value);
+    formData.set('mensaje', document.getElementById('mensaje').value);
+
+    try {
+        const response = await fetch('contacto.php', {
+            method: 'POST',
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || data.error) {
+            throw new Error(data.error || 'Error al enviar');
+        }
+
         form.reset();
-        form.style.display         = 'none';
+        form.style.display           = 'none';
         successMessage.style.display = 'block';
+
         setTimeout(() => {
-            form.style.display         = 'block';
-            form.style.opacity         = '1';
+            form.style.display           = 'block';
             successMessage.style.display = 'none';
         }, 3000);
-    }, 500);
+
+    } catch (error) {
+        console.error('Error al enviar formulario:', error);
+        alert('❌ Error al enviar el mensaje: ' + error.message);
+    } finally {
+        btnEnviar.disabled      = false;
+        btnEnviar.style.opacity = '1';
+    }
 }
 
 // ============================================================

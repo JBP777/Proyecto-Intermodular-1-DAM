@@ -11,15 +11,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 // Configuración de la base de datos — cámbiala por tus datos de XAMPP
 $host     = 'localhost';
-$dbname   = 'incidencias';   // <-- nombre de tu base de datos
-$username = 'root';
-$password = '';              // <-- tu contraseña (vacía por defecto en XAMPP)
+$dbname   = 'incidencias';
+$port     = '7777';
+$username = 'postgres';
+$password = '12345';              // <-- tu contraseña (vacía por defecto en XAMPP)
 
 try {
     $conexion = new PDO(
-        "mysql:host=$host;dbname=$dbname;charset=utf8",
-        $username,
-        $password
+"pgsql:host=$host;port=$port;dbname=$dbname", $username, $password
     );
     $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $conexion->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);

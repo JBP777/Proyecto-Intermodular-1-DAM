@@ -162,3 +162,12 @@ CREATE TABLE OBTENER (
     FOREIGN KEY (logro) REFERENCES LOGRO(id),
     FOREIGN KEY (usuario) REFERENCES USUARIO(nombre_usuario)
 );
+
+--Nueva tabla creada especificamene para guardar lo que devuelve el formulario de la web y que desde java el admin pueda leer.
+CREATE TABLE CONTACTO (
+    id        serial PRIMARY KEY,
+    nombre    VARCHAR(100)  NOT NULL,
+    email     VARCHAR(100)  NOT NULL,
+    asunto    VARCHAR(200)  NOT NULL,
+    mensaje   VARCHAR(1000) NOT NULL
+);
