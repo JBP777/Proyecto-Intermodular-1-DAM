@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import util.Colores;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -25,15 +27,6 @@ public class Ventana_Principal_Admin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	
-	// COLORES GLOBALES
-	
-	Color amarilloFondo = new Color(244, 171, 0);
-	Color amarilloOscuro = new Color(64, 45, 0);
-	Color verdeBrillante = new Color(0, 204, 102);
-	Color amarilloPastel = new Color(255, 255, 128);
-	Color verdeOscuro = new Color(0, 121, 61);
-	
 	private JTable table;
 	protected DefaultTableModel modelo;
 	
@@ -49,7 +42,7 @@ public class Ventana_Principal_Admin extends JFrame {
 		setTitle("FIXIT!");
 		setBounds(100, 100, 800, 528);
 		contentPane = new JPanel();
-		contentPane.setBackground(amarilloFondo);
+		contentPane.setBackground(Colores.AMARILLO_FONDO);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -57,13 +50,13 @@ public class Ventana_Principal_Admin extends JFrame {
 		// LABELS
 		
 		JLabel label_FIX = new JLabel("FIX");
-		label_FIX.setForeground(amarilloOscuro);
+		label_FIX.setForeground(Colores.AMARILLO_FONDO);
 		label_FIX.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
 		label_FIX.setBounds(10, 11, 58, 43);
 		contentPane.add(label_FIX);
 		
 		JLabel label_IT = new JLabel("IT!");
-		label_IT.setForeground(verdeBrillante);
+		label_IT.setForeground(Colores.VERDE_BRILLANTE);
 		label_IT.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
 		label_IT.setBounds(64, 5, 49, 54);
 		contentPane.add(label_IT);
@@ -81,7 +74,7 @@ public class Ventana_Principal_Admin extends JFrame {
 		
 		table = new JTable(modelo);
 		table.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		table.setBackground(amarilloPastel);
+		table.setBackground(Colores.AMARILLO_PASTEL);
 		table.setOpaque(true);
 		
 		// Thiago Sesseler: Hace falta verificar como hacer lo del color sin tocar mucha cosa rara.
@@ -89,9 +82,9 @@ public class Ventana_Principal_Admin extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(163, 59, 611, 419);
 		scrollPane.getViewport().setFont(new Font("Britannic Bold", Font.PLAIN, 15));
-		scrollPane.getViewport().setBackground(amarilloPastel); 
-		scrollPane.setBackground(amarilloFondo);
-		scrollPane.getViewport().setForeground(amarilloOscuro);
+		scrollPane.getViewport().setBackground(Colores.AMARILLO_PASTEL); 
+		scrollPane.setBackground(Colores.AMARILLO_FONDO);
+		scrollPane.getViewport().setForeground(Colores.AMARILLO_OSCURO);
 		contentPane.add(scrollPane);   
 		
 		// BOTONES
@@ -101,7 +94,7 @@ public class Ventana_Principal_Admin extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		boton_borrarIncidencia.setForeground(verdeOscuro);
+		boton_borrarIncidencia.setForeground(Colores.VERDE_OSCURO);
 		boton_borrarIncidencia.setBackground(new Color(128, 255, 128));
 		boton_borrarIncidencia.setFont(new Font("Britannic Bold", Font.PLAIN, 12));
 		boton_borrarIncidencia.setBounds(10, 62, 143, 93);

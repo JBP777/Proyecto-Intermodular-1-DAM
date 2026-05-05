@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import util.Colores;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -22,14 +25,6 @@ public class Ventana_Registro extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	
-	// COLORES GLOBALES
-	
-	Color amarilloFondo = new Color(244, 171, 0);
-	Color amarilloOscuro = new Color(64, 45, 0);
-	Color verdeBrillante = new Color(0, 204, 102);
-	Color amarilloPastel = new Color(255, 255, 128);
-	
 	private JTextField input_usuario;
 	private JTextField input_correo;
 	private JTextField input_contrasena;
@@ -49,7 +44,7 @@ public class Ventana_Registro extends JFrame {
 		setTitle("FIXIT!");
 		setBounds(100, 100, 800, 528);
 		contentPane = new JPanel();
-		contentPane.setBackground(amarilloFondo);
+		contentPane.setBackground(Colores.AMARILLO_FONDO);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -57,13 +52,13 @@ public class Ventana_Registro extends JFrame {
 		// LABELS
 		
 		JLabel label_FIX = new JLabel("FIX");
-		label_FIX.setForeground(amarilloOscuro);
+		label_FIX.setForeground(Colores.AMARILLO_OSCURO);
 		label_FIX.setFont(new Font("Britannic Bold", Font.PLAIN, 73));
 		label_FIX.setBounds(282, 71, 108, 118);
 		contentPane.add(label_FIX);
 		
 		JLabel label_IT = new JLabel("IT!");
-		label_IT.setForeground(verdeBrillante);
+		label_IT.setForeground(Colores.VERDE_BRILLANTE);
 		label_IT.setFont(new Font("Britannic Bold", Font.PLAIN, 75));
 		label_IT.setBounds(392, 70, 141, 118);
 		contentPane.add(label_IT);
@@ -116,7 +111,7 @@ public class Ventana_Registro extends JFrame {
 		
 		JCheckBox checkbox_terminos = new JCheckBox("");
 		checkbox_terminos.setBounds(473, 311, 26, 23);
-		checkbox_terminos.setBackground(amarilloFondo);
+		checkbox_terminos.setBackground(Colores.AMARILLO_FONDO);
 		contentPane.add(checkbox_terminos);
 		
 		// BOTONES
