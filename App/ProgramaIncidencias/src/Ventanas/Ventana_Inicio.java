@@ -22,7 +22,6 @@ public class Ventana_Inicio extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
 	/**
 	 * Launch the application.
 	 */
@@ -43,7 +42,7 @@ public class Ventana_Inicio extends JFrame {
 	 * Create the frame.
 	 */
 	
-	// COLORES GLOBALES
+	
 	
 
 	

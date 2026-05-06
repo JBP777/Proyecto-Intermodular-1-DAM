@@ -50,7 +50,7 @@ public class Ventana_Principal_Admin extends JFrame {
 		// LABELS
 		
 		JLabel label_FIX = new JLabel("FIX");
-		label_FIX.setForeground(Colores.AMARILLO_FONDO);
+		label_FIX.setForeground(Colores.AMARILLO_OSCURO);
 		label_FIX.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
 		label_FIX.setBounds(10, 11, 58, 43);
 		contentPane.add(label_FIX);
