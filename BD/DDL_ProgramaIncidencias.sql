@@ -1,7 +1,7 @@
 CREATE TABLE USUARIO (
     nombre_usuario VARCHAR(50) PRIMARY KEY,
     email VARCHAR(100),
-    fecha_registro TIMESTAMP,
+    fecha_registro DATE,
     contrasenya VARCHAR(255) 
 );
 
@@ -70,7 +70,7 @@ CREATE TABLE SEGUIR (
 CREATE TABLE MENSAJE (
     id NUMERIC(10,0) PRIMARY KEY,
     contenido VARCHAR(1000),
-    fecha_envio TIMESTAMP,
+    fecha_envio DATE,
     usuario_envia VARCHAR(50),
     usuario_recibe VARCHAR(50),
     FOREIGN KEY (usuario_envia) REFERENCES USUARIO(nombre_usuario),
@@ -82,7 +82,7 @@ CREATE TABLE INCIDENCIA (
     estado VARCHAR(50),
     titulo VARCHAR(200),
     descripcion VARCHAR(1000),
-    fecha_creacion TIMESTAMP,
+    fecha_creacion DATE,
     reportador VARCHAR(50) NOT NULL,
     zona numeric(10,0),
     FOREIGN KEY (reportador) REFERENCES REPORTADOR(usuario),
@@ -119,7 +119,7 @@ CREATE TABLE VALORAR (
 CREATE TABLE COMENTARIO (
     id NUMERIC(10,0) PRIMARY KEY,
     texto VARCHAR(1000),
-    fecha TIMESTAMP,
+    fecha DATE,
     usuario VARCHAR(50),
     FOREIGN KEY (usuario) REFERENCES USUARIO(nombre_usuario)
 );

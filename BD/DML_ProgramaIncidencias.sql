@@ -1,10 +1,10 @@
 -- TABLA USUARIO
 INSERT INTO USUARIO (nombre_usuario, email, fecha_registro, contrasenya) VALUES
-('JesusBP', 'jesbarpet@alu.edu.gva.es', '2026-01-10 10:15:00', '12345'),
-('KhaledKN', 'khanay@alu.edu.gva.es', '2026-01-12 12:30:00', '12345'),
-('ThiagoBS', 'thises@alu.edu.gva.es', '2026-01-15 09:45:00', '12345'),
-('Usuario01', 'usuario01@alu.edu.gva.es', '2026-01-18 16:20:00', '54321'),
-('Usuario02', 'usuario02@alu.edu.gva.es', '2026-01-20 18:05:00', '54321');
+('JesusBP', 'jesbarpet@alu.edu.gva.es', '2026-01-10', '12345'),
+('KhaledKN', 'khanay@alu.edu.gva.es', '2026-01-12', '12345'),
+('ThiagoBS', 'thises@alu.edu.gva.es', '2026-01-15', '12345'),
+('Usuario01', 'usuario01@alu.edu.gva.es', '2026-01-18', '54321'),
+('Usuario02', 'usuario02@alu.edu.gva.es', '2026-01-20', '54321');
 
 -- TABLA ZONA
 INSERT INTO ZONA (id, nombre) VALUES
@@ -72,11 +72,11 @@ INSERT INTO ESTAR_ESPECIALIZADO (usuario, categoria) VALUES
 
 -- TABLA INCIDENCIA
 INSERT INTO INCIDENCIA (id, estado, titulo, descripcion, fecha_creacion, reportador, zona) VALUES
-(1, 'Abierta', 'Error al cargar la página', 'La página principal no carga correctamente en ciertos navegadores.', '2026-02-01 09:00:00', 'JesusBP', 1),
-(2, 'En progreso', 'Problema con la base de datos', 'Al actualizar los registros, algunos datos no se guardan.', '2026-02-02 10:30:00', 'KhaledKN', 2),
-(3, 'Cerrada', 'Permisos incorrectos de usuario', 'Algunos usuarios no pueden acceder a ciertas funciones.', '2026-02-03 11:15:00', 'ThiagoBS', 3),
-(4, 'Abierta', 'Consulta lenta en el sistema', 'La consulta SQL tarda demasiado tiempo en ejecutarse.', '2026-02-04 12:45:00', 'Usuario01', 4),
-(5, 'En progreso', 'Validación de formularios insuficiente', 'Se pueden enviar datos erróneos sin avisos.', '2026-02-05 14:00:00', 'Usuario02', 5);
+(1, 'Abierta', 'Error al cargar la página', 'La página principal no carga correctamente en ciertos navegadores.', '2026-02-01', 'JesusBP', 1),
+(2, 'En progreso', 'Problema con la base de datos', 'Al actualizar los registros, algunos datos no se guardan.', '2026-02-02', 'KhaledKN', 2),
+(3, 'Cerrada', 'Permisos incorrectos de usuario', 'Algunos usuarios no pueden acceder a ciertas funciones.', '2026-02-03', 'ThiagoBS', 3),
+(4, 'Abierta', 'Consulta lenta en el sistema', 'La consulta SQL tarda demasiado tiempo en ejecutarse.', '2026-02-04', 'Usuario01', 4),
+(5, 'En progreso', 'Validación de formularios insuficiente', 'Se pueden enviar datos erróneos sin avisos.', '2026-02-05', 'Usuario02', 5);
 
 -- TABLA CLASIFICAR
 INSERT INTO CLASIFICAR (incidencia, categoria) VALUES
@@ -110,11 +110,11 @@ INSERT INTO SOLUCION (id, es_aceptada, descripcion) VALUES
 
 -- TABLA COMENTARIO
 INSERT INTO COMENTARIO (id, texto, fecha, usuario) VALUES
-(1, 'Creo que esta incidencia es urgente.', '2026-02-05 10:00:00', 'JesusBP'),
-(2, 'Estoy revisando la incidencia 12.', '2026-02-05 11:15:00', 'KhaledKN'),
-(3, 'Necesito más información sobre la zona afectada.', '2026-02-06 09:30:00', 'ThiagoBS'),
-(4, 'He completado mi revisión de la incidencia.', '2026-02-06 14:45:00', 'Usuario01'),
-(5, 'Gracias por la ayuda, todo solucionado.', '2026-02-07 16:20:00', 'Usuario02');
+(1, 'Creo que esta incidencia es urgente.', '2026-02-05', 'JesusBP'),
+(2, 'Estoy revisando la incidencia 12.', '2026-02-05', 'KhaledKN'),
+(3, 'Necesito más información sobre la zona afectada.', '2026-02-06', 'ThiagoBS'),
+(4, 'He completado mi revisión de la incidencia.', '2026-02-06', 'Usuario01'),
+(5, 'Gracias por la ayuda, todo solucionado.', '2026-02-07', 'Usuario02');
 
 -- TABLA TENER
 INSERT INTO TENER (comentario, solucion) VALUES
@@ -134,11 +134,11 @@ INSERT INTO SEGUIR (usuario1, usuario2) VALUES
 
 -- TABLA MENSAJE
 INSERT INTO MENSAJE (id, contenido, fecha_envio, usuario_envia, usuario_recibe) VALUES
-(1, 'Hola Khaled, ¿has visto la incidencia 12?', '2026-02-01 09:10:00', 'JesusBP', 'KhaledKN'),
-(2, 'Sí, estoy trabajando en ella', '2026-02-01 09:15:00', 'KhaledKN', 'JesusBP'),
-(3, 'Thiago, necesito tu ayuda con la zona 3', '2026-02-02 11:30:00', 'JesusBP', 'ThiagoBS'),
-(4, 'Usuario01, revisa tu reporte de ayer', '2026-02-03 14:20:00', 'Usuario02', 'Usuario01'),
-(5, 'Perfecto, lo revisaré', '2026-02-03 14:35:00', 'Usuario01', 'Usuario02');
+(1, 'Hola Khaled, ¿has visto la incidencia 12?', '2026-02-01', 'JesusBP', 'KhaledKN'),
+(2, 'Sí, estoy trabajando en ella', '2026-02-01', 'KhaledKN', 'JesusBP'),
+(3, 'Thiago, necesito tu ayuda con la zona 3', '2026-02-02', 'JesusBP', 'ThiagoBS'),
+(4, 'Usuario01, revisa tu reporte de ayer', '2026-02-03', 'Usuario02', 'Usuario01'),
+(5, 'Perfecto, lo revisaré', '2026-02-03', 'Usuario01', 'Usuario02');
 
 
 -- TABLA RESOLVER
