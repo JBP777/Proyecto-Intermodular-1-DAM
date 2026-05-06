@@ -1,10 +1,10 @@
 -- TABLA USUARIO
 INSERT INTO USUARIO (nombre_usuario, email, fecha_registro, contrasenya) VALUES
-('JesusBP', 'jesbarpet@alu.edu.gva.es', '2026-01-10 10:15:00', 'hash123'), --hash porque se supone que debemos guardar el hash de la contraseña y no la contraseña en si
-('KhaledKN', 'khanay@alu.edu.gva.es', '2026-01-12 12:30:00', 'hash456'),
-('ThiagoBS', 'thises@alu.edu.gva.es', '2026-01-15 09:45:00', 'hash789'),
-('Usuario01', 'usuario01@alu.edu.gva.es', '2026-01-18 16:20:00', 'hash101'),
-('Usuario02', 'usuario02@alu.edu.gva.es', '2026-01-20 18:05:00', 'hash202');
+('JesusBP', 'jesbarpet@alu.edu.gva.es', '2026-01-10 10:15:00', '12345'),
+('KhaledKN', 'khanay@alu.edu.gva.es', '2026-01-12 12:30:00', '12345'),
+('ThiagoBS', 'thises@alu.edu.gva.es', '2026-01-15 09:45:00', '12345'),
+('Usuario01', 'usuario01@alu.edu.gva.es', '2026-01-18 16:20:00', '54321'),
+('Usuario02', 'usuario02@alu.edu.gva.es', '2026-01-20 18:05:00', '54321');
 
 -- TABLA ZONA
 INSERT INTO ZONA (id, nombre) VALUES
