@@ -5,7 +5,7 @@ public class Colaborador extends Usuario {
 		private double valoracionMedia;
 		private int totalResueltas;
 		
-		public Colaborador(String nombreUsuario, String email, String contrasenya, int fechaRegistro,
+		public Colaborador(String nombreUsuario, String email, String contrasenya, String fechaRegistro,
 				double valoracionMedia, int totalResueltas) {
 			super(nombreUsuario, email, contrasenya, fechaRegistro);
 			this.valoracionMedia = valoracionMedia;

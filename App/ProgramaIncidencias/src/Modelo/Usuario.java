@@ -2,13 +2,13 @@ package Modelo;
 
 public class Usuario {
 
-		private String nombreUsuario,email,contrasenya;
-		private int fechaRegistro;
+	
+		private String nombreUsuario,email,contrasenya,fechaRegistro;
 		
 		public String getNombreUsuario() {
 			return nombreUsuario;
 		}
-		public Usuario(String nombreUsuario, String email, String contrasenya, int fechaRegistro) {
+		public Usuario(String nombreUsuario, String email, String contrasenya, String fechaRegistro) {
 			super();
 			this.nombreUsuario = nombreUsuario;
 			this.email = email;
@@ -31,10 +31,10 @@ public class Usuario {
 		public void setContrasenya(String contrasenya) {
 			this.contrasenya = contrasenya;
 		}
-		public int getFechaRegistro() {
+		public String getFechaRegistro() {
 			return fechaRegistro;
 		}
-		public void setFechaRegistro(int fechaRegistro) {
+		public void setFechaRegistro(String fechaRegistro) {
 			this.fechaRegistro = fechaRegistro;
 		}
 }

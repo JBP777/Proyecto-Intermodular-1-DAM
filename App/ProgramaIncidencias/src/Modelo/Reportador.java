@@ -3,7 +3,7 @@ package Modelo;
 public class Reportador extends Usuario{
 	private int totalCreadas;
 
-	public Reportador(String nombreUsuario, String email, String contrasenya, int fechaRegistro, int totalCreadas) {
+	public Reportador(String nombreUsuario, String email, String contrasenya, String fechaRegistro, int totalCreadas) {
 		super(nombreUsuario, email, contrasenya, fechaRegistro);
 		this.totalCreadas = totalCreadas;
 	}
