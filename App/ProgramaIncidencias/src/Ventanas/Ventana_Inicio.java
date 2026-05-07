@@ -7,10 +7,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Modelo.Usuario;
+import dao.UsuarioDAO;
 import util.Colores;
 
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -116,18 +120,11 @@ public class Ventana_Inicio extends JFrame {
 		boton_Iniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(input_usuario.getText().isEmpty() && input_contrasena.getText().isEmpty()) {
-					label_contraseñaError.setVisible(true);
-				}else if(input_usuario.getText().equalsIgnoreCase("admin") && input_contrasena.getText().equalsIgnoreCase("admin")) {
-					
-					Ventana_Principal_Admin v = new Ventana_Principal_Admin(Ventana_Inicio.this);
-					v.setVisible(true);
-					setVisible(false);
-				}else if(input_usuario.getText().equalsIgnoreCase("user") && input_contrasena.getText().equalsIgnoreCase("user")) {
-					
-					Ventana_Principal_Usuario vU = new Ventana_Principal_Usuario(Ventana_Inicio.this);
-					vU.setVisible(true);
-					setVisible(false);
+				Usuario user = UsuarioDAO.obtenerUsuario(input_usuario.getText(),input_contrasena.getText());
+				if(user != null) {
+					// falta implementar
+				}else {
+					JOptionPane.showMessageDialog(contentPane, "No existe el usuario, prueba a registrarte","Error de login",JOptionPane.ERROR_MESSAGE);
 				}
 				
 			}
