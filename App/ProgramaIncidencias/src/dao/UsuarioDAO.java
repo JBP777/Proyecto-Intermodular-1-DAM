@@ -66,6 +66,33 @@ public class UsuarioDAO {
 		}
 		
 	}
+	
+	public static Usuario obtenerUsuario(String usuario, String passwd) {
+		
+		Connection conn = ConexionBD.getConexion();
+		try {
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM usuario WHERE nombre_usuario = ? AND cotrasenya = ?");
+			
+			ps.setString(1, usuario);
+			ps.setString(2,passwd);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				String nombreUsuario = rs.getString(1);
+				String email = rs.getString(2);
+				String fechaRegistro = rs.getString(3);
+				String contrasenya = rs.getString(4);
+				
+				return new Usuario(nombreUsuario,email,contrasenya,fechaRegistro);
+			}
+			
+			
+		}catch(SQLException e ) {
+			System.out.println(e);
+		}
+		return null;
+	}
 
 
 
