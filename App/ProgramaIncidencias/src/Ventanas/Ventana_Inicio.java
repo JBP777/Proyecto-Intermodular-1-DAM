@@ -113,8 +113,7 @@ public class Ventana_Inicio extends JFrame {
 		input_contrasena.setBounds(400, 244, 86, 20);
 		contentPane.add(input_contrasena);
 		
-		// BOTONES
-		
+		// Iniciar Sesion
 		JButton boton_Iniciar = new JButton("Iniciar Sesion");
 		boton_Iniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -123,6 +122,7 @@ public class Ventana_Inicio extends JFrame {
 				if(user != null) {
 					// falta implementar
 				}else {
+					//Mostrar Mensaje de error(Usuario no encontrado)
 					JOptionPane.showMessageDialog(contentPane, "No existe el usuario, prueba a registrarte","Error de login",JOptionPane.ERROR_MESSAGE);
 				}
 				

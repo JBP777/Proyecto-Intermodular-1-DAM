@@ -1,16 +1,21 @@
 package Ventanas;
 
 import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Modelo.Usuario;
 import util.Colores;
+import dao.UsuarioDAO;
 
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -20,6 +25,10 @@ import javax.swing.SwingConstants;
 import javax.swing.JCheckBox;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import javax.swing.JPasswordField;
 
 public class Ventana_Registro extends JFrame {
 
@@ -27,7 +36,7 @@ public class Ventana_Registro extends JFrame {
 	private JPanel contentPane;
 	private JTextField input_usuario;
 	private JTextField input_correo;
-	private JTextField input_contrasena;
+	private JPasswordField input_contrasena;
 	
 	// EVENTO CIERRE DE VENTANA
 	
@@ -102,13 +111,11 @@ public class Ventana_Registro extends JFrame {
 		input_correo.setBounds(400, 244, 86, 20);
 		contentPane.add(input_correo);
 		
-		input_contrasena = new JTextField();
-		input_contrasena.setColumns(10);
-		input_contrasena.setBounds(400, 275, 86, 20);
+		input_contrasena = new JPasswordField();
+		input_contrasena.setBounds(400, 276, 86, 20);
 		contentPane.add(input_contrasena);
 		
 		// CHECKBOXES
-		
 		JCheckBox checkbox_terminos = new JCheckBox("");
 		checkbox_terminos.setBounds(473, 311, 26, 23);
 		checkbox_terminos.setBackground(Colores.AMARILLO_FONDO);
@@ -116,13 +123,33 @@ public class Ventana_Registro extends JFrame {
 		
 		// BOTONES
 		
-		
+		// Registrarse
 		JButton boton_registrarse = new JButton("Registrarse");
 		boton_registrarse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(!checkbox_terminos.isSelected()) {
-					label_errorTerminos.setVisible(true);
+				if(UsuarioDAO.obtenerUsuario(input_usuario.getText()) != null) {
+					JOptionPane.showMessageDialog(contentPane, "Usuario ya registrado, prueba a iniciar sesion.","Usuario no valido", JOptionPane.WARNING_MESSAGE);
+				}else {
+					String nombreUsuario,email,contrasenya,fechaRegistro;
+					
+					nombreUsuario = input_usuario.getText();
+					email = input_correo.getText();
+					// es necesario hacer esto porque JPassword no devuelve un string por seguridad, igualmente esto no es seguro.
+					contrasenya = new String(input_contrasena.getPassword());
+					
+					// esto es para sacar la fecha de hoy 
+					LocalDate fechaActual = LocalDate.now();
+					// con esto creamos el formato necesario para nuestra base de datos
+					DateTimeFormatter formato = DateTimeFormatter.ofPattern("yy-MM-dd");
+					// se guarda la fecha de registro con el formato aplicado
+					fechaRegistro = fechaActual.format(formato);
+					
+					UsuarioDAO.insertarUsuario(new Usuario(nombreUsuario, email, contrasenya, fechaRegistro));
+						
+					JOptionPane.showMessageDialog(contentPane, "Usuario registrado correctamente","Registo Completado",JOptionPane.INFORMATION_MESSAGE);
+					v.setVisible(true);
+					dispose();
 				}
 				
 			}
@@ -132,6 +159,7 @@ public class Ventana_Registro extends JFrame {
 		boton_registrarse.setBackground(new Color(255, 255, 128));
 		boton_registrarse.setBounds(293, 386, 174, 53);
 		contentPane.add(boton_registrarse);
+		
 
 	}
 }
