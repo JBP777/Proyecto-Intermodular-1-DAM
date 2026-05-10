@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 public class Reportador extends Usuario{
 	private int totalCreadas;

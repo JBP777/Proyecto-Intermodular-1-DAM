@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 public class Mensaje {
 	private int id, fechaEnvio;
