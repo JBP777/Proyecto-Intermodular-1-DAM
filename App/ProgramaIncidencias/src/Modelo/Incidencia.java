@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 public class Incidencia {
 	private int id,fechaCreacion;

@@ -1,6 +1,7 @@
-package Ventanas;
+package ventanas;
 
 import java.awt.BorderLayout;
+import util.ConexionBD;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -30,6 +31,7 @@ public class Ventana_Inicio extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					ConexionBD.getConexion();
 					Ventana_Inicio frame = new Ventana_Inicio();
 					frame.setVisible(true);
 				} catch (Exception e) {
