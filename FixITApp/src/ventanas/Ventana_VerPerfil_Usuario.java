@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import modelo.Usuario;
 import util.Colores;
 
 import java.awt.Color;
@@ -34,9 +35,11 @@ public class Ventana_VerPerfil_Usuario extends JFrame {
 	private JTextField mostrar_IncidenciasResueltas;
 	private JTextField mostrar_ValoracionMedia;
 	Ventana_Inicio vI = new Ventana_Inicio();
-	Ventana_Principal_Usuario vPu = new Ventana_Principal_Usuario(vI);
+	private Usuario usuarioActual;
+	Ventana_Principal_Usuario vPu = new Ventana_Principal_Usuario(vI, usuarioActual);
 	
-	public Ventana_VerPerfil_Usuario(Ventana_Principal_Usuario v) {
+	
+	public Ventana_VerPerfil_Usuario(Ventana_Principal_Usuario v, Usuario u) {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {

@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import modelo.Usuario;
 import util.Colores;
 
 import java.awt.Color;
@@ -22,6 +23,9 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 public class Ventana_Principal_Admin extends JFrame {
 
@@ -30,7 +34,12 @@ public class Ventana_Principal_Admin extends JFrame {
 	private JTable table;
 	protected DefaultTableModel modelo;
 	
-	public Ventana_Principal_Admin(Ventana_Inicio v) {
+	private Usuario usuarioActual;
+	
+	public Ventana_Principal_Admin(Ventana_Inicio v, Usuario u) {
+		// esto es para no perder los datos del usuario que ha iniciado sesion y poder ir pasandolo por las ventanas.
+		usuarioActual = u;
+		
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -41,6 +50,22 @@ public class Ventana_Principal_Admin extends JFrame {
 		
 		setTitle("FIXIT!");
 		setBounds(100, 100, 800, 528);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnOpciones = new JMenu("Opciones");
+		menuBar.add(mnOpciones);
+		
+		JMenuItem mntmCerrarSesion = new JMenuItem("Cerrar Sesion");
+		mntmCerrarSesion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				Ventana_Inicio vi = new Ventana_Inicio();
+				vi.setVisible(true);
+			}
+		});
+		mnOpciones.add(mntmCerrarSesion);
 		contentPane = new JPanel();
 		contentPane.setBackground(Colores.AMARILLO_FONDO);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

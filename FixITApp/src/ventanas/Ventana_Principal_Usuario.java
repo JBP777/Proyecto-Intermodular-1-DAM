@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import modelo.Usuario;
 import util.Colores;
 
 import java.awt.Color;
@@ -29,7 +30,11 @@ public class Ventana_Principal_Usuario extends JFrame {
 	private JPanel contentPane;	private JTable table;
 	protected DefaultTableModel modelo;
 	
-	public Ventana_Principal_Usuario(Ventana_Inicio v) {
+	private Usuario usuarioActual;
+	
+	public Ventana_Principal_Usuario(Ventana_Inicio v, Usuario u) {
+		usuarioActual = u;
+		
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -113,7 +118,7 @@ public class Ventana_Principal_Usuario extends JFrame {
 		JButton boton_verPerfil = new JButton("Ver Perfil");
 		boton_verPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana_VerPerfil_Usuario v = new Ventana_VerPerfil_Usuario(Ventana_Principal_Usuario.this);
+				Ventana_VerPerfil_Usuario v = new Ventana_VerPerfil_Usuario(Ventana_Principal_Usuario.this, usuarioActual);
 				v.setVisible(true);
 				dispose();
 			}

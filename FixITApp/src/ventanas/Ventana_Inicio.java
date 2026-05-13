@@ -28,6 +28,9 @@ public class Ventana_Inicio extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	
+	private Usuario usuarioActual;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -121,19 +124,19 @@ public class Ventana_Inicio extends JFrame {
 		boton_Iniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Usuario user = UsuarioDAO.obtenerUsuario(input_usuario.getText(),input_contrasena.getText());
-				if(user != null) {
+				usuarioActual = UsuarioDAO.obtenerUsuario(input_usuario.getText(),input_contrasena.getText());
+				if(usuarioActual != null) {
 					// falta implementar
-					if(Administrator.esAdmin(user.getNombreUsuario())) {
+					if(Administrator.esAdmin(usuarioActual.getNombreUsuario())) {
 						// Abrir ventana administrador
 						setVisible(false);
-						Ventana_Principal_Admin vpa = new Ventana_Principal_Admin(Ventana_Inicio.this);
+						Ventana_Principal_Admin vpa = new Ventana_Principal_Admin(Ventana_Inicio.this, usuarioActual);
 						vpa.setVisible(true);
 						
 					}else {
 						// Abrir ventana usuario normal
 						setVisible(false);
-						Ventana_Principal_Usuario vpu = new Ventana_Principal_Usuario(Ventana_Inicio.this);
+						Ventana_Principal_Usuario vpu = new Ventana_Principal_Usuario(Ventana_Inicio.this, usuarioActual);
 						vpu.setVisible(true);
 					}
 				}else {
