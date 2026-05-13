@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.UsuarioDAO;
 import modelo.Usuario;
+import util.Administrator;
 import util.Colores;
 
 import java.awt.Color;
@@ -123,6 +124,18 @@ public class Ventana_Inicio extends JFrame {
 				Usuario user = UsuarioDAO.obtenerUsuario(input_usuario.getText(),input_contrasena.getText());
 				if(user != null) {
 					// falta implementar
+					if(Administrator.esAdmin(user.getNombreUsuario())) {
+						// Abrir ventana administrador
+						setVisible(false);
+						Ventana_Principal_Admin vpa = new Ventana_Principal_Admin(Ventana_Inicio.this);
+						vpa.setVisible(true);
+						
+					}else {
+						// Abrir ventana usuario normal
+						setVisible(false);
+						Ventana_Principal_Usuario vpu = new Ventana_Principal_Usuario(Ventana_Inicio.this);
+						vpu.setVisible(true);
+					}
 				}else {
 					//Mostrar Mensaje de error(Usuario no encontrado)
 					JOptionPane.showMessageDialog(contentPane, "No existe el usuario, prueba a registrarte","Error de login",JOptionPane.ERROR_MESSAGE);
