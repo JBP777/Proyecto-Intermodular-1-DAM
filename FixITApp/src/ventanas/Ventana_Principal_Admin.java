@@ -2,6 +2,9 @@ package ventanas;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import dao.ContactoDAO;
+import modelo.Contacto;
 import modelo.Usuario;
 import util.Colores;
 import java.awt.*;
@@ -24,13 +27,23 @@ public class Ventana_Principal_Admin extends JFrame {
     private JTable tableUsuarios;
 
     // TABLA MENSAJES (sin cambios)
-    private String[] columnasTablaMensajes = {"Usuario", "Asunto"};
-    private DefaultTableModel modeloTablaMensajes = new DefaultTableModel(columnasTablaMensajes, 0);
+    private String[] columnasTablaMensajes = {"Nombre", "Asunto"};
+    private DefaultTableModel modeloMensajes = new DefaultTableModel(columnasTablaMensajes, 0);
     private JTable tableMensajes;
+    
+    
+    private void cargarMensajes() {
+    		modeloMensajes.setRowCount(0);
+    		for(Contacto c : ContactoDAO.obtenerMensajesContacto()) {
+    			modeloMensajes.addRow(new Object[] {
+    					c.getNombre(), c.getAsunto()
+    			});
+    		}
+    }
 
     public Ventana_Principal_Admin(Ventana_Inicio v, Usuario u) {
         usuarioActual = u;
-
+        cargarMensajes();
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -120,7 +133,7 @@ public class Ventana_Principal_Admin extends JFrame {
         lblMensajes.setBounds(540, 62, 200, 25);
         contentPane.add(lblMensajes);
 
-        tableMensajes = new JTable(modeloTablaMensajes);
+        tableMensajes = new JTable(modeloMensajes);
         JScrollPane scrollTablaMensajes = new JScrollPane(tableMensajes);
         scrollTablaMensajes.setBounds(530, 90, 250, 310);
         contentPane.add(scrollTablaMensajes);
@@ -133,5 +146,13 @@ public class Ventana_Principal_Admin extends JFrame {
         JButton btnEliminarUsr = new JButton("Eliminar usuario");
         btnEliminarUsr.setBounds(270, 410, 240, 28);
         contentPane.add(btnEliminarUsr); // sin logica por ahora
+        
+        JButton btnLeerMensaje = new JButton("Leer Mensaje");
+        btnLeerMensaje.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        btnLeerMensaje.setBounds(530, 410, 250, 28);
+        contentPane.add(btnLeerMensaje);
     }
 }
