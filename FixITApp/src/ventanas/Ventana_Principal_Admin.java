@@ -150,6 +150,11 @@ public class Ventana_Principal_Admin extends JFrame {
         JButton btnLeerMensaje = new JButton("Leer Mensaje");
         btnLeerMensaje.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		int mensajeSeleccionado = tableMensajes.getSelectedRow();
+        		if(mensajeSeleccionado != -1) {
+        			Ventana_Leer_Mensajes vlm = new Ventana_Leer_Mensajes(ContactoDAO.obtenerMensajesContacto().get(mensajeSeleccionado));
+        			vlm.setVisible(true);
+        		}
         	}
         });
         btnLeerMensaje.setBounds(530, 410, 250, 28);
