@@ -23,6 +23,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import javax.swing.JPasswordField;
 
 public class Ventana_Inicio extends JFrame {
 
@@ -57,7 +58,7 @@ public class Ventana_Inicio extends JFrame {
 
 	
 	private JTextField input_usuario;
-	private JTextField input_contrasena;
+	private JPasswordField input_contrasena;
 	
 	public Ventana_Inicio() {
 		
@@ -114,19 +115,14 @@ public class Ventana_Inicio extends JFrame {
 		contentPane.add(input_usuario);
 		input_usuario.setColumns(10);
 		
-		input_contrasena = new JTextField();
-		input_contrasena.setColumns(10);
-		input_contrasena.setBounds(400, 244, 86, 20);
-		contentPane.add(input_contrasena);
-		
 		// Iniciar Sesion
 		JButton boton_Iniciar = new JButton("Iniciar Sesion");
 		boton_Iniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				usuarioActual = UsuarioDAO.obtenerUsuario(input_usuario.getText(),input_contrasena.getText());
+				usuarioActual = UsuarioDAO.obtenerUsuario(input_usuario.getText(),new String(input_contrasena.getPassword())); // getPassword devuelve un array de char y para pasarlo a string se puede usar esta forma ya que el getText esta deprecated para el campo de contraseñas.
 				if(usuarioActual != null) {
-					// falta implementar
+					
 					if(Administrator.esAdmin(usuarioActual.getNombreUsuario())) {
 						// Abrir ventana administrador
 						setVisible(false);
@@ -165,6 +161,10 @@ public class Ventana_Inicio extends JFrame {
 		boton_registrarse.setBackground(new Color(255, 255, 128));
 		boton_registrarse.setBounds(293, 386, 174, 53);
 		contentPane.add(boton_registrarse);
+		
+		input_contrasena = new JPasswordField();
+		input_contrasena.setBounds(400, 245, 86, 20);
+		contentPane.add(input_contrasena);
 
 	}
 }

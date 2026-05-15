@@ -44,13 +44,7 @@ public class Ventana_Principal_Admin extends JFrame {
     public Ventana_Principal_Admin(Ventana_Inicio v, Usuario u) {
         usuarioActual = u;
         cargarMensajes();
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                v.setVisible(true);
-                dispose();
-            }
-        });
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 
         setTitle("FIXIT!");
         setBounds(100, 100, 810, 530);
