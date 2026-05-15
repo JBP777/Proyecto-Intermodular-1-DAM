@@ -1,7 +1,7 @@
 // ============================================================
 // Ruta base al PHP
 // ============================================================
-const API_URL = 'api_incidencias.php';
+const API_URL = 'PHP/api_incidencias.php';
 
 // ============================================================
 // TRADUCCIONES — todo el texto del HTML
@@ -38,7 +38,7 @@ const traducciones = {
         // Ranking
         rankingTitle: '🏆 Ranking de Colaboradores',
         rankingIntro: 'Los técnicos más destacados de nuestra comunidad',
-        statLabels: ['Incidencias totales', 'Colaboradores activos', 'Problemas resueltos'],
+        statLabels: ['Incidencias activas', 'Colaboradores activos', 'Problemas resueltos'],
         rankHeader: ['Posición', 'Usuario', 'Email', 'Resueltas'],
         cargando: 'Cargando ranking...',
         sinDatos: 'No hay datos disponibles',
@@ -330,7 +330,7 @@ async function handleSubmit(event) {
     formData.set('mensaje', document.getElementById('mensaje').value);
 
     try {
-        const response = await fetch('contacto.php', {
+        const response = await fetch('PHP/contacto.php', {
             method: 'POST',
             body: formData
         });
