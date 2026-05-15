@@ -153,5 +153,14 @@ public class Ventana_Principal_Admin extends JFrame {
         });
         btnLeerMensaje.setBounds(530, 410, 250, 28);
         contentPane.add(btnLeerMensaje);
+        // boton para recargar los datos de las tablas
+        JButton btnRecargar = new JButton("🔄️");
+        btnRecargar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		cargarMensajes();
+        	}
+        });
+        btnRecargar.setBounds(722, 11, 58, 25);
+        contentPane.add(btnRecargar);
     }
 }
