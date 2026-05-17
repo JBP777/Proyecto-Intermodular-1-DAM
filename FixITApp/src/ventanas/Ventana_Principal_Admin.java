@@ -4,7 +4,9 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import dao.ContactoDAO;
+import dao.IncidenciaDAO;
 import modelo.Contacto;
+import modelo.Incidencia;
 import modelo.Usuario;
 import util.Colores;
 import java.awt.*;
@@ -17,7 +19,7 @@ public class Ventana_Principal_Admin extends JFrame {
     private Usuario usuarioActual;
 
     // TABLA INCIDENCIAS
-    private String[] columnasIncidencias = {"ID","Estado","Descripcion"};
+    private String[] columnasIncidencias = {"ID","Estado","Titulo"};
     private DefaultTableModel modeloIncidencias = new DefaultTableModel(columnasIncidencias, 0);
     private JTable tableIncidencias;
 
@@ -32,22 +34,32 @@ public class Ventana_Principal_Admin extends JFrame {
     private JTable tableMensajes;
     
     
-    private void cargarMensajes() {
+    private void cargarTablas() {
+    		
+    		// Tabla mensajes
     		modeloMensajes.setRowCount(0);
     		for(Contacto c : ContactoDAO.obtenerMensajesContacto()) {
     			modeloMensajes.addRow(new Object[] {
     					c.getNombre(), c.getAsunto()
     			});
     		}
+    		
+    		// Tabla incidencias
+    		modeloIncidencias.setRowCount(0);
+    		for(Incidencia i : IncidenciaDAO.obtenerIncidencias()) {
+    			modeloIncidencias.addRow(new Object[] {
+    				i.getId(), i.getEstado(), i.getTitulo()	
+    			});
+    		}
     }
 
     public Ventana_Principal_Admin(Ventana_Inicio v, Usuario u) {
         usuarioActual = u;
-        cargarMensajes();
+        cargarTablas();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 
         setTitle("FIXIT!");
-        setBounds(100, 100, 810, 530);
+        setBounds(100, 100, 810, 591);
 
         // MENU
         JMenuBar menuBar = new JMenuBar();
@@ -134,11 +146,21 @@ public class Ventana_Principal_Admin extends JFrame {
 
         // BOTONES ELIMINAR
         JButton btnEliminarInc = new JButton("Eliminar incidencia");
-        btnEliminarInc.setBounds(10, 410, 240, 28);
+        btnEliminarInc.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		int incidenciaSeleccionada = tableIncidencias.getSelectedRow();
+        		
+        		if(incidenciaSeleccionada != -1) {
+        			IncidenciaDAO.eliminarIncidencia(IncidenciaDAO.obtenerIncidencias().get(incidenciaSeleccionada));
+        			JOptionPane.showMessageDialog(tableMensajes, "Incidencia eliminada");
+        		}
+        	}
+        });
+        btnEliminarInc.setBounds(10, 452, 240, 28);
         contentPane.add(btnEliminarInc); // sin logica por ahora
 
         JButton btnEliminarUsr = new JButton("Eliminar usuario");
-        btnEliminarUsr.setBounds(270, 410, 240, 28);
+        btnEliminarUsr.setBounds(270, 452, 240, 28);
         contentPane.add(btnEliminarUsr); // sin logica por ahora
         
         JButton btnLeerMensaje = new JButton("Leer Mensaje");
@@ -148,6 +170,8 @@ public class Ventana_Principal_Admin extends JFrame {
         		if(mensajeSeleccionado != -1) {
         			Ventana_Leer_Mensajes vlm = new Ventana_Leer_Mensajes(ContactoDAO.obtenerMensajesContacto().get(mensajeSeleccionado));
         			vlm.setVisible(true);
+        		}else {
+        			JOptionPane.showMessageDialog(tableMensajes, "Debes seleccionar un mensaje","ERROR - SELECCIONA UN MENSAJE", JOptionPane.ERROR_MESSAGE);
         		}
         	}
         });
@@ -157,10 +181,18 @@ public class Ventana_Principal_Admin extends JFrame {
         JButton btnRecargar = new JButton("🔄️");
         btnRecargar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		cargarMensajes();
+        		cargarTablas();
         	}
         });
         btnRecargar.setBounds(722, 11, 58, 25);
         contentPane.add(btnRecargar);
+        
+        JButton btnVerUsuario = new JButton("Ver Usuario");
+        btnVerUsuario.setBounds(270, 410, 240, 28);
+        contentPane.add(btnVerUsuario);
+        
+        JButton btnVerIncidencia = new JButton("Ver Incidencia");
+        btnVerIncidencia.setBounds(10, 410, 240, 28);
+        contentPane.add(btnVerIncidencia);
     }
 }
