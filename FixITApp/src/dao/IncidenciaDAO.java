@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import modelo.Incidencia;
 import util.ConexionBD;
@@ -50,7 +51,8 @@ public class IncidenciaDAO {
 					// modificar? esto es para ver que error da la base de datos
 					System.out.println(e);
 				}
-				
+				// esto es para que el array se ordene por ID 
+				incidencias.sort(Comparator.comparingInt(Incidencia::getId));
 				return incidencias;
 		}
 		

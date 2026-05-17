@@ -152,12 +152,15 @@ public class Ventana_Principal_Admin extends JFrame {
         		
         		if(incidenciaSeleccionada != -1) {
         			IncidenciaDAO.eliminarIncidencia(IncidenciaDAO.obtenerIncidencias().get(incidenciaSeleccionada));
+        			cargarTablas();
         			JOptionPane.showMessageDialog(tableMensajes, "Incidencia eliminada");
+        		}else {
+        			JOptionPane.showMessageDialog(tableMensajes, "Debes seleccionar una ","ERROR - SELECCIONA UNA INCIDENCIA", JOptionPane.ERROR_MESSAGE);
         		}
         	}
         });
         btnEliminarInc.setBounds(10, 452, 240, 28);
-        contentPane.add(btnEliminarInc); // sin logica por ahora
+        contentPane.add(btnEliminarInc);
 
         JButton btnEliminarUsr = new JButton("Eliminar usuario");
         btnEliminarUsr.setBounds(270, 452, 240, 28);
