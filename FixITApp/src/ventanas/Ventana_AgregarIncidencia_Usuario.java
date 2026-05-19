@@ -8,8 +8,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
+
+import dao.CategoriaDAO;
 import dao.IncidenciaDAO;
+import dao.ZonaDAO;
+import modelo.Categoria;
 import modelo.Usuario;
+import modelo.Zona;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -24,6 +30,7 @@ import javax.swing.JSpinner;
 import javax.swing.JList;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import util.Colores;
 
@@ -169,7 +176,13 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
 		
 		// LISTA
 		
-		String[] opciones = {"Valencia", "Madrid", "Barcelona", "Sevilla", "Bilbao"};
+		String[] opciones = new String[ZonaDAO.obtenerZonas().size()]; // para guardar solo los nombre de las zonas
+		ArrayList<Zona> zonas = ZonaDAO.obtenerZonas();
+
+		for (int i = 0; i < zonas.size(); i++) {
+		    opciones[i] = zonas.get(i).getNombre();
+		}
+
 		lista_Zonas = new JList<>(opciones);
 		JScrollPane scrollPane = new JScrollPane(lista_Zonas);
 		scrollPane.setBounds(260, 294, 173, 106);

@@ -13,7 +13,7 @@ import util.ConexionBD;
 
 public class CategoriaDAO {
 	
-	 public ArrayList<Categoria> obtenerTodas() {
+	 public static ArrayList<Categoria> obtenerCategorias() {
 
 	        ArrayList<Categoria> lista = new ArrayList<>();
 
