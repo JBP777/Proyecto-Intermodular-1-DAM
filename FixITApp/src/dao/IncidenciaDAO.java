@@ -24,7 +24,7 @@ public class IncidenciaDAO {
 				
 				try {
 					// consulta usada para seleccionar todos los usuario de la tabla 
-					PreparedStatement st = conn.prepareStatement("SELECT INCIDENCIA.id, INCIDENCIA.estado, INCIDENCIA.titulo,INCIDENCIA.descripcion,INCIDENCIA.fecha_creacion,INCIDENCIA.reportador,ZONA.nombre FROM INCIDENCIA,ZONA WHERE INCIDENCIA.zona = ZONA.id;");
+					PreparedStatement st = conn.prepareStatement("SELECT * FROM vista_incidencias_con_zona;");
 					// ejecutar la consulta
 					ResultSet rs = st.executeQuery();
 					
@@ -75,4 +75,48 @@ public class IncidenciaDAO {
 				e.printStackTrace();
 			}
 		}
+		
+		
+		// metodo para abrir incidencias con el estado cerrado
+		public static boolean abrirIncidencia(Incidencia i) {
+		    boolean actualizada = false;
+		    Connection conn = ConexionBD.getConexion();
+
+		    try {
+		        if (i.getEstado().equals("Cerrada")) {
+		            PreparedStatement st = conn.prepareStatement(
+		                "UPDATE INCIDENCIA SET estado = 'Abierta' WHERE id = ?");
+		            st.setInt(1, i.getId());
+		            st.executeUpdate();
+		            actualizada = true;
+		        }
+		        conn.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+
+		    return actualizada;
+		}
+
+		// cerrar incidencias con el estado abierto
+		public static boolean cerrarIncidencia(Incidencia i) {
+		    boolean actualizada = false;
+		    Connection conn = ConexionBD.getConexion();
+
+		    try {
+		        if (i.getEstado().equals("Abierta")) {
+		            PreparedStatement st = conn.prepareStatement(
+		                "UPDATE INCIDENCIA SET estado = 'Cerrada' WHERE id = ?");
+		            st.setInt(1, i.getId());
+		            st.executeUpdate();
+		            actualizada = true;
+		        }
+		        conn.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+
+		    return actualizada;
+		}
+		
 }
