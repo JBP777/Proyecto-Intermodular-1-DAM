@@ -18,13 +18,13 @@ public class IncidenciaDAO {
 				
 				//campos incidencia
 				int id;
-				String estado, titulo, descripcion, reportador, zona, fechaCreacion;
+				String estado, titulo, descripcion, reportador, zona, fechaCreacion,categorias;
 				
 				ArrayList<Incidencia> incidencias = new ArrayList<Incidencia>();
 				
 				try {
 					// consulta usada para seleccionar todos los usuario de la tabla 
-					PreparedStatement st = conn.prepareStatement("SELECT * FROM vista_incidencias_con_zona;");
+					PreparedStatement st = conn.prepareStatement("SELECT * FROM vista_incidencias_con_zona_categoria;");
 					// ejecutar la consulta
 					ResultSet rs = st.executeQuery();
 					
@@ -39,9 +39,10 @@ public class IncidenciaDAO {
 						fechaCreacion = rs.getString("fecha_creacion");
 						reportador = rs.getString("reportador");
 						zona = rs.getString("nombre");
+						categorias = rs.getString("categorias");
 						
 						incidencias.add(new Incidencia(id, estado, titulo, descripcion, reportador, zona,
-			fechaCreacion));
+			fechaCreacion,categorias));
 						
 					}
 					

@@ -2,10 +2,10 @@ package modelo;
 
 public class Incidencia {
 	private int id;
-	private String estado, titulo, descripcion, reportador, zona, fechaCreacion;
+	private String estado, titulo, descripcion, reportador, zona, fechaCreacion, categorias;
 	
 	public Incidencia(int id, String estado, String titulo, String descripcion, String reportador, String zona,
-			String fechaCreacion) {	
+			String fechaCreacion, String categorias) {
 		this.id = id;
 		this.estado = estado;
 		this.titulo = titulo;
@@ -13,6 +13,7 @@ public class Incidencia {
 		this.reportador = reportador;
 		this.zona = zona;
 		this.fechaCreacion = fechaCreacion;
+		this.categorias = categorias;
 	}
 
 	public int getId() {
@@ -43,6 +44,10 @@ public class Incidencia {
 		return fechaCreacion;
 	}
 
+	public String getCategorias() {
+		return categorias;
+	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -70,6 +75,12 @@ public class Incidencia {
 	public void setFechaCreacion(String fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
+
+	public void setCategorias(String categorias) {
+		this.categorias = categorias;
+	}
+	
+	
 	
 	
 
