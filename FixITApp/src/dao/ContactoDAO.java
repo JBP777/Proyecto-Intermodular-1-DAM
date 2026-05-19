@@ -55,7 +55,7 @@ public class ContactoDAO {
 			try {
 				
 				//consulta usada
-				PreparedStatement ps = conn.prepareStatement("INSERT INTO usuario (nombre, email, asunto, mensaje) VALUES (?,?,?,?)");
+				PreparedStatement ps = conn.prepareStatement("INSERT INTO Contacto (nombre, email, asunto, mensaje) VALUES (?,?,?,?)");
 				
 				ps.setString(1, c.getNombre());
 				ps.setString(2, c.getEmail());

@@ -76,7 +76,7 @@ public class IncidenciaDAO {
 			}
 		}
 		
-		public static boolean agregarIncidencia(String titulo, String descripcion, String fecha, String reportador, int idZona) {
+		public static boolean agregarIncidencia(String titulo, String descripcion, String fecha, String reportador, int idZona) { // modificar
 			Connection conn = ConexionBD.getConexion();
 			boolean exito = false;
 			try {

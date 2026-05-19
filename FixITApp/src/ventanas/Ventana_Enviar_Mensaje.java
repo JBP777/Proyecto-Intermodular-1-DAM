@@ -67,11 +67,22 @@ public class Ventana_Enviar_Mensaje extends JFrame {
 
         JButton btnEnviar = new JButton("Enviar");
         btnEnviar.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        	
-        		ContactoDAO.enviarMensaje(new Contacto(usuarioActual.getNombreUsuario(),usuarioActual.getEmail(),txtAsunto.getText(),areaMensaje.getText()));
-        	
-        	}
+            public void actionPerformed(ActionEvent e) {
+
+                // comprobar que ningún campo esté vacío antes de enviar
+                if (txtAsunto.getText().isEmpty() || areaMensaje.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(contentPane, "Por favor, rellena todos los campos.");
+                    
+                }else {
+
+	                ContactoDAO.enviarMensaje(new Contacto(usuarioActual.getNombreUsuario(),usuarioActual.getEmail(),txtAsunto.getText(),areaMensaje.getText()));
+	
+	                // limpiar campos tras enviar
+	                txtAsunto.setText("");
+	                areaMensaje.setText("");
+	                JOptionPane.showMessageDialog(contentPane, "Mensaje enviado correctamente.");
+                }
+            }
         });
         btnEnviar.setBackground(Colores.VERDE_BRILLANTE);
         btnEnviar.setForeground(Colores.VERDE_OSCURO);
