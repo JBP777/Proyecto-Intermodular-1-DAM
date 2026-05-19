@@ -75,13 +75,13 @@ public class Ventana_Inicio extends JFrame {
 		
 		JLabel label_FIX = new JLabel("FIX");
 		label_FIX.setForeground(Colores.AMARILLO_OSCURO);
-		label_FIX.setFont(new Font("Britannic Bold", Font.PLAIN, 73));
-		label_FIX.setBounds(282, 71, 108, 118);
+		label_FIX.setFont(new Font("Bahnschrift", Font.BOLD, 73));
+		label_FIX.setBounds(282, 71, 127, 118);
 		contentPane.add(label_FIX);
 		
 		JLabel label_IT = new JLabel("IT!");
 		label_IT.setForeground(Colores.VERDE_BRILLANTE);
-		label_IT.setFont(new Font("Britannic Bold", Font.PLAIN, 75));
+		label_IT.setFont(new Font("Bahnschrift", Font.BOLD, 75));
 		label_IT.setBounds(392, 70, 141, 118);
 		contentPane.add(label_IT);
 		
@@ -144,7 +144,7 @@ public class Ventana_Inicio extends JFrame {
 		});
 		boton_Iniciar.setBackground(Colores.AMARILLO_PASTEL);
 		boton_Iniciar.setForeground(Colores.AMARILLO_OSCURO);
-		boton_Iniciar.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
+		boton_Iniciar.setFont(new Font("Bahnschrift", Font.BOLD, 15));
 		boton_Iniciar.setBounds(293, 291, 174, 53);
 		contentPane.add(boton_Iniciar);
 		
@@ -157,7 +157,7 @@ public class Ventana_Inicio extends JFrame {
 			}
 		});
 		boton_registrarse.setForeground(new Color(64, 45, 0));
-		boton_registrarse.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
+		boton_registrarse.setFont(new Font("Bahnschrift", Font.BOLD, 15));
 		boton_registrarse.setBackground(new Color(255, 255, 128));
 		boton_registrarse.setBounds(293, 386, 174, 53);
 		contentPane.add(boton_registrarse);

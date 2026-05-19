@@ -7,9 +7,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
+import javax.swing.JOptionPane;
 import modelo.Usuario;
+import modelo.Incidencia;
+import dao.IncidenciaDAO;
 import util.Colores;
+import java.util.ArrayList;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -69,13 +72,20 @@ public class Ventana_Principal_Usuario extends JFrame {
 		
 		// TABLA
 		
-		String[] columnas = {"Estado", "Titulo", "Descripcion", "Fecha Creada", "Reportador", "Zona"};
+		String[] columnas = {"ID", "Estado", "Titulo", "Descripcion", "Fecha Creada", "Reportador", "Zona"};
 		modelo = new DefaultTableModel(columnas, 0);
 		
 		table = new JTable(modelo);
 		table.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
 		table.setBackground(Colores.AMARILLO_PASTEL);
 		table.setOpaque(true);
+		
+		// Ocultar columna ID
+		table.getColumnModel().getColumn(0).setMinWidth(0);
+		table.getColumnModel().getColumn(0).setMaxWidth(0);
+		table.getColumnModel().getColumn(0).setWidth(0);
+		
+		cargarIncidencias();
 		
 		// Thiago Sesseler: Hace falta verificar como hacer lo del color sin tocar mucha cosa rara.
 		
@@ -92,7 +102,7 @@ public class Ventana_Principal_Usuario extends JFrame {
 		JButton boton_borrarIncidencia = new JButton("Agregar Incidencia");
 		boton_borrarIncidencia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana_AgregarIncidencia_Usuario v = new Ventana_AgregarIncidencia_Usuario(Ventana_Principal_Usuario.this);
+				Ventana_AgregarIncidencia_Usuario v = new Ventana_AgregarIncidencia_Usuario(Ventana_Principal_Usuario.this, usuarioActual);
 				v.setVisible(true);
 				dispose();
 			}
@@ -106,7 +116,16 @@ public class Ventana_Principal_Usuario extends JFrame {
 		JButton boton_borrarUsuario = new JButton("Borrar Incidencia");
 		boton_borrarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				int fila = table.getSelectedRow();
+				if (fila != -1) {
+					int id = (int) modelo.getValueAt(fila, 0);
+					Incidencia i = new Incidencia(id, "", "", "", "", "", "");
+					IncidenciaDAO.eliminarIncidencia(i);
+					JOptionPane.showMessageDialog(null, "Incidencia borrada con éxito.");
+					cargarIncidencias();
+				} else {
+					JOptionPane.showMessageDialog(null, "Por favor, selecciona una incidencia para borrar.");
+				}
 			}
 		});
 		boton_borrarUsuario.setForeground(Colores.VERDE_OSCURO);
@@ -129,7 +148,34 @@ public class Ventana_Principal_Usuario extends JFrame {
 		boton_verPerfil.setBounds(10, 270, 143, 93);
 		contentPane.add(boton_verPerfil);
 		
-		
-
+		JButton boton_enviarMensaje = new JButton("Enviar Mensaje");
+		boton_enviarMensaje.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Ventana_Enviar_Mensaje v = new Ventana_Enviar_Mensaje(usuarioActual);
+				v.setVisible(true);
+			}
+		});
+		boton_enviarMensaje.setForeground(Colores.VERDE_OSCURO);
+		boton_enviarMensaje.setFont(new Font("Britannic Bold", Font.PLAIN, 12));
+		boton_enviarMensaje.setBackground(Colores.VERDE_BRILLANTE);
+		boton_enviarMensaje.setBounds(10, 374, 143, 93);
+		contentPane.add(boton_enviarMensaje);
+	}
+	
+	public void cargarIncidencias() {
+		modelo.setRowCount(0); // Limpiar tabla
+		ArrayList<Incidencia> incidencias = IncidenciaDAO.obtenerIncidencias();
+		for (Incidencia i : incidencias) {
+			Object[] fila = {
+				i.getId(),
+				i.getEstado(),
+				i.getTitulo(),
+				i.getDescripcion(),
+				i.getFechaCreacion(),
+				i.getReportador(),
+				i.getZona()
+			};
+			modelo.addRow(fila);
+		}
 	}
 }

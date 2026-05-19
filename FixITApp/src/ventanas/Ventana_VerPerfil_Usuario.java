@@ -34,12 +34,13 @@ public class Ventana_VerPerfil_Usuario extends JFrame {
 	private JTextField mostrar_IncidenciasCreadas;
 	private JTextField mostrar_IncidenciasResueltas;
 	private JTextField mostrar_ValoracionMedia;
-	Ventana_Inicio vI = new Ventana_Inicio();
 	private Usuario usuarioActual;
-	Ventana_Principal_Usuario vPu = new Ventana_Principal_Usuario(vI, usuarioActual);
+	private Ventana_Principal_Usuario vPu;
 	
 	
 	public Ventana_VerPerfil_Usuario(Ventana_Principal_Usuario v, Usuario u) {
+		this.vPu = v;
+		this.usuarioActual = u;
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -105,10 +106,16 @@ public class Ventana_VerPerfil_Usuario extends JFrame {
 		boton_borrarUsuario.setBounds(10, 166, 143, 93);
 		contentPane.add(boton_borrarUsuario);
 		
-		JButton boton_verPerfil = new JButton("Ver Perfil");
+		JButton boton_verPerfil = new JButton("Enviar Mensaje");
+		boton_verPerfil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Ventana_Enviar_Mensaje vent = new Ventana_Enviar_Mensaje(usuarioActual);
+				vent.setVisible(true);
+			}
+		});
 		boton_verPerfil.setForeground(Colores.VERDE_OSCURO);
 		boton_verPerfil.setFont(new Font("Britannic Bold", Font.PLAIN, 12));
-		boton_verPerfil.setBackground(new Color(128, 255, 128));
+		boton_verPerfil.setBackground(Colores.VERDE_BRILLANTE);
 		boton_verPerfil.setBounds(10, 270, 143, 93);
 		contentPane.add(boton_verPerfil);
 		
@@ -167,7 +174,21 @@ public class Ventana_VerPerfil_Usuario extends JFrame {
 		mostrar_ValoracionMedia.setBounds(351, 253, 119, 20);
 		contentPane.add(mostrar_ValoracionMedia);
 		
+		// Cargar datos
+		mostrar_Usuario.setText(usuarioActual.getNombreUsuario());
+		mostrar_Usuario.setEditable(false);
 		
-
+		mostrar_Correo.setText(usuarioActual.getEmail());
+		mostrar_Correo.setEditable(false);
+		
+		String[] stats = dao.UsuarioDAO.obtenerEstadisticas(usuarioActual.getNombreUsuario());
+		mostrar_IncidenciasCreadas.setText(stats[0]);
+		mostrar_IncidenciasCreadas.setEditable(false);
+		
+		mostrar_IncidenciasResueltas.setText(stats[1]);
+		mostrar_IncidenciasResueltas.setEditable(false);
+		
+		mostrar_ValoracionMedia.setText(stats[2]);
+		mostrar_ValoracionMedia.setEditable(false);
 	}
 }

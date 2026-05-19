@@ -2,13 +2,14 @@ package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
+import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
-import java.awt.Color;
+import javax.swing.JOptionPane;
+import dao.IncidenciaDAO;
+import modelo.Usuario;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -38,8 +39,12 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
 	protected DefaultTableModel modelo;
 	private JTextField input_Titulo;
 	private JTextField input_Fecha;
+	private JTextArea input_Descripcion;
+	private JList<String> lista_Zonas;
+	private Usuario usuarioActual;
 	
-	public Ventana_AgregarIncidencia_Usuario(Ventana_Principal_Usuario v) {
+	public Ventana_AgregarIncidencia_Usuario(Ventana_Principal_Usuario v, Usuario u) {
+		this.usuarioActual = u;
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -87,7 +92,7 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
 		label_Descripcion.setBounds(196, 133, 116, 32);
 		contentPane.add(label_Descripcion);
 		
-		JTextArea input_Descripcion = new JTextArea();
+		input_Descripcion = new JTextArea();
 		input_Descripcion.setBounds(196, 166, 237, 54);
 		contentPane.add(input_Descripcion);
 		
@@ -111,7 +116,25 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
 		JButton boton_borrarIncidencia = new JButton("Agregar Incidencia");
 		boton_borrarIncidencia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String titulo = input_Titulo.getText();
+				String descripcion = input_Descripcion.getText();
+				String fecha = input_Fecha.getText();
+				int idZona = lista_Zonas.getSelectedIndex() + 1;
 				
+				if (titulo.isEmpty() || descripcion.isEmpty() || fecha.isEmpty() || idZona == 0) {
+					JOptionPane.showMessageDialog(null, "Por favor, rellene todos los campos y seleccione una zona.");
+					return;
+				}
+				
+				boolean exito = IncidenciaDAO.agregarIncidencia(titulo, descripcion, fecha, usuarioActual.getNombreUsuario(), idZona);
+				if (exito) {
+					JOptionPane.showMessageDialog(null, "Incidencia agregada con éxito.");
+					v.cargarIncidencias();
+					v.setVisible(true);
+					dispose();
+				} else {
+					JOptionPane.showMessageDialog(null, "Error al agregar la incidencia. Revisa el formato de fecha (YYYY-MM-DD).");
+				}
 			}
 		});
 		boton_borrarIncidencia.setForeground(Colores.VERDE_OSCURO);
@@ -146,8 +169,8 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
 		
 		// LISTA
 		
-		String[] opciones = {"Benidorm", "Altea", "Alfaz del Pi", "Albir", "Alicante", "Valencia", "Calpe", "Denia"};
-		JList lista_Zonas = new JList(opciones);
+		String[] opciones = {"Valencia", "Madrid", "Barcelona", "Sevilla", "Bilbao"};
+		lista_Zonas = new JList<>(opciones);
 		JScrollPane scrollPane = new JScrollPane(lista_Zonas);
 		scrollPane.setBounds(260, 294, 173, 106);
 		contentPane.add(scrollPane);
