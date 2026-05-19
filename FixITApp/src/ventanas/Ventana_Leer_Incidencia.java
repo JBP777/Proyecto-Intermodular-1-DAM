@@ -25,16 +25,14 @@ public class Ventana_Leer_Incidencia extends JFrame {
     private JTextField txtReportador;
     private JTextField txtZona;
     private JTextField txtFecha;
+    private JTextField txtCategorias; // AÑADIDO
     private JTextArea areaDescripcion;
 
-    /**
-     * 
-     */
     public Ventana_Leer_Incidencia(Incidencia incidencia) {
 
         setTitle("FIXIT! - Incidencia");
         setResizable(false);
-        setBounds(200, 150, 400, 430);
+        setBounds(200, 150, 400, 490); 
         // DISPOSE_ON_CLOSE cierra solo esta ventana, sin cerrar toda la aplicacion
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -111,8 +109,18 @@ public class Ventana_Leer_Incidencia extends JFrame {
         txtFecha.setBounds(95, 185, 275, 22);
         contentPane.add(txtFecha);
 
+        // AÑADIDO — campo categorias, muestra todas separadas por coma (viene de STRING_AGG en la vista)
+        JLabel lblCategorias = new JLabel("Categorias:");
+        lblCategorias.setBounds(10, 215, 80, 20);
+        contentPane.add(lblCategorias);
+
+        txtCategorias = new JTextField();
+        txtCategorias.setEditable(false);
+        txtCategorias.setBounds(95, 215, 275, 22);
+        contentPane.add(txtCategorias);
+
         JLabel lblDescripcion = new JLabel("Descripcion:");
-        lblDescripcion.setBounds(10, 215, 80, 20);
+        lblDescripcion.setBounds(10, 245, 80, 20); // MODIFICADO — bajado 30px por el nuevo campo
         contentPane.add(lblDescripcion);
 
         // JTextArea con scroll, la descripcion puede ser larga
@@ -121,7 +129,7 @@ public class Ventana_Leer_Incidencia extends JFrame {
         areaDescripcion.setWrapStyleWord(true);  // corta por palabras, no por caracteres
         areaDescripcion.setEditable(false);
         JScrollPane scroll = new JScrollPane(areaDescripcion);
-        scroll.setBounds(10, 235, 360, 100);
+        scroll.setBounds(10, 265, 360, 100); // MODIFICADO — bajado 30px por el nuevo campo
         contentPane.add(scroll);
 
         // BOTONES DE CAMBIO DE ESTADO
@@ -142,7 +150,7 @@ public class Ventana_Leer_Incidencia extends JFrame {
         });
         btnAbrir.setBackground(Colores.VERDE_BRILLANTE);
         btnAbrir.setForeground(Colores.VERDE_OSCURO);
-        btnAbrir.setBounds(10, 345, 175, 28);
+        btnAbrir.setBounds(10, 375, 175, 28); // MODIFICADO — bajado 30px por el nuevo campo
         contentPane.add(btnAbrir);
 
         JButton btnCerrar = new JButton("Marcar como cerrada");
@@ -159,15 +167,18 @@ public class Ventana_Leer_Incidencia extends JFrame {
         });
         btnCerrar.setBackground(Colores.AMARILLO_PASTEL);
         btnCerrar.setForeground(Colores.AMARILLO_OSCURO);
-        btnCerrar.setBounds(195, 345, 175, 28);
+        btnCerrar.setBounds(195, 375, 175, 28); // MODIFICADO — bajado 30px por el nuevo campo
         contentPane.add(btnCerrar);
 
-        // CARGAR DATOS
+        // CARGAR
+        //                
         txtEstado.setText(incidencia.getEstado());
         txtTitulo.setText(incidencia.getTitulo());
         txtReportador.setText(incidencia.getReportador());
         txtZona.setText(incidencia.getZona());
         txtFecha.setText(incidencia.getFechaCreacion());
+        //si no tiene categorias asignadas muestra "Sin categoria"
+        txtCategorias.setText(incidencia.getCategorias() == null ? "Sin categoria" : incidencia.getCategorias());
         areaDescripcion.setText(incidencia.getDescripcion());
     }
 }
