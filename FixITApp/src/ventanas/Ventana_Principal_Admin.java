@@ -195,6 +195,20 @@ public class Ventana_Principal_Admin extends JFrame {
         contentPane.add(btnVerUsuario);
         
         JButton btnVerIncidencia = new JButton("Ver Incidencia");
+        btnVerIncidencia.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	
+        		int incSeleccionada = tableIncidencias.getSelectedRow();
+        		
+        		if( incSeleccionada != -1) {
+        			Ventana_Leer_Incidencia vli = new Ventana_Leer_Incidencia(IncidenciaDAO.obtenerIncidencias().get(incSeleccionada));
+        			vli.setVisible(true);
+        		}else {
+        			JOptionPane.showMessageDialog(tableIncidencias, "Debes seleccionar una incidencia","AVISO - SELECCIONA UNA INCIDENCIA", JOptionPane.WARNING_MESSAGE);
+        		}
+        	
+        	}
+        });
         btnVerIncidencia.setBounds(10, 410, 240, 28);
         contentPane.add(btnVerIncidencia);
     }

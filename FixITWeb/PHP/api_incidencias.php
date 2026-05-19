@@ -39,15 +39,7 @@ switch ($accion) {
 case 'ranking':
     try {
         $query = "
-            SELECT
-                u.nombre_usuario  AS usuario,
-                u.email,
-                c.total_resueltas AS incidenciasresueltas,
-                c.valoracion_media
-            FROM colaborador c
-            JOIN usuario u ON c.usuario = u.nombre_usuario
-            ORDER BY c.total_resueltas DESC
-            LIMIT 3
+           SELECT * FROM vista_top_colaboradores LIMIT 3;
         ";
         $stmt = $conexion->prepare($query);
         $stmt->execute();
