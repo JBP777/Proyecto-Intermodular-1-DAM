@@ -1,23 +1,18 @@
 package ventanas;
 
-import java.awt.BorderLayout;
 import util.ConexionBD;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import dao.UsuarioDAO;
 import modelo.Usuario;
 import util.Administrator;
 import util.Colores;
-
-import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
+import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -27,144 +22,147 @@ import javax.swing.JPasswordField;
 
 public class Ventana_Inicio extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	
-	private Usuario usuarioActual;
-	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ConexionBD.getConexion();
-					Ventana_Inicio frame = new Ventana_Inicio();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private Usuario usuarioActual;
 
-	/**
-	 * Create the frame.
-	 */
-	
-	
-	
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    ConexionBD.getConexion();
+                    Ventana_Inicio frame = new Ventana_Inicio();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
-	
-	private JTextField input_usuario;
-	private JPasswordField input_contrasena;
-	
-	public Ventana_Inicio() {
-		
-		setTitle("FIXIT!");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 528);
-		contentPane = new JPanel();
-		contentPane.setBackground(Colores.AMARILLO_FONDO);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		// LABELS
-		
-		JLabel label_FIX = new JLabel("FIX");
-		label_FIX.setForeground(Colores.AMARILLO_OSCURO);
-		label_FIX.setFont(new Font("Bahnschrift", Font.BOLD, 73));
-		label_FIX.setBounds(282, 71, 127, 118);
-		contentPane.add(label_FIX);
-		
-		JLabel label_IT = new JLabel("IT!");
-		label_IT.setForeground(Colores.VERDE_BRILLANTE);
-		label_IT.setFont(new Font("Bahnschrift", Font.BOLD, 75));
-		label_IT.setBounds(392, 70, 141, 118);
-		contentPane.add(label_IT);
-		
-		JLabel label_Usuario = new JLabel("Nombre de Usuario:");
-		label_Usuario.setFont(new Font("Britannic Bold", Font.PLAIN, 13));
-		label_Usuario.setBounds(263, 210, 127, 29);
-		contentPane.add(label_Usuario);
-		
-		JLabel label_Contrasena = new JLabel("Contraseña:");
-		label_Contrasena.setFont(new Font("Britannic Bold", Font.PLAIN, 13));
-		label_Contrasena.setBounds(263, 240, 108, 29);
-		contentPane.add(label_Contrasena);
-		
-		JLabel label_noTienesCuenta = new JLabel("¿No tienes cuenta?");
-		label_noTienesCuenta.setForeground(Colores.VERDE_BRILLANTE);
-		label_noTienesCuenta.setFont(new Font("Britannic Bold", Font.PLAIN, 13));
-		label_noTienesCuenta.setBounds(324, 366, 127, 20);
-		contentPane.add(label_noTienesCuenta);
-		
-		JLabel label_contraseñaError = new JLabel("Contraseña incorrecta");
-		label_contraseñaError.setHorizontalAlignment(SwingConstants.CENTER);
-		label_contraseñaError.setVisible(false);
-		label_contraseñaError.setForeground(new Color(255, 0, 0));
-		label_contraseñaError.setBounds(293, 277, 174, 14);
-		contentPane.add(label_contraseñaError);
-		
-		// INPUTS
-		
-		input_usuario = new JTextField();
-		input_usuario.setBounds(400, 214, 86, 20);
-		contentPane.add(input_usuario);
-		input_usuario.setColumns(10);
-		
-		// Iniciar Sesion
-		JButton boton_Iniciar = new JButton("Iniciar Sesion");
-		boton_Iniciar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				usuarioActual = UsuarioDAO.obtenerUsuario(input_usuario.getText(),new String(input_contrasena.getPassword())); // getPassword devuelve un array de char y para pasarlo a string se puede usar esta forma ya que el getText esta deprecated para el campo de contraseñas.
-				if(usuarioActual != null) {
-					
-					if(Administrator.esAdmin(usuarioActual.getNombreUsuario())) {
-						// Abrir ventana administrador
-						setVisible(false);
-						Ventana_Principal_Admin vpa = new Ventana_Principal_Admin(Ventana_Inicio.this, usuarioActual);
-						vpa.setVisible(true);
-						
-					}else {
-						// Abrir ventana usuario normal
-						setVisible(false);
-						Ventana_Principal_Usuario vpu = new Ventana_Principal_Usuario(Ventana_Inicio.this, usuarioActual);
-						vpu.setVisible(true);
-					}
-				}else {
-					//Mostrar Mensaje de error(Usuario no encontrado)
-					JOptionPane.showMessageDialog(contentPane, "No existe el usuario, prueba a registrarte","Error de login",JOptionPane.ERROR_MESSAGE);
-				}
-				
-			}
-		});
-		boton_Iniciar.setBackground(Colores.AMARILLO_PASTEL);
-		boton_Iniciar.setForeground(Colores.AMARILLO_OSCURO);
-		boton_Iniciar.setFont(new Font("Bahnschrift", Font.BOLD, 15));
-		boton_Iniciar.setBounds(293, 291, 174, 53);
-		contentPane.add(boton_Iniciar);
-		
-		JButton boton_registrarse = new JButton("Registrarse");
-		boton_registrarse.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Ventana_Registro v = new Ventana_Registro(Ventana_Inicio.this);
-				v.setVisible(true);
-				setVisible(false);
-			}
-		});
-		boton_registrarse.setForeground(new Color(64, 45, 0));
-		boton_registrarse.setFont(new Font("Bahnschrift", Font.BOLD, 15));
-		boton_registrarse.setBackground(new Color(255, 255, 128));
-		boton_registrarse.setBounds(293, 386, 174, 53);
-		contentPane.add(boton_registrarse);
-		
-		input_contrasena = new JPasswordField();
-		input_contrasena.setBounds(400, 245, 86, 20);
-		contentPane.add(input_contrasena);
+    private JTextField input_usuario;
+    private JPasswordField input_contrasena;
 
-	}
+    public Ventana_Inicio() {
+
+        setTitle("FIXIT!");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+        setBounds(100, 100, 671, 620);
+
+        contentPane = new JPanel();
+        contentPane.setBackground(Colores.AMARILLO_FONDO);
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        // ── LOGO ──────────────────────────────────────────────────────
+        // "FIX" (ancho ~155px) + "IT!" (ancho ~130px) = ~285px en total
+        // Para centrarlo: x_inicio = (655 - 285) / 2 = 185
+        JLabel label_FIX = new JLabel("FIX");
+        label_FIX.setForeground(Colores.AMARILLO_OSCURO);
+        label_FIX.setFont(new Font("Bahnschrift", Font.BOLD, 100));
+        label_FIX.setBounds(185, 50, 165, 130);
+        contentPane.add(label_FIX);
+
+        JLabel label_IT = new JLabel("IT!");
+        label_IT.setForeground(Colores.VERDE_BRILLANTE);
+        label_IT.setFont(new Font("Bahnschrift", Font.BOLD, 100));
+        label_IT.setBounds(340, 50, 155, 130);
+        contentPane.add(label_IT);
+
+        // ── FORMULARIO ────────────────────────────────────────────────
+        // Label (195px) + gap(10px) + input (180px) = 385px total
+        // x_inicio = (655 - 385) / 2 = 135  → label en 135, input en 340
+        int labelX  = 135;
+        int inputX  = 340;
+        int inputW  = 180;
+        int inputH  = 30;
+
+        JLabel label_Usuario = new JLabel("Nombre de Usuario:");
+        label_Usuario.setForeground(Colores.AMARILLO_OSCURO);
+        label_Usuario.setFont(new Font("Britannic Bold", Font.PLAIN, 17));
+        label_Usuario.setBounds(labelX, 228, 195, 36);
+        contentPane.add(label_Usuario);
+
+        input_usuario = new JTextField();
+        input_usuario.setBackground(Color.WHITE);
+        input_usuario.setForeground(Colores.AMARILLO_OSCURO);
+        input_usuario.setCaretColor(Colores.AMARILLO_OSCURO);
+        input_usuario.setFont(new Font("SansSerif", Font.PLAIN, 15));
+        input_usuario.setBounds(inputX, 233, inputW, inputH);
+        input_usuario.setColumns(10);
+        contentPane.add(input_usuario);
+
+        JLabel label_Contrasena = new JLabel("Contraseña:");
+        label_Contrasena.setForeground(Colores.AMARILLO_OSCURO);
+        label_Contrasena.setFont(new Font("Britannic Bold", Font.PLAIN, 17));
+        label_Contrasena.setBounds(labelX, 278, 155, 36);
+        contentPane.add(label_Contrasena);
+
+        input_contrasena = new JPasswordField();
+        input_contrasena.setBackground(Color.WHITE);
+        input_contrasena.setForeground(Colores.AMARILLO_OSCURO);
+        input_contrasena.setCaretColor(Colores.AMARILLO_OSCURO);
+        input_contrasena.setFont(new Font("SansSerif", Font.PLAIN, 15));
+        input_contrasena.setBounds(inputX, 283, inputW, inputH);
+        contentPane.add(input_contrasena);
+
+        // ── BOTONES ───────────────────────────────────────────────────
+        // boton 230px de ancho → x = (655 - 230) / 2 = 212
+        int botonX = 212;
+        int botonW = 230;
+        int botonH = 60;
+
+        JButton boton_Iniciar = new JButton("Iniciar Sesion");
+        boton_Iniciar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                usuarioActual = UsuarioDAO.obtenerUsuario(
+                    input_usuario.getText(),
+                    new String(input_contrasena.getPassword()));
+                if (usuarioActual != null) {
+                    if (Administrator.esAdmin(usuarioActual.getNombreUsuario())) {
+                        setVisible(false);
+                        new Ventana_Principal_Admin(Ventana_Inicio.this, usuarioActual).setVisible(true);
+                    } else {
+                        setVisible(false);
+                        new Ventana_Principal_Usuario(Ventana_Inicio.this, usuarioActual).setVisible(true);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(contentPane,
+                        "No existe el usuario, prueba a registrarte",
+                        "Error de login", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        boton_Iniciar.setBackground(Colores.VERDE_BRILLANTE);
+        boton_Iniciar.setForeground(Colores.VERDE_OSCURO);
+        boton_Iniciar.setFont(new Font("Bahnschrift", Font.BOLD, 18));
+        boton_Iniciar.setFocusPainted(false);
+        boton_Iniciar.setBounds(botonX, 340, botonW, botonH);
+        contentPane.add(boton_Iniciar);
+
+        // Label "¿No tienes cuenta?" centrado entre los dos botones
+        JLabel label_noTienesCuenta = new JLabel("¿No tienes cuenta?");
+        label_noTienesCuenta.setHorizontalAlignment(SwingConstants.CENTER);
+        label_noTienesCuenta.setForeground(Colores.VERDE_OSCURO);
+        label_noTienesCuenta.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
+        label_noTienesCuenta.setBounds(botonX, 412, botonW, 24);
+        contentPane.add(label_noTienesCuenta);
+
+        JButton boton_registrarse = new JButton("Registrarse");
+        boton_registrarse.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Ventana_Registro v = new Ventana_Registro(Ventana_Inicio.this);
+                v.setVisible(true);
+                setVisible(false);
+            }
+        });
+        boton_registrarse.setBackground(Colores.VERDE_BRILLANTE);
+        boton_registrarse.setForeground(Colores.VERDE_OSCURO);
+        boton_registrarse.setFont(new Font("Bahnschrift", Font.BOLD, 18));
+        boton_registrarse.setFocusPainted(false);
+        boton_registrarse.setBounds(botonX, 445, botonW, botonH);
+        contentPane.add(boton_registrarse);
+    }
 }
