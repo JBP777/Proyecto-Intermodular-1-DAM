@@ -1,3 +1,4 @@
+
 :root {
     --primary: #ffcf4b;
     --secondary: #00A082;
@@ -45,6 +46,9 @@ body {
     display: flex;
     gap: 30px;
     list-style: none;
+    align-items: center;
+    min-width: 500px;
+    justify-content: flex-end;
 }
 
 .nav-links a {
@@ -77,6 +81,8 @@ body {
     border-radius: 20px;
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
+    min-width: 120px;
+    text-align: center;
 }
 
 .btn-nav:hover {
