@@ -1,7 +1,5 @@
 package ventanas;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,7 +22,6 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
-import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JList;
@@ -47,6 +44,9 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
     private JList<String> lista_Categorias;
     private Usuario usuarioActual;
 
+    // verde oscuro coherente con el resto de ventanas
+    private static final Color VERDE_OSCURO_UI = new Color(34, 85, 34);
+
     public Ventana_AgregarIncidencia_Usuario(Ventana_Principal_Usuario v, Usuario u) {
         this.usuarioActual = u;
 
@@ -60,7 +60,8 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
 
         setTitle("FIXIT!");
         setResizable(false);
-        setBounds(100, 100, 480, 559);
+        setBounds(100, 100, 580, 660);
+
         contentPane = new JPanel();
         contentPane.setBackground(Colores.AMARILLO_FONDO);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -68,64 +69,75 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
         contentPane.setLayout(null);
 
         // LOGO
-
         JLabel label_FIX = new JLabel("FIX");
         label_FIX.setForeground(Colores.AMARILLO_OSCURO);
-        label_FIX.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
-        label_FIX.setBounds(10, 11, 58, 43);
+        label_FIX.setFont(new Font("Britannic Bold", Font.PLAIN, 45));
+        label_FIX.setBounds(10, 8, 80, 55);
         contentPane.add(label_FIX);
 
         JLabel label_IT = new JLabel("IT!");
         label_IT.setForeground(Colores.VERDE_BRILLANTE);
-        label_IT.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
-        label_IT.setBounds(64, 5, 49, 54);
+        label_IT.setFont(new Font("Britannic Bold", Font.PLAIN, 45));
+        label_IT.setBounds(84, 8, 70, 55);
         contentPane.add(label_IT);
 
-        // TITULO DE LA VENTANA
+        // TITULO VENTANA — centrado
         JLabel label_titulo_ventana = new JLabel("Nueva Incidencia");
-        label_titulo_ventana.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
-        label_titulo_ventana.setForeground(Colores.AMARILLO_OSCURO);
+        label_titulo_ventana.setFont(new Font("Britannic Bold", Font.PLAIN, 24));
+        label_titulo_ventana.setForeground(VERDE_OSCURO_UI);
         label_titulo_ventana.setHorizontalAlignment(SwingConstants.CENTER);
-        label_titulo_ventana.setBounds(0, 12, 470, 30);
+        label_titulo_ventana.setBounds(0, 15, 570, 35);
         contentPane.add(label_titulo_ventana);
 
-        // LINEA SEPARADORA debajo del logo
+        // SEPARADOR verde
         JSeparator separador = new JSeparator();
-        separador.setForeground(Colores.AMARILLO_OSCURO);
-        separador.setBounds(0, 62, 480, 2);
+        separador.setForeground(VERDE_OSCURO_UI);
+        separador.setBackground(VERDE_OSCURO_UI);
+        separador.setBounds(0, 72, 580, 3);
         contentPane.add(separador);
 
-        // CAMPOS DEL FORMULARIO
-        // reportador, estado y fecha se asignan automaticamente al enviar (no se muestran)
+        // ── CAMPO: TÍTULO ─────────────────────────────────────────────
 
-        JLabel label_Titulo = new JLabel("Titulo:");
-        label_Titulo.setFont(new Font("Tahoma", Font.BOLD, 13));
-        label_Titulo.setBounds(40, 80, 80, 25);
+        JLabel label_Titulo = new JLabel("Título:");
+        label_Titulo.setFont(new Font("Britannic Bold", Font.PLAIN, 16));
+        label_Titulo.setForeground(VERDE_OSCURO_UI);
+        label_Titulo.setBounds(40, 92, 100, 28);
         contentPane.add(label_Titulo);
 
         input_Titulo = new JTextField();
-        input_Titulo.setBounds(130, 80, 295, 25);
+        input_Titulo.setBackground(Color.WHITE);
+        input_Titulo.setForeground(new Color(40, 40, 40));
+        input_Titulo.setFont(new Font("SansSerif", Font.PLAIN, 15));
+        input_Titulo.setBounds(155, 92, 370, 30);
         input_Titulo.setColumns(10);
         contentPane.add(input_Titulo);
 
-        JLabel label_Descripcion = new JLabel("Descripcion:");
-        label_Descripcion.setFont(new Font("Tahoma", Font.BOLD, 13));
-        label_Descripcion.setBounds(40, 120, 100, 25);
+        // ── CAMPO: DESCRIPCIÓN ────────────────────────────────────────
+
+        JLabel label_Descripcion = new JLabel("Descripción:");
+        label_Descripcion.setFont(new Font("Britannic Bold", Font.PLAIN, 16));
+        label_Descripcion.setForeground(VERDE_OSCURO_UI);
+        label_Descripcion.setBounds(40, 138, 110, 28);
         contentPane.add(label_Descripcion);
 
         input_Descripcion = new JTextArea();
         input_Descripcion.setLineWrap(true);
         input_Descripcion.setWrapStyleWord(true);
+        input_Descripcion.setBackground(Color.WHITE);
+        input_Descripcion.setForeground(new Color(40, 40, 40));
+        input_Descripcion.setFont(new Font("SansSerif", Font.PLAIN, 14));
         JScrollPane scrollDescripcion = new JScrollPane(input_Descripcion);
-        scrollDescripcion.setBounds(130, 120, 295, 90);
+        scrollDescripcion.setBounds(155, 138, 370, 100);
         contentPane.add(scrollDescripcion);
 
+        // ── CAMPO: ZONA ───────────────────────────────────────────────
+
         JLabel label_Zona = new JLabel("Zona:");
-        label_Zona.setFont(new Font("Tahoma", Font.BOLD, 13));
-        label_Zona.setBounds(40, 228, 80, 25);
+        label_Zona.setFont(new Font("Britannic Bold", Font.PLAIN, 16));
+        label_Zona.setForeground(VERDE_OSCURO_UI);
+        label_Zona.setBounds(40, 260, 100, 28);
         contentPane.add(label_Zona);
 
-        // LISTA DE ZONAS cargada desde la BD
         ArrayList<Zona> zonas = ZonaDAO.obtenerZonas();
         String[] opciones = new String[zonas.size()];
         for (int i = 0; i < zonas.size(); i++) {
@@ -133,14 +145,21 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
         }
 
         lista_Zonas = new JList<>(opciones);
+        lista_Zonas.setBackground(Color.WHITE);
+        lista_Zonas.setForeground(new Color(40, 40, 40));
+        lista_Zonas.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        lista_Zonas.setSelectionBackground(new Color(80, 160, 80));
+        lista_Zonas.setSelectionForeground(Color.WHITE);
         JScrollPane scrollZonas = new JScrollPane(lista_Zonas);
-        scrollZonas.setBounds(130, 228, 150, 70);
+        scrollZonas.setBounds(155, 256, 370, 85);
         contentPane.add(scrollZonas);
-        
-        // LISTA DE CATEGORIAS cargas desde la BD
-        JLabel label_Categoria = new JLabel("Categoria:");
-        label_Categoria.setFont(new Font("Tahoma", Font.BOLD, 13));
-        label_Categoria.setBounds(40, 323, 90, 25);
+
+        // ── CAMPO: CATEGORÍA ──────────────────────────────────────────
+
+        JLabel label_Categoria = new JLabel("Categoría:");
+        label_Categoria.setFont(new Font("Britannic Bold", Font.PLAIN, 16));
+        label_Categoria.setForeground(VERDE_OSCURO_UI);
+        label_Categoria.setBounds(40, 368, 110, 28);
         contentPane.add(label_Categoria);
 
         ArrayList<Categoria> categorias = CategoriaDAO.obtenerCategorias();
@@ -150,11 +169,16 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
         }
 
         lista_Categorias = new JList<>(opcionesCategorias);
+        lista_Categorias.setBackground(Color.WHITE);
+        lista_Categorias.setForeground(new Color(40, 40, 40));
+        lista_Categorias.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        lista_Categorias.setSelectionBackground(new Color(80, 160, 80));
+        lista_Categorias.setSelectionForeground(Color.WHITE);
         JScrollPane scrollCategorias = new JScrollPane(lista_Categorias);
-        scrollCategorias.setBounds(130, 316, 150, 70);
+        scrollCategorias.setBounds(155, 362, 370, 85);
         contentPane.add(scrollCategorias);
 
-        // BOTONES
+        // ── BOTONES ───────────────────────────────────────────────────
 
         JButton boton_cancelar = new JButton("Cancelar");
         boton_cancelar.addActionListener(new ActionListener() {
@@ -165,24 +189,24 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
         });
         boton_cancelar.setForeground(Colores.AMARILLO_OSCURO);
         boton_cancelar.setBackground(Colores.AMARILLO_PASTEL);
-        boton_cancelar.setFont(new Font("Britannic Bold", Font.PLAIN, 12));
-        boton_cancelar.setBounds(130, 477, 140, 35);
+        boton_cancelar.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
+        boton_cancelar.setFocusPainted(false);
+        boton_cancelar.setBounds(90, 570, 165, 45);
         contentPane.add(boton_cancelar);
 
         JButton boton_agregar = new JButton("Agregar Incidencia");
         boton_agregar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String titulo       = input_Titulo.getText();
-                String descripcion  = input_Descripcion.getText();
-                String reportador   = usuarioActual.getNombreUsuario();
-                String zona         = lista_Zonas.getSelectedValue();
-                String categoria    = lista_Categorias.getSelectedValue();
+                String titulo      = input_Titulo.getText();
+                String descripcion = input_Descripcion.getText();
+                String reportador  = usuarioActual.getNombreUsuario();
+                String zona        = lista_Zonas.getSelectedValue();
+                String categoria   = lista_Categorias.getSelectedValue();
 
-                // validar que todos los campos esten rellenos y las listas tengan seleccion
                 if (titulo.trim().isEmpty() || descripcion.trim().isEmpty()
                         || zona == null || categoria == null) {
                     JOptionPane.showMessageDialog(contentPane,
-                        "Por favor, rellena todos los campos y selecciona una zona y categoria.");
+                        "Por favor, rellena todos los campos y selecciona una zona y categoría.");
                     return;
                 }
 
@@ -190,8 +214,6 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
 
                 if (IncidenciaDAO.agregarIncidencia(i)) {
                     JOptionPane.showMessageDialog(contentPane, "Incidencia creada correctamente.");
-
-                    // limpiar campos tras insertar correctamente
                     input_Titulo.setText("");
                     input_Descripcion.setText("");
                     lista_Zonas.clearSelection();
@@ -203,8 +225,9 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
         });
         boton_agregar.setForeground(Colores.VERDE_OSCURO);
         boton_agregar.setBackground(Colores.VERDE_BRILLANTE);
-        boton_agregar.setFont(new Font("Britannic Bold", Font.PLAIN, 12));
-        boton_agregar.setBounds(285, 477, 140, 35);
+        boton_agregar.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
+        boton_agregar.setFocusPainted(false);
+        boton_agregar.setBounds(320, 570, 165, 45);
         contentPane.add(boton_agregar);
     }
 }
