@@ -77,46 +77,21 @@ public class IncidenciaDAO {
 			}
 		}
 		
-		public static boolean agregarIncidencia(String titulo, String descripcion, String fecha, String reportador, int idZona) { // modificar
+		public static boolean agregarIncidencia(Incidencia i) { 
 			Connection conn = ConexionBD.getConexion();
 			boolean exito = false;
 			try {
-				// 1. Obtener el próximo ID disponible
-				PreparedStatement stMaxId = conn.prepareStatement("SELECT COALESCE(MAX(id), 0) + 1 AS next_id FROM INCIDENCIA");
-				ResultSet rsMaxId = stMaxId.executeQuery();
-				int nextId = 1;
-				if (rsMaxId.next()) {
-					nextId = rsMaxId.getInt("next_id");
-				}
+				PreparedStatement st = conn.prepareStatement("SELECT insertar_incidencia(?,?,?,?,?);");
+				st.setString(1, i.getTitulo());
+				st.setString(2, i.getDescripcion());
+				st.setString(3, i.getReportador());
+				st.setString(4, i.getZona());
+				st.setString(5, i.getCategorias());
 				
-				// 2. Asegurar que el usuario existe en REPORTADOR
-				PreparedStatement stCheckReportador = conn.prepareStatement("SELECT * FROM REPORTADOR WHERE usuario = ?");
-				stCheckReportador.setString(1, reportador);
-				ResultSet rsRep = stCheckReportador.executeQuery();
+				st.executeQuery();
 				
-				if (rsRep.next()) {
-					// Actualizar total creadas
-					PreparedStatement stUpdRep = conn.prepareStatement("UPDATE REPORTADOR SET total_creadas = total_creadas + 1 WHERE usuario = ?");
-					stUpdRep.setString(1, reportador);
-					stUpdRep.executeUpdate();
-				} else {
-					// Insertar nuevo reportador
-					PreparedStatement stInsRep = conn.prepareStatement("INSERT INTO REPORTADOR (usuario, total_creadas) VALUES (?, 1)");
-					stInsRep.setString(1, reportador);
-					stInsRep.executeUpdate();
-				}
+				exito = true;
 				
-				// 3. Insertar la incidencia
-				PreparedStatement stInsInc = conn.prepareStatement("INSERT INTO INCIDENCIA (id, estado, titulo, descripcion, fecha_creacion, reportador, zona) VALUES (?, 'Abierta', ?, ?, TO_DATE(?, 'YYYY-MM-DD'), ?, ?)");
-				stInsInc.setInt(1, nextId);
-				stInsInc.setString(2, titulo);
-				stInsInc.setString(3, descripcion);
-				stInsInc.setString(4, fecha);
-				stInsInc.setString(5, reportador);
-				stInsInc.setInt(6, idZona);
-				
-				int filasAfectadas = stInsInc.executeUpdate();
-				if (filasAfectadas > 0) exito = true;
 				
 				conn.close();
 			} catch (SQLException e) {
