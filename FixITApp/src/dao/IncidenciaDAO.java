@@ -61,7 +61,17 @@ public class IncidenciaDAO {
 			Connection conn = ConexionBD.getConexion();
 			
 			try {
+				
+		        PreparedStatement stClasificar = conn.prepareStatement(
+		                "DELETE FROM clasificar WHERE incidencia = ?");
+		            stClasificar.setInt(1, i.getId());
+		            stClasificar.executeUpdate();
+				
+				
+				
+				
 				PreparedStatement st = conn.prepareStatement("DELETE FROM INCIDENCIA WHERE id = ?");
+				
 				
 				// se le pasa el id de la consulta que queremos eliminar
 				st.setInt(1, i.getId());
