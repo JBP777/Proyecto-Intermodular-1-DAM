@@ -13,6 +13,7 @@ import dao.CategoriaDAO;
 import dao.IncidenciaDAO;
 import dao.ZonaDAO;
 import modelo.Categoria;
+import modelo.Incidencia;
 import modelo.Usuario;
 import modelo.Zona;
 
@@ -171,7 +172,33 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
         JButton boton_agregar = new JButton("Agregar Incidencia");
         boton_agregar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               
+                String titulo       = input_Titulo.getText();
+                String descripcion  = input_Descripcion.getText();
+                String reportador   = usuarioActual.getNombreUsuario();
+                String zona         = lista_Zonas.getSelectedValue();
+                String categoria    = lista_Categorias.getSelectedValue();
+
+                // validar que todos los campos esten rellenos y las listas tengan seleccion
+                if (titulo.trim().isEmpty() || descripcion.trim().isEmpty()
+                        || zona == null || categoria == null) {
+                    JOptionPane.showMessageDialog(contentPane,
+                        "Por favor, rellena todos los campos y selecciona una zona y categoria.");
+                    return;
+                }
+
+                Incidencia i = new Incidencia(0, null, titulo, descripcion, reportador, zona, null, categoria);
+
+                if (IncidenciaDAO.agregarIncidencia(i)) {
+                    JOptionPane.showMessageDialog(contentPane, "Incidencia creada correctamente.");
+
+                    // limpiar campos tras insertar correctamente
+                    input_Titulo.setText("");
+                    input_Descripcion.setText("");
+                    lista_Zonas.clearSelection();
+                    lista_Categorias.clearSelection();
+                } else {
+                    JOptionPane.showMessageDialog(contentPane, "Error - Incidencia no creada.");
+                }
             }
         });
         boton_agregar.setForeground(Colores.VERDE_OSCURO);
