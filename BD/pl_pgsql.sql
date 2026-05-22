@@ -13,10 +13,10 @@ SELECT
     i.reportador,
     z.nombre AS nombre_zona,
     STRING_AGG(c.nombre, ', ') AS categorias
-FROM INCIDENCIA i
-JOIN ZONA z      ON z.id = i.zona
-JOIN CLASIFICAR cl ON cl.incidencia = i.id
-JOIN CATEGORIA c ON c.id = cl.categoria
+FROM INCIDENCIA i, ZONA z, CLASIFICAR cl, CATEGORIA c
+WHERE i.zona = z.id
+  AND cl.incidencia = i.id
+  AND cl.categoria = c.id
 GROUP BY i.id, i.estado, i.titulo, i.descripcion, i.fecha_creacion, i.reportador, z.nombre;
 
 
@@ -27,8 +27,8 @@ SELECT
     u.email,
     c.total_resueltas AS incidencias_resueltas,
     c.valoracion_media
-FROM COLABORADOR c
-JOIN USUARIO u ON u.nombre_usuario = c.usuario
+FROM COLABORADOR c, USUARIO u
+WHERE c.usuario = u.nombre_usuario
 ORDER BY c.total_resueltas DESC;
 
 
@@ -60,9 +60,9 @@ DECLARE
     v_total NUMERIC;
 BEGIN
     SELECT COUNT(*) INTO v_total
-    FROM INCIDENCIA i
-    JOIN ZONA z ON z.id = i.zona
-    WHERE z.nombre = p_zona
+    FROM INCIDENCIA i, ZONA z
+    WHERE z.id = i.zona
+      AND z.nombre = p_zona
       AND i.estado = 'Abierta';
 
     RETURN COALESCE(v_total, 0);
@@ -92,6 +92,53 @@ BEGIN
 
     INSERT INTO CLASIFICAR (incidencia, categoria)
     VALUES (v_id_incidencia, v_id_categoria);
+END;
+$$ LANGUAGE plpgsql;
+
+
+-- Recorre todos los colaboradores con un cursor y recalcula su valoracion_media
+-- en escala 0-5 según las entradas en VALORAR respecto a sus resueltas.
+-- USO: SELECT fn_recalcular_valoraciones();
+CREATE OR REPLACE FUNCTION fn_recalcular_valoraciones()
+RETURNS VOID AS $$
+DECLARE
+    cur_colaboradores CURSOR FOR
+        SELECT usuario FROM COLABORADOR;
+
+    v_usuario   COLABORADOR.usuario%TYPE;
+    v_total     NUMERIC;
+    v_resueltas NUMERIC;  -- ← declarada
+    v_media     NUMERIC;
+BEGIN
+    OPEN cur_colaboradores;
+
+    LOOP
+        FETCH cur_colaboradores INTO v_usuario;
+        EXIT WHEN NOT FOUND;
+
+        SELECT COUNT(*) INTO v_total
+        FROM RESOLVER r, VALORAR v
+        WHERE r.incidencia = v.incidencia
+          AND r.solucion = v.solucion
+          AND r.colaborador = v_usuario;
+
+        SELECT total_resueltas INTO v_resueltas  -- ← rellenada
+        FROM COLABORADOR
+        WHERE usuario = v_usuario;
+
+        IF v_total > 0 AND v_resueltas > 0 THEN
+            v_media := ROUND((v_total * 5.0) / v_resueltas, 2);
+        ELSE
+            v_media := 0.00;
+        END IF;
+
+        UPDATE COLABORADOR
+        SET valoracion_media = LEAST(v_media, 5.00)
+        WHERE usuario = v_usuario;
+
+    END LOOP;
+
+    CLOSE cur_colaboradores;
 END;
 $$ LANGUAGE plpgsql;
 
