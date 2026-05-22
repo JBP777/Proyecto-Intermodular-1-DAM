@@ -3,6 +3,9 @@ package ventanas;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import dao.UsuarioDAO;
+
 import javax.swing.JSeparator;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -24,7 +27,7 @@ public class Ventana_VerPerfil_Usuario extends JFrame {
     private static final Color VERDE_OSCURO_UI = new Color(34, 85, 34);
 
     public Ventana_VerPerfil_Usuario(Ventana_Principal_Usuario v, Usuario u) {
-
+    	String[] stats = UsuarioDAO.obtenerEstadisticas(u);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -139,7 +142,8 @@ public class Ventana_VerPerfil_Usuario extends JFrame {
         lbl_creadasTitulo.setBounds(50, 290, 220, 30);
         contentPane.add(lbl_creadasTitulo);
 
-        JLabel lbl_creadasValor = new JLabel("—"); // TODO: sustituir con dato real
+        
+        JLabel lbl_creadasValor = new JLabel(stats[0]); // valor del array
         lbl_creadasValor.setFont(new Font("SansSerif", Font.BOLD, 16));
         lbl_creadasValor.setForeground(Colores.VERDE_BRILLANTE);
         lbl_creadasValor.setBounds(280, 290, 190, 30);
@@ -157,7 +161,8 @@ public class Ventana_VerPerfil_Usuario extends JFrame {
         lbl_resueltasTitulo.setBounds(50, 330, 220, 30);
         contentPane.add(lbl_resueltasTitulo);
 
-        JLabel lbl_resueltasValor = new JLabel("—"); // TODO: sustituir con dato real
+
+        JLabel lbl_resueltasValor = new JLabel(stats[1]); // valor del array
         lbl_resueltasValor.setFont(new Font("SansSerif", Font.BOLD, 16));
         lbl_resueltasValor.setForeground(Colores.VERDE_BRILLANTE);
         lbl_resueltasValor.setBounds(280, 330, 190, 30);
@@ -175,7 +180,9 @@ public class Ventana_VerPerfil_Usuario extends JFrame {
         lbl_valoracionTitulo.setBounds(50, 370, 220, 30);
         contentPane.add(lbl_valoracionTitulo);
 
-        JLabel lbl_valoracionValor = new JLabel("— ⭐"); // TODO: sustituir con dato real
+
+
+        JLabel lbl_valoracionValor = new JLabel(stats[2]); // valor del array
         lbl_valoracionValor.setFont(new Font("SansSerif", Font.BOLD, 16));
         lbl_valoracionValor.setForeground(Colores.VERDE_BRILLANTE);
         lbl_valoracionValor.setBounds(280, 370, 190, 30);
@@ -201,5 +208,11 @@ public class Ventana_VerPerfil_Usuario extends JFrame {
         boton_volver.setFocusPainted(false);
         boton_volver.setBounds(175, 430, 160, 48);
         contentPane.add(boton_volver);
+        
+        
+
+
+
+
     }
 }

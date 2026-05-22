@@ -150,31 +150,27 @@ public class UsuarioDAO {
 
 
 
-	public static String[] obtenerEstadisticas(String usuario) {
-		Connection conn = ConexionBD.getConexion();
-		String[] stats = {"0", "0", "0.0"};
-		try {
-			// Obtener creadas de REPORTADOR
-			PreparedStatement psRep = conn.prepareStatement("SELECT total_creadas FROM REPORTADOR WHERE usuario = ?");
-			psRep.setString(1, usuario);
-			ResultSet rsRep = psRep.executeQuery();
-			if (rsRep.next()) {
-				stats[0] = String.valueOf(rsRep.getInt(1));
-			}
-			
-			// Obtener resueltas y valoracion de COLABORADOR
-			PreparedStatement psCol = conn.prepareStatement("SELECT total_resueltas, valoracion_media FROM COLABORADOR WHERE usuario = ?");
-			psCol.setString(1, usuario);
-			ResultSet rsCol = psCol.executeQuery();
-			if (rsCol.next()) {
-				stats[1] = String.valueOf(rsCol.getInt(1));
-				stats[2] = String.valueOf(rsCol.getDouble(2));
-			}
-			conn.close();
-		} catch (SQLException e) {
-			System.out.println("Error obteniendo estadisticas: " + e);
-		}
-		return stats;
+	public static String[] obtenerEstadisticas(Usuario u) {
+	    Connection conn = ConexionBD.getConexion();
+	    String[] stats = {"0", "0", "0.00"};
+	    try {
+	        PreparedStatement st = conn.prepareStatement(
+	            "SELECT r.total_creadas, c.total_resueltas, c.valoracion_media " +
+	            "FROM REPORTADOR r, COLABORADOR c " +
+	            "WHERE r.usuario = ? AND c.usuario = ?");
+	        st.setString(1, u.getNombreUsuario());
+	        st.setString(2, u.getNombreUsuario());
+	        ResultSet rs = st.executeQuery();
+	        if (rs.next()) {
+	            stats[0] = String.valueOf(rs.getInt("total_creadas"));
+	            stats[1] = String.valueOf(rs.getInt("total_resueltas"));
+	            stats[2] = String.valueOf(rs.getDouble("valoracion_media"));
+	        }
+	        conn.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return stats;
 	}
 
 }
