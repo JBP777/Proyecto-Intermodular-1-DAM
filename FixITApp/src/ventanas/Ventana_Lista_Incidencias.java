@@ -5,18 +5,27 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import dao.IncidenciaDAO;
+import modelo.Incidencia;
 import modelo.Usuario;
 import util.Colores;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class Ventana_Lista_Incidencias extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTable tableIncidencias;
-    private DefaultTableModel modeloTabla;
+    private String[] columnas = {"ID", "Título", "Estado", "Zona", "Categoría", "Reportador"};
+    private DefaultTableModel modeloTabla = new DefaultTableModel(columnas, 0) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
     private Usuario usuarioActual;
 
     private static final Color VERDE_OSCURO_UI  = new Color(34, 85, 34);
@@ -24,6 +33,21 @@ public class Ventana_Lista_Incidencias extends JFrame {
     private static final Color COLOR_FILA_IMPAR = new Color(235, 245, 235);
     private static final Color COLOR_SELECCION  = new Color(80, 160, 80);
     private static final Color COLOR_GRID       = new Color(180, 210, 180);
+
+    private void cargarTabla() {
+        modeloTabla.setRowCount(0);
+        ArrayList<Incidencia> incidencias = IncidenciaDAO.obtenerIncidencias();
+        for (Incidencia i : incidencias) {
+            modeloTabla.addRow(new Object[]{
+                i.getId(),
+                i.getTitulo(),
+                i.getEstado(),
+                i.getZona(),
+                i.getCategorias(),
+                i.getReportador()
+            });
+        }
+    }
 
     public Ventana_Lista_Incidencias(Ventana_Principal_Usuario v, Usuario u) {
         usuarioActual = u;
@@ -67,13 +91,18 @@ public class Ventana_Lista_Incidencias extends JFrame {
         label_titulo.setBounds(0, 15, 804, 35);
         contentPane.add(label_titulo);
 
-        // BOTÓN RECARGAR — esquina superior derecha
+        // BOTÓN RECARGAR — llaves correctas
         JButton btnRecargar = new JButton("🔄️");
         btnRecargar.setBackground(Colores.AMARILLO_PASTEL);
         btnRecargar.setForeground(Colores.AMARILLO_OSCURO);
         btnRecargar.setFont(new Font("SansSerif", Font.PLAIN, 14));
         btnRecargar.setFocusPainted(false);
         btnRecargar.setBounds(736, 20, 60, 30);
+        btnRecargar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cargarTabla(); // solo esto dentro
+            }
+        });
         contentPane.add(btnRecargar);
 
         // SEPARADOR
@@ -84,14 +113,6 @@ public class Ventana_Lista_Incidencias extends JFrame {
         contentPane.add(separador);
 
         // TABLA
-        String[] columnas = {"ID", "Título", "Estado", "Zona", "Categoría", "Reportador"};
-        modeloTabla = new DefaultTableModel(columnas, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-
         tableIncidencias = new JTable(modeloTabla);
 
         // CABECERA
@@ -133,7 +154,7 @@ public class Ventana_Lista_Incidencias extends JFrame {
         scrollTabla.getViewport().setBackground(Color.WHITE);
         contentPane.add(scrollTabla);
 
-        // BOTÓN OFRECERSE A RESOLVER — centrado
+        // BOTÓN OFRECERSE A RESOLVER
         JButton btnResolver = new JButton("🙋 Ofrecerse a resolver");
         btnResolver.setBackground(Colores.VERDE_BRILLANTE);
         btnResolver.setForeground(Colores.VERDE_OSCURO);
@@ -142,7 +163,7 @@ public class Ventana_Lista_Incidencias extends JFrame {
         btnResolver.setBounds(280, 508, 260, 50);
         contentPane.add(btnResolver);
 
-        // BOTÓN VOLVER — esquina inferior izquierda
+        // BOTÓN VOLVER
         JButton btnVolver = new JButton("Volver");
         btnVolver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -156,5 +177,7 @@ public class Ventana_Lista_Incidencias extends JFrame {
         btnVolver.setFocusPainted(false);
         btnVolver.setBounds(20, 508, 120, 50);
         contentPane.add(btnVolver);
+
+        cargarTabla();
     }
 }
