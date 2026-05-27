@@ -176,5 +176,18 @@ public class UsuarioDAO {
 		}
 		return stats;
 	}
+	
+	
+	public static void eliminarUsuario(Usuario u) {
+	    Connection conn = ConexionBD.getConexion();
+	    try {
+	        PreparedStatement st = conn.prepareStatement("SELECT eliminar_usuario(?)");
+	        st.setString(1, u.getNombreUsuario());
+	        st.executeQuery();
+	        conn.close();
+	    } catch (SQLException e) { e.printStackTrace(); }
+	}
+	
+	
 
 }

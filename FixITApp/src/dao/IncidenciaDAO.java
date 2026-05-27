@@ -38,7 +38,7 @@ public class IncidenciaDAO {
 						descripcion = rs.getString("descripcion");
 						fechaCreacion = rs.getString("fecha_creacion");
 						reportador = rs.getString("reportador");
-						zona = rs.getString("nombre");
+						zona = rs.getString("nombre_zona");
 						categorias = rs.getString("categorias");
 						
 						incidencias.add(new Incidencia(id, estado, titulo, descripcion, reportador, zona,

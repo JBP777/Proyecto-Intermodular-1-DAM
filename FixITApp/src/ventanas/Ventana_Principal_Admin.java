@@ -5,9 +5,11 @@ import javax.swing.table.DefaultTableModel;
 
 import dao.ContactoDAO;
 import dao.IncidenciaDAO;
+import dao.UsuarioDAO;
 import modelo.Contacto;
 import modelo.Incidencia;
 import modelo.Usuario;
+import util.Administrator;
 import util.Colores;
 import java.awt.*;
 import java.awt.event.*;
@@ -18,75 +20,76 @@ public class Ventana_Principal_Admin extends JFrame {
     private JPanel contentPane;
     private Usuario usuarioActual;
 
-    // TABLA INCIDENCIAS
-    private String[] columnasIncidencias = {"ID","Estado","Titulo"};
-    private DefaultTableModel modeloIncidencias = new DefaultTableModel(columnasIncidencias, 0);
-    private JTable tableIncidencias;
+    private DefaultTableModel modeloIncidencias = new DefaultTableModel(new String[]{"ID","Estado","Título"}, 0) {
+        public boolean isCellEditable(int r, int c) { return false; }
+    };
+    private DefaultTableModel modeloUsuarios = new DefaultTableModel(new String[]{"Usuario","Email","Rol"}, 0) {
+        public boolean isCellEditable(int r, int c) { return false; }
+    };
+    private DefaultTableModel modeloMensajes = new DefaultTableModel(new String[]{"Nombre","Asunto"}, 0) {
+        public boolean isCellEditable(int r, int c) { return false; }
+    };
 
-    // TABLA USUARIOS
-    private String[] columnasUsuarios = {"Usuario", "Email","Rol"};
-    private DefaultTableModel modeloUsuarios = new DefaultTableModel(columnasUsuarios, 0);
-    private JTable tableUsuarios;
+    private JTable tableIncidencias = new JTable(modeloIncidencias);
+    private JTable tableUsuarios    = new JTable(modeloUsuarios);
+    private JTable tableMensajes    = new JTable(modeloMensajes);
 
-    // TABLA MENSAJES (sin cambios)
-    private String[] columnasTablaMensajes = {"Nombre", "Asunto"};
-    private DefaultTableModel modeloMensajes = new DefaultTableModel(columnasTablaMensajes, 0);
-    private JTable tableMensajes;
-    
-    
-    private void cargarTablas() {
-    		
-    		// Tabla mensajes
-    		modeloMensajes.setRowCount(0);
-    		for(Contacto c : ContactoDAO.obtenerMensajesContacto()) {
-    			modeloMensajes.addRow(new Object[] {
-    					c.getNombre(), c.getAsunto()
-    			});
-    		}
-    		
-    		// Tabla incidencias
-    		modeloIncidencias.setRowCount(0);
-    		for(Incidencia i : IncidenciaDAO.obtenerIncidencias()) {
-    			modeloIncidencias.addRow(new Object[] {
-    				i.getId(), i.getEstado(), i.getTitulo()	
-    			});
-    		}
+    private void estilizarTabla(JTable tabla) {
+        tabla.getTableHeader().setBackground(Colores.CABECERA_TABLA);
+        tabla.getTableHeader().setForeground(Color.WHITE);
+        tabla.getTableHeader().setReorderingAllowed(false);
+        tabla.setRowHeight(24);
+        tabla.setBackground(Colores.FILA_TABLA);
+        tabla.setForeground(Colores.AMARILLO_OSCURO);
+        tabla.setGridColor(Colores.BORDE_TABLA);
+        tabla.setSelectionBackground(Colores.SELECCION_TABLA);
+        tabla.setSelectionForeground(Color.WHITE);
+        tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }
+
+  protected void cargarTablas() {
+        modeloMensajes.setRowCount(0);
+        modeloUsuarios.setRowCount(0);
+        modeloIncidencias.setRowCount(0);
+
+        for (Contacto c : ContactoDAO.obtenerMensajesContacto())
+            modeloMensajes.addRow(new Object[]{c.getNombre(), c.getAsunto()});
+
+        for (Incidencia i : IncidenciaDAO.obtenerIncidencias())
+            modeloIncidencias.addRow(new Object[]{i.getId(), i.getEstado(), i.getTitulo()});
+
+        for (Usuario usr : UsuarioDAO.obtenerUsuarios())
+            modeloUsuarios.addRow(new Object[]{
+                usr.getNombreUsuario(),
+                usr.getEmail(),
+                Administrator.esAdmin(usr.getNombreUsuario()) ? "Admin" : "Usuario"
+            });
     }
 
     public Ventana_Principal_Admin(Ventana_Inicio v, Usuario u) {
         usuarioActual = u;
-        cargarTablas();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 
-        setTitle("FIXIT!");
-        setBounds(100, 100, 810, 591);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("FIXIT! — Admin");
+        setResizable(false);
+        setBounds(100, 100, 1000, 660);
 
-        // MENU
+        // MENÚ
         JMenuBar menuBar = new JMenuBar();
+        menuBar.setBackground(Colores.AMARILLO_FONDO);
         setJMenuBar(menuBar);
 
         JMenu mnOpciones = new JMenu("Opciones");
-        menuBar.add(mnOpciones);
-
+        mnOpciones.setFont(new Font("Britannic Bold", Font.PLAIN, 13));
         JMenuItem mntmCerrarSesion = new JMenuItem("Cerrar Sesion");
         mntmCerrarSesion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Ventana_Inicio vi = new Ventana_Inicio();
-                vi.setVisible(true);
+                new Ventana_Inicio().setVisible(true);
             }
         });
         mnOpciones.add(mntmCerrarSesion);
-
-        // MENU — opciones de eliminar
-        JMenu mnGestion = new JMenu("Gestion");
-        menuBar.add(mnGestion);
-
-        JMenuItem mntmEliminarInc = new JMenuItem("Eliminar incidencia");
-        mnGestion.add(mntmEliminarInc); // sin logica por ahora
-
-        JMenuItem mntmEliminarUsr = new JMenuItem("Eliminar usuario");
-        mnGestion.add(mntmEliminarUsr); // sin logica por ahora
+        menuBar.add(mnOpciones);
 
         // PANEL
         contentPane = new JPanel();
@@ -95,121 +98,182 @@ public class Ventana_Principal_Admin extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        // LOGO 
+        // LOGO
         JLabel label_FIX = new JLabel("FIX");
         label_FIX.setForeground(Colores.AMARILLO_OSCURO);
-        label_FIX.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
-        label_FIX.setBounds(10, 11, 58, 43);
+        label_FIX.setFont(new Font("Britannic Bold", Font.PLAIN, 42));
+        label_FIX.setBounds(10, 8, 75, 52);
         contentPane.add(label_FIX);
 
         JLabel label_IT = new JLabel("IT!");
         label_IT.setForeground(Colores.VERDE_BRILLANTE);
-        label_IT.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
-        label_IT.setBounds(64, 5, 49, 54);
+        label_IT.setFont(new Font("Britannic Bold", Font.PLAIN, 42));
+        label_IT.setBounds(78, 8, 65, 52);
         contentPane.add(label_IT);
 
         JLabel label_admin = new JLabel("ADMIN");
-        label_admin.setForeground(new Color(128, 0, 0));
-        label_admin.setFont(new Font("Britannic Bold", Font.PLAIN, 19));
-        label_admin.setBounds(109, 11, 58, 54);
+        label_admin.setForeground(Colores.ROJO_ADMIN);
+        label_admin.setFont(new Font("Britannic Bold", Font.PLAIN, 22));
+        label_admin.setBounds(140, 18, 80, 36);
         contentPane.add(label_admin);
 
-        // LABEL + TABLA INCIDENCIAS
-        JLabel lblIncidencias = new JLabel("INCIDENCIAS");
-        lblIncidencias.setBounds(20, 62, 200, 25);
+        JSeparator sep = new JSeparator();
+        sep.setForeground(Colores.VERDE_OSCURO);
+        sep.setBackground(Colores.VERDE_OSCURO);
+        sep.setBounds(0, 70, 1000, 3);
+        contentPane.add(sep);
+
+        JButton btnRecargar = new JButton("🔄️");
+        btnRecargar.setBackground(Colores.AMARILLO_PASTEL);
+        btnRecargar.setFocusPainted(false);
+        btnRecargar.setBounds(910, 18, 64, 30);
+        btnRecargar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cargarTablas();
+            }
+        });
+        contentPane.add(btnRecargar);
+
+        // ── COLUMNA 1: INCIDENCIAS ────────────────────────────────────
+
+        JLabel lblIncidencias = new JLabel("📋 INCIDENCIAS");
+        lblIncidencias.setFont(new Font("Britannic Bold", Font.PLAIN, 14));
+        lblIncidencias.setForeground(Colores.VERDE_OSCURO);
+        lblIncidencias.setBounds(10, 82, 300, 24);
         contentPane.add(lblIncidencias);
 
-        tableIncidencias = new JTable(modeloIncidencias);
+        estilizarTabla(tableIncidencias);
         JScrollPane scrollIncidencias = new JScrollPane(tableIncidencias);
-        scrollIncidencias.setBounds(10, 90, 240, 310);
+        scrollIncidencias.setBounds(10, 110, 300, 390);
         contentPane.add(scrollIncidencias);
 
-        // LABEL + TABLA USUARIOS
-        JLabel lblUsuarios = new JLabel("USUARIOS");
-        lblUsuarios.setBounds(280, 62, 200, 25);
+        JButton btnVerInc = new JButton("Ver");
+        btnVerInc.setBackground(Colores.VERDE_BRILLANTE);
+        btnVerInc.setForeground(Colores.VERDE_OSCURO);
+        btnVerInc.setFont(new Font("Britannic Bold", Font.PLAIN, 13));
+        btnVerInc.setFocusPainted(false);
+        btnVerInc.setBounds(10, 510, 145, 34);
+        btnVerInc.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int sel = tableIncidencias.getSelectedRow();
+                if (sel != -1) {
+                    new Ventana_Leer_Incidencia(IncidenciaDAO.obtenerIncidencias().get(sel)).setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(contentPane, "Selecciona una incidencia.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+        contentPane.add(btnVerInc);
+
+        JButton btnElimInc = new JButton("Eliminar");
+        btnElimInc.setBackground(Colores.ROJO_ELIMINAR);
+        btnElimInc.setForeground(Colores.ROJO_ELIMINAR_TXT);
+        btnElimInc.setFont(new Font("Britannic Bold", Font.PLAIN, 13));
+        btnElimInc.setFocusPainted(false);
+        btnElimInc.setBounds(165, 510, 145, 34);
+        btnElimInc.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int sel = tableIncidencias.getSelectedRow();
+                if (sel != -1) {
+                    IncidenciaDAO.eliminarIncidencia(IncidenciaDAO.obtenerIncidencias().get(sel));
+                    cargarTablas();
+                    JOptionPane.showMessageDialog(contentPane, "Incidencia eliminada.");
+                } else {
+                    JOptionPane.showMessageDialog(contentPane, "Selecciona una incidencia.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        contentPane.add(btnElimInc);
+
+        // ── COLUMNA 2: USUARIOS ───────────────────────────────────────
+
+        JLabel lblUsuarios = new JLabel("👤 USUARIOS");
+        lblUsuarios.setFont(new Font("Britannic Bold", Font.PLAIN, 14));
+        lblUsuarios.setForeground(Colores.VERDE_OSCURO);
+        lblUsuarios.setBounds(330, 82, 310, 24);
         contentPane.add(lblUsuarios);
 
-        tableUsuarios = new JTable(modeloUsuarios);
+        estilizarTabla(tableUsuarios);
         JScrollPane scrollUsuarios = new JScrollPane(tableUsuarios);
-        scrollUsuarios.setBounds(270, 90, 240, 310);
+        scrollUsuarios.setBounds(330, 110, 310, 390);
         contentPane.add(scrollUsuarios);
 
-        // LABEL + TABLA MENSAJES 
-        JLabel lblMensajes = new JLabel("MENSAJES RECIBIDOS");
-        lblMensajes.setBounds(540, 62, 200, 25);
+        JButton btnVerUsr = new JButton("Ver");
+        btnVerUsr.setBackground(Colores.VERDE_BRILLANTE);
+        btnVerUsr.setForeground(Colores.VERDE_OSCURO);
+        btnVerUsr.setFont(new Font("Britannic Bold", Font.PLAIN, 13));
+        btnVerUsr.setFocusPainted(false);
+        btnVerUsr.setBounds(330, 510, 150, 34);
+        btnVerUsr.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int sel = tableUsuarios.getSelectedRow();
+                if (sel != -1) {
+                    new Ventana_Ver_Usuario_Admin(Ventana_Principal_Admin.this, UsuarioDAO.obtenerUsuarios().get(sel)).setVisible(true);
+                    setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(contentPane, "Selecciona un usuario.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+        contentPane.add(btnVerUsr);
+
+        JButton btnEliminarUsr = new JButton("Eliminar");
+        btnEliminarUsr.setBackground(Colores.ROJO_ELIMINAR);
+        btnEliminarUsr.setForeground(Colores.ROJO_ELIMINAR_TXT);
+        btnEliminarUsr.setFont(new Font("Britannic Bold", Font.PLAIN, 13));
+        btnEliminarUsr.setFocusPainted(false);
+        btnEliminarUsr.setBounds(490, 510, 150, 34);
+        btnEliminarUsr.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int sel = tableUsuarios.getSelectedRow();
+                if (sel != -1) {
+                    Usuario uSel = UsuarioDAO.obtenerUsuarios().get(sel);
+                    int confirmacion = JOptionPane.showConfirmDialog(contentPane,
+                        "¿Seguro que quieres eliminar a \"" + uSel.getNombreUsuario() + "\"?\nSe borrarán todos sus datos.",
+                        "Confirmar eliminación", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                    if (confirmacion == JOptionPane.YES_OPTION) {
+                        UsuarioDAO.eliminarUsuario(uSel);
+                        cargarTablas();
+                        JOptionPane.showMessageDialog(contentPane, "Usuario eliminado correctamente.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(contentPane, "Selecciona un usuario.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        contentPane.add(btnEliminarUsr);
+
+        // ── COLUMNA 3: MENSAJES ───────────────────────────────────────
+
+        JLabel lblMensajes = new JLabel("✉ MENSAJES RECIBIDOS");
+        lblMensajes.setFont(new Font("Britannic Bold", Font.PLAIN, 14));
+        lblMensajes.setForeground(Colores.VERDE_OSCURO);
+        lblMensajes.setBounds(660, 82, 310, 24);
         contentPane.add(lblMensajes);
 
-        tableMensajes = new JTable(modeloMensajes);
-        JScrollPane scrollTablaMensajes = new JScrollPane(tableMensajes);
-        scrollTablaMensajes.setBounds(530, 90, 250, 310);
-        contentPane.add(scrollTablaMensajes);
+        estilizarTabla(tableMensajes);
+        JScrollPane scrollMensajes = new JScrollPane(tableMensajes);
+        scrollMensajes.setBounds(660, 110, 310, 390);
+        contentPane.add(scrollMensajes);
 
-        // BOTONES ELIMINAR
-        JButton btnEliminarInc = new JButton("Eliminar incidencia");
-        btnEliminarInc.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		int incidenciaSeleccionada = tableIncidencias.getSelectedRow();
-        		
-        		if(incidenciaSeleccionada != -1) {
-        			IncidenciaDAO.eliminarIncidencia(IncidenciaDAO.obtenerIncidencias().get(incidenciaSeleccionada));
-        			cargarTablas();
-        			JOptionPane.showMessageDialog(tableMensajes, "Incidencia eliminada");
-        		}else {
-        			JOptionPane.showMessageDialog(tableMensajes, "Debes seleccionar una ","ERROR - SELECCIONA UNA INCIDENCIA", JOptionPane.ERROR_MESSAGE);
-        		}
-        	}
-        });
-        btnEliminarInc.setBounds(10, 452, 240, 28);
-        contentPane.add(btnEliminarInc);
-
-        JButton btnEliminarUsr = new JButton("Eliminar usuario");
-        btnEliminarUsr.setBounds(270, 452, 240, 28);
-        contentPane.add(btnEliminarUsr); // sin logica por ahora
-        
         JButton btnLeerMensaje = new JButton("Leer Mensaje");
+        btnLeerMensaje.setBackground(Colores.VERDE_BRILLANTE);
+        btnLeerMensaje.setForeground(Colores.VERDE_OSCURO);
+        btnLeerMensaje.setFont(new Font("Britannic Bold", Font.PLAIN, 13));
+        btnLeerMensaje.setFocusPainted(false);
+        btnLeerMensaje.setBounds(660, 510, 310, 34);
         btnLeerMensaje.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		int mensajeSeleccionado = tableMensajes.getSelectedRow();
-        		if(mensajeSeleccionado != -1) {
-        			Ventana_Leer_Mensajes vlm = new Ventana_Leer_Mensajes(ContactoDAO.obtenerMensajesContacto().get(mensajeSeleccionado));
-        			vlm.setVisible(true);
-        		}else {
-        			JOptionPane.showMessageDialog(tableMensajes, "Debes seleccionar un mensaje","ERROR - SELECCIONA UN MENSAJE", JOptionPane.ERROR_MESSAGE);
-        		}
-        	}
+            public void actionPerformed(ActionEvent e) {
+                int sel = tableMensajes.getSelectedRow();
+                if (sel != -1) {
+                    new Ventana_Leer_Mensajes(ContactoDAO.obtenerMensajesContacto().get(sel)).setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(contentPane, "Selecciona un mensaje.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
         });
-        btnLeerMensaje.setBounds(530, 410, 250, 28);
         contentPane.add(btnLeerMensaje);
-        // boton para recargar los datos de las tablas
-        JButton btnRecargar = new JButton("🔄️");
-        btnRecargar.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		cargarTablas();
-        	}
-        });
-        btnRecargar.setBounds(722, 11, 58, 25);
-        contentPane.add(btnRecargar);
-        
-        JButton btnVerUsuario = new JButton("Ver Usuario");
-        btnVerUsuario.setBounds(270, 410, 240, 28);
-        contentPane.add(btnVerUsuario);
-        
-        JButton btnVerIncidencia = new JButton("Ver Incidencia");
-        btnVerIncidencia.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        	
-        		int incSeleccionada = tableIncidencias.getSelectedRow();
-        		
-        		if( incSeleccionada != -1) {
-        			Ventana_Leer_Incidencia vli = new Ventana_Leer_Incidencia(IncidenciaDAO.obtenerIncidencias().get(incSeleccionada));
-        			vli.setVisible(true);
-        		}else {
-        			JOptionPane.showMessageDialog(tableIncidencias, "Debes seleccionar una incidencia","AVISO - SELECCIONA UNA INCIDENCIA", JOptionPane.WARNING_MESSAGE);
-        		}
-        	
-        	}
-        });
-        btnVerIncidencia.setBounds(10, 410, 240, 28);
-        contentPane.add(btnVerIncidencia);
+
+        cargarTablas();
     }
 }
