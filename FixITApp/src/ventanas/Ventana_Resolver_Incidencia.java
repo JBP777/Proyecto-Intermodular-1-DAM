@@ -2,6 +2,10 @@ package ventanas;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import dao.IncidenciaDAO;
+import dao.SolucionDAO;
+
 import java.awt.*;
 import java.awt.event.*;
 import modelo.Incidencia;
@@ -161,7 +165,7 @@ public class Ventana_Resolver_Incidencia extends JFrame {
 
         // ── BOTONES ───────────────────────────────────────────────────
 
-        JButton btnEnviar = new JButton("✔ Enviar solución");
+        JButton btnEnviar = new JButton("Enviar solución");
         btnEnviar.setBackground(Colores.VERDE_BRILLANTE);
         btnEnviar.setForeground(Colores.VERDE_OSCURO);
         btnEnviar.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
@@ -169,20 +173,30 @@ public class Ventana_Resolver_Incidencia extends JFrame {
         btnEnviar.setBounds(170, 468, 220, 46);
         btnEnviar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
                 String solucion = txt_solucion.getText().trim();
+
                 if (solucion.isEmpty()) {
                     JOptionPane.showMessageDialog(contentPane,
                         "Escribe tu solución antes de enviar.",
                         "Campo vacío", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
-                // TODO: llamar al DAO para guardar la solución
-                // Ejemplo: SolucionDAO.insertarSolucion(i, u, solucion);
-                JOptionPane.showMessageDialog(contentPane,
-                    "Solución enviada correctamente.",
-                    "Enviado", JOptionPane.INFORMATION_MESSAGE);
-                v.setVisible(true);
-                dispose();
+
+                boolean ok = SolucionDAO.insertarSolucion(solucion, u, i);
+
+                if (ok) {
+                	IncidenciaDAO.cerrarIncidencia(i);
+                    JOptionPane.showMessageDialog(contentPane,
+                        "Solución enviada correctamente.",
+                        "Enviado", JOptionPane.INFORMATION_MESSAGE);
+                    v.setVisible(true);
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(contentPane,
+                        "Error al enviar la solución. Inténtalo de nuevo.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
         contentPane.add(btnEnviar);

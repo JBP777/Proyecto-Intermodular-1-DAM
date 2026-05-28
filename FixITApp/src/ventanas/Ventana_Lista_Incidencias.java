@@ -27,7 +27,7 @@ public class Ventana_Lista_Incidencias extends JFrame {
     private void cargarTabla() {
         modeloTabla.setRowCount(0);
         for (Incidencia i : IncidenciaDAO.obtenerIncidencias()) {
-            if (i.getEstado().equals("Abierta")) {
+            if (i.getEstado().equals("Abierta") && !i.getReportador().equals(usuarioActual.getNombreUsuario())) {
                 modeloTabla.addRow(new Object[]{
                     i.getId(), i.getTitulo(), i.getEstado(),
                     i.getZona(), i.getCategorias(), i.getReportador()
@@ -125,7 +125,14 @@ public class Ventana_Lista_Incidencias extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 int sel = tableIncidencias.getSelectedRow();
                 if (sel != -1) {
-                    Incidencia inc = IncidenciaDAO.obtenerIncidencias().get(sel);
+                    int idSeleccionado = (int) modeloTabla.getValueAt(sel, 0);
+                    Incidencia inc = null;
+                    for (Incidencia i : IncidenciaDAO.obtenerIncidencias()) {
+                        if (i.getId() == idSeleccionado) {
+                            inc = i;
+                            break;
+                        }
+                    }
                     new Ventana_Resolver_Incidencia(Ventana_Lista_Incidencias.this, inc, usuarioActual).setVisible(true);
                     setVisible(false);
                 } else {
