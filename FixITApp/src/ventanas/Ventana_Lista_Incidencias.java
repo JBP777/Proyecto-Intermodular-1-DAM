@@ -66,13 +66,13 @@ public class Ventana_Lista_Incidencias extends JFrame {
         // LOGO
         JLabel label_FIX = new JLabel("FIX");
         label_FIX.setForeground(Colores.AMARILLO_OSCURO);
-        label_FIX.setFont(new Font("Britannic Bold", Font.PLAIN, 45));
+        label_FIX.setFont(new Font("Bahnschrift", Font.BOLD, 45));
         label_FIX.setBounds(10, 8, 80, 55);
         contentPane.add(label_FIX);
 
         JLabel label_IT = new JLabel("IT!");
         label_IT.setForeground(Colores.VERDE_BRILLANTE);
-        label_IT.setFont(new Font("Britannic Bold", Font.PLAIN, 45));
+        label_IT.setFont(new Font("Bahnschrift", Font.BOLD, 45));
         label_IT.setBounds(84, 8, 70, 55);
         contentPane.add(label_IT);
 
@@ -88,7 +88,7 @@ public class Ventana_Lista_Incidencias extends JFrame {
         JButton btnRecargar = new JButton("🔄");
         btnRecargar.setBackground(Colores.AMARILLO_PASTEL);
         btnRecargar.setForeground(Colores.AMARILLO_OSCURO);
-        btnRecargar.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        btnRecargar.setFont(new Font("Britannic Bold", Font.PLAIN, 14));
         btnRecargar.setFocusPainted(false);
         btnRecargar.setBounds(736, 20, 60, 30);
         btnRecargar.addActionListener(new ActionListener() {

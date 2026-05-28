@@ -45,13 +45,13 @@ public class Ventana_Ver_Usuario_Admin extends JFrame {
         // LOGO
         JLabel label_FIX = new JLabel("FIX");
         label_FIX.setForeground(Colores.AMARILLO_OSCURO);
-        label_FIX.setFont(new Font("Britannic Bold", Font.PLAIN, 45));
+        label_FIX.setFont(new Font("Bahnschrift", Font.BOLD, 45));
         label_FIX.setBounds(10, 8, 80, 55);
         contentPane.add(label_FIX);
 
         JLabel label_IT = new JLabel("IT!");
         label_IT.setForeground(Colores.VERDE_BRILLANTE);
-        label_IT.setFont(new Font("Britannic Bold", Font.PLAIN, 45));
+        label_IT.setFont(new Font("Bahnschrift", Font.BOLD, 45));
         label_IT.setBounds(84, 8, 70, 55);
         contentPane.add(label_IT);
 
@@ -70,7 +70,7 @@ public class Ventana_Ver_Usuario_Admin extends JFrame {
 
         // ICONO
         JLabel iconoUsuario = new JLabel("👤");
-        iconoUsuario.setFont(new Font("SansSerif", Font.PLAIN, 52));
+        iconoUsuario.setFont(new Font("Britannic Bold", Font.PLAIN, 52));
         iconoUsuario.setHorizontalAlignment(SwingConstants.CENTER);
         iconoUsuario.setBounds(0, 85, 504, 65);
         contentPane.add(iconoUsuario);
@@ -96,7 +96,7 @@ public class Ventana_Ver_Usuario_Admin extends JFrame {
         contentPane.add(lbl_emailTitulo);
 
         JLabel lbl_emailValor = new JLabel(u.getEmail());
-        lbl_emailValor.setFont(new Font("SansSerif", Font.PLAIN, 15));
+        lbl_emailValor.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
         lbl_emailValor.setForeground(new Color(40, 40, 40));
         lbl_emailValor.setBounds(280, 210, 190, 30);
         contentPane.add(lbl_emailValor);
@@ -114,7 +114,7 @@ public class Ventana_Ver_Usuario_Admin extends JFrame {
         contentPane.add(lbl_fechaTitulo);
 
         JLabel lbl_fechaValor = new JLabel(u.getFechaRegistro());
-        lbl_fechaValor.setFont(new Font("SansSerif", Font.PLAIN, 15));
+        lbl_fechaValor.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
         lbl_fechaValor.setForeground(new Color(40, 40, 40));
         lbl_fechaValor.setBounds(280, 250, 190, 30);
         contentPane.add(lbl_fechaValor);
@@ -135,7 +135,7 @@ public class Ventana_Ver_Usuario_Admin extends JFrame {
         String[] stats = UsuarioDAO.obtenerEstadisticas(u);
         
         JLabel lbl_creadasValor = new JLabel(stats[0]);
-        lbl_creadasValor.setFont(new Font("SansSerif", Font.BOLD, 16));
+        lbl_creadasValor.setFont(new Font("Britannic Bold", Font.BOLD, 16));
         lbl_creadasValor.setForeground(Colores.VERDE_BRILLANTE);
         lbl_creadasValor.setBounds(280, 290, 190, 30);
         contentPane.add(lbl_creadasValor);
@@ -153,7 +153,7 @@ public class Ventana_Ver_Usuario_Admin extends JFrame {
         contentPane.add(lbl_resueltasTitulo);
 
         JLabel lbl_resueltasValor = new JLabel(stats[1]);
-        lbl_resueltasValor.setFont(new Font("SansSerif", Font.BOLD, 16));
+        lbl_resueltasValor.setFont(new Font("Britannic Bold", Font.BOLD, 16));
         lbl_resueltasValor.setForeground(Colores.VERDE_BRILLANTE);
         lbl_resueltasValor.setBounds(280, 330, 190, 30);
         contentPane.add(lbl_resueltasValor);

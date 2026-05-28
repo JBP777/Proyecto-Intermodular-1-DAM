@@ -74,13 +74,13 @@ public class Ventana_Principal_Usuario extends JFrame {
         // LOGO
         JLabel label_FIX = new JLabel("FIX");
         label_FIX.setForeground(Colores.AMARILLO_OSCURO);
-        label_FIX.setFont(new Font("Britannic Bold", Font.PLAIN, 55));
+        label_FIX.setFont(new Font("Bahnschrift", Font.BOLD, 55));
         label_FIX.setBounds(168, 12, 110, 65);
         contentPane.add(label_FIX);
 
         JLabel label_IT = new JLabel("IT!");
         label_IT.setForeground(Colores.VERDE_BRILLANTE);
-        label_IT.setFont(new Font("Britannic Bold", Font.PLAIN, 55));
+        label_IT.setFont(new Font("Bahnschrift", Font.BOLD, 55));
         label_IT.setBounds(270, 12, 100, 65);
         contentPane.add(label_IT);
 
@@ -107,7 +107,7 @@ public class Ventana_Principal_Usuario extends JFrame {
         contentPane.add(lblNombreUsuario);
 
         JLabel lblSubtitulo = new JLabel("¿Qué deseas hacer hoy?");
-        lblSubtitulo.setFont(new Font("SansSerif", Font.PLAIN, 17));
+        lblSubtitulo.setFont(new Font("Britannic Bold", Font.PLAIN, 17));
         lblSubtitulo.setForeground(new Color(34, 85, 34)); // verde oscuro
         lblSubtitulo.setHorizontalAlignment(SwingConstants.CENTER);
         lblSubtitulo.setBounds(0, 210, 544, 30);

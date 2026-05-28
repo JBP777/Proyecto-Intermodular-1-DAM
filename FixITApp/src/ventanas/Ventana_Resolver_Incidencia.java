@@ -47,13 +47,13 @@ public class Ventana_Resolver_Incidencia extends JFrame {
         // LOGO
         JLabel label_FIX = new JLabel("FIX");
         label_FIX.setForeground(Colores.AMARILLO_OSCURO);
-        label_FIX.setFont(new Font("Britannic Bold", Font.PLAIN, 45));
+        label_FIX.setFont(new Font("Bahnschrift", Font.BOLD, 45));
         label_FIX.setBounds(10, 8, 80, 55);
         contentPane.add(label_FIX);
 
         JLabel label_IT = new JLabel("IT!");
         label_IT.setForeground(Colores.VERDE_BRILLANTE);
-        label_IT.setFont(new Font("Britannic Bold", Font.PLAIN, 45));
+        label_IT.setFont(new Font("Bahnschrift", Font.BOLD, 45));
         label_IT.setBounds(84, 8, 70, 55);
         contentPane.add(label_IT);
 
@@ -82,7 +82,7 @@ public class Ventana_Resolver_Incidencia extends JFrame {
         contentPane.add(lbl_tituloTxt);
 
         JLabel lbl_tituloValor = new JLabel(i.getTitulo());
-        lbl_tituloValor.setFont(new Font("SansSerif", Font.BOLD, 15));
+        lbl_tituloValor.setFont(new Font("Britannic Bold", Font.BOLD, 15));
         lbl_tituloValor.setForeground(new Color(40, 40, 40));
         lbl_tituloValor.setBounds(140, 88, 380, 25);
         contentPane.add(lbl_tituloValor);
@@ -100,7 +100,7 @@ public class Ventana_Resolver_Incidencia extends JFrame {
         contentPane.add(lbl_zonaTxt);
 
         JLabel lbl_zonaValor = new JLabel(i.getZona());
-        lbl_zonaValor.setFont(new Font("SansSerif", Font.PLAIN, 15));
+        lbl_zonaValor.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
         lbl_zonaValor.setForeground(new Color(40, 40, 40));
         lbl_zonaValor.setBounds(140, 122, 380, 25);
         contentPane.add(lbl_zonaValor);
@@ -118,7 +118,7 @@ public class Ventana_Resolver_Incidencia extends JFrame {
         contentPane.add(lbl_catTxt);
 
         JLabel lbl_catValor = new JLabel(i.getCategorias());
-        lbl_catValor.setFont(new Font("SansSerif", Font.PLAIN, 15));
+        lbl_catValor.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
         lbl_catValor.setForeground(new Color(40, 40, 40));
         lbl_catValor.setBounds(140, 156, 380, 25);
         contentPane.add(lbl_catValor);
@@ -136,7 +136,7 @@ public class Ventana_Resolver_Incidencia extends JFrame {
         contentPane.add(lbl_descTxt);
 
         JTextArea txt_descripcion = new JTextArea(i.getDescripcion());
-        txt_descripcion.setFont(new Font("SansSerif", Font.PLAIN, 13));
+        txt_descripcion.setFont(new Font("Britannic Bold", Font.PLAIN, 13));
         txt_descripcion.setForeground(new Color(40, 40, 40));
         txt_descripcion.setBackground(new Color(255, 250, 210));
         txt_descripcion.setEditable(false);
@@ -160,7 +160,7 @@ public class Ventana_Resolver_Incidencia extends JFrame {
         contentPane.add(lbl_solucionTxt);
 
         JTextArea txt_solucion = new JTextArea();
-        txt_solucion.setFont(new Font("SansSerif", Font.PLAIN, 13));
+        txt_solucion.setFont(new Font("Britannic Bold", Font.PLAIN, 13));
         txt_solucion.setForeground(new Color(40, 40, 40));
         txt_solucion.setBackground(Color.WHITE);
         txt_solucion.setLineWrap(true);

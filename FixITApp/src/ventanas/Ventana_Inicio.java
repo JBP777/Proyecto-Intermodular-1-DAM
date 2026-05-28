@@ -96,7 +96,7 @@ public class Ventana_Inicio extends JFrame {
         input_usuario.setBackground(Color.WHITE);
         input_usuario.setForeground(Colores.AMARILLO_OSCURO);
         input_usuario.setCaretColor(Colores.AMARILLO_OSCURO);
-        input_usuario.setFont(new Font("SansSerif", Font.PLAIN, 15));
+        input_usuario.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
         input_usuario.setBounds(inputX, 233, inputW, inputH);
         input_usuario.setColumns(10);
         contentPane.add(input_usuario);
@@ -111,7 +111,7 @@ public class Ventana_Inicio extends JFrame {
         input_contrasena.setBackground(Color.WHITE);
         input_contrasena.setForeground(Colores.AMARILLO_OSCURO);
         input_contrasena.setCaretColor(Colores.AMARILLO_OSCURO);
-        input_contrasena.setFont(new Font("SansSerif", Font.PLAIN, 15));
+        input_contrasena.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
         input_contrasena.setBounds(inputX, 283, inputW, inputH);
         contentPane.add(input_contrasena);
 
@@ -157,7 +157,7 @@ public class Ventana_Inicio extends JFrame {
         });
         boton_Iniciar.setBackground(Colores.VERDE_BRILLANTE);
         boton_Iniciar.setForeground(Colores.VERDE_OSCURO);
-        boton_Iniciar.setFont(new Font("Bahnschrift", Font.BOLD, 18));
+        boton_Iniciar.setFont(new Font("Britannic Bold", Font.BOLD, 18));
         boton_Iniciar.setFocusPainted(false);
         boton_Iniciar.setBounds(botonX, 340, botonW, botonH);
         contentPane.add(boton_Iniciar);
@@ -181,7 +181,7 @@ public class Ventana_Inicio extends JFrame {
         });
         boton_registrarse.setBackground(Colores.VERDE_BRILLANTE);
         boton_registrarse.setForeground(Colores.VERDE_OSCURO);
-        boton_registrarse.setFont(new Font("Bahnschrift", Font.BOLD, 18));
+        boton_registrarse.setFont(new Font("Britannic Bold", Font.BOLD, 18));
         boton_registrarse.setFocusPainted(false);
         boton_registrarse.setBounds(botonX, 445, botonW, botonH);
         contentPane.add(boton_registrarse);

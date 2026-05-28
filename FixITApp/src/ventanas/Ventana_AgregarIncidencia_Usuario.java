@@ -69,13 +69,13 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
         // LOGO
         JLabel label_FIX = new JLabel("FIX");
         label_FIX.setForeground(Colores.AMARILLO_OSCURO);
-        label_FIX.setFont(new Font("Britannic Bold", Font.PLAIN, 45));
+        label_FIX.setFont(new Font("Bahnschrift", Font.BOLD, 45));
         label_FIX.setBounds(10, 8, 80, 55);
         contentPane.add(label_FIX);
 
         JLabel label_IT = new JLabel("IT!");
         label_IT.setForeground(Colores.VERDE_BRILLANTE);
-        label_IT.setFont(new Font("Britannic Bold", Font.PLAIN, 45));
+        label_IT.setFont(new Font("Bahnschrift", Font.BOLD, 45));
         label_IT.setBounds(84, 8, 70, 55);
         contentPane.add(label_IT);
 
@@ -105,7 +105,7 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
         input_Titulo = new JTextField();
         input_Titulo.setBackground(Color.WHITE);
         input_Titulo.setForeground(new Color(40, 40, 40));
-        input_Titulo.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        input_Titulo.setFont(new Font("Britannic Bold", Font.PLAIN, 14));
         input_Titulo.setBounds(30, 110, 555, 32);
         contentPane.add(input_Titulo);
 
@@ -122,7 +122,7 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
         input_Descripcion.setWrapStyleWord(true);
         input_Descripcion.setBackground(Color.WHITE);
         input_Descripcion.setForeground(new Color(40, 40, 40));
-        input_Descripcion.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        input_Descripcion.setFont(new Font("Britannic Bold", Font.PLAIN, 14));
         JScrollPane scrollDescripcion = new JScrollPane(input_Descripcion);
         scrollDescripcion.setBounds(30, 180, 555, 100);
         contentPane.add(scrollDescripcion);
@@ -142,7 +142,7 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
         lista_Zonas = new JList<>(opciones);
         lista_Zonas.setBackground(Color.WHITE);
         lista_Zonas.setForeground(new Color(40, 40, 40));
-        lista_Zonas.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        lista_Zonas.setFont(new Font("Britannic Bold", Font.PLAIN, 14));
         lista_Zonas.setSelectionBackground(new Color(80, 160, 80));
         lista_Zonas.setSelectionForeground(Color.WHITE);
         JScrollPane scrollZonas = new JScrollPane(lista_Zonas);
@@ -162,7 +162,7 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
         lista_Categorias = new JList<>(opcionesCategorias);
         lista_Categorias.setBackground(Color.WHITE);
         lista_Categorias.setForeground(new Color(40, 40, 40));
-        lista_Categorias.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        lista_Categorias.setFont(new Font("Britannic Bold", Font.PLAIN, 14));
         lista_Categorias.setSelectionBackground(new Color(80, 160, 80));
         lista_Categorias.setSelectionForeground(Color.WHITE);
         JScrollPane scrollCategorias = new JScrollPane(lista_Categorias);

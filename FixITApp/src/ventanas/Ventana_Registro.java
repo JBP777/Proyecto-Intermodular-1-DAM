@@ -103,7 +103,7 @@ public class Ventana_Registro extends JFrame {
         input_usuario = new JTextField();
         input_usuario.setBackground(Color.WHITE);
         input_usuario.setForeground(new Color(40, 40, 40));
-        input_usuario.setFont(new Font("SansSerif", Font.PLAIN, 15));
+        input_usuario.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
         input_usuario.setBounds(390, 240, 200, 30);
         input_usuario.setColumns(10);
         contentPane.add(input_usuario);
@@ -117,7 +117,7 @@ public class Ventana_Registro extends JFrame {
         input_correo = new JTextField();
         input_correo.setBackground(Color.WHITE);
         input_correo.setForeground(new Color(40, 40, 40));
-        input_correo.setFont(new Font("SansSerif", Font.PLAIN, 15));
+        input_correo.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
         input_correo.setBounds(390, 284, 200, 30);
         input_correo.setColumns(10);
         contentPane.add(input_correo);
@@ -132,7 +132,7 @@ public class Ventana_Registro extends JFrame {
         input_contrasena.setBackground(Color.WHITE);
         input_contrasena.setForeground(new Color(40, 40, 40));
         input_contrasena.setCaretColor(new Color(40, 40, 40));
-        input_contrasena.setFont(new Font("SansSerif", Font.PLAIN, 15));
+        input_contrasena.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
         input_contrasena.setBounds(390, 328, 200, 30);
         contentPane.add(input_contrasena);
 
@@ -201,7 +201,7 @@ public class Ventana_Registro extends JFrame {
         });
         boton_registrarse.setForeground(Colores.VERDE_OSCURO);
         boton_registrarse.setBackground(Colores.VERDE_BRILLANTE);
-        boton_registrarse.setFont(new Font("Bahnschrift", Font.BOLD, 18));
+        boton_registrarse.setFont(new Font("Britannic Bold", Font.BOLD, 18));
         boton_registrarse.setFocusPainted(false);
         boton_registrarse.setBounds(247, 420, 190, 58);	
         contentPane.add(boton_registrarse);
@@ -216,7 +216,7 @@ public class Ventana_Registro extends JFrame {
         });
         boton_volver.setForeground(Colores.AMARILLO_OSCURO);
         boton_volver.setBackground(Colores.AMARILLO_PASTEL);
-        boton_volver.setFont(new Font("Bahnschrift", Font.BOLD, 14));
+        boton_volver.setFont(new Font("Britannic Bold", Font.BOLD, 14));
         boton_volver.setFocusPainted(false);
         boton_volver.setBounds(273, 488, 138, 36);
         contentPane.add(boton_volver);

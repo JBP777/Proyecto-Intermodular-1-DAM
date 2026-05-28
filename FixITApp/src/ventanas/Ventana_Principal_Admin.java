@@ -117,13 +117,13 @@ public class Ventana_Principal_Admin extends JFrame {
         // LOGO
         JLabel label_FIX = new JLabel("FIX");
         label_FIX.setForeground(Colores.AMARILLO_OSCURO);
-        label_FIX.setFont(new Font("Britannic Bold", Font.PLAIN, 42));
+        label_FIX.setFont(new Font("Bahnschrift", Font.BOLD, 42));
         label_FIX.setBounds(10, 8, 75, 52);
         contentPane.add(label_FIX);
 
         JLabel label_IT = new JLabel("IT!");
         label_IT.setForeground(Colores.VERDE_BRILLANTE);
-        label_IT.setFont(new Font("Britannic Bold", Font.PLAIN, 42));
+        label_IT.setFont(new Font("Bahnschrift", Font.BOLD, 42));
         label_IT.setBounds(78, 8, 65, 52);
         contentPane.add(label_IT);
 
