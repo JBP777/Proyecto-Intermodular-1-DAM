@@ -38,6 +38,10 @@ public class Ventana_Principal_Admin extends JFrame {
     private JTable tableUsuarios    = new JTable(modeloUsuarios);
     private JTable tableMensajes    = new JTable(modeloMensajes);
 
+    private JLabel lblIncidencias = new JLabel("INCIDENCIAS: 0");
+    private JLabel lblUsuarios = new JLabel("USUARIOS: 0");
+    private JLabel lblMensajes = new JLabel("MENSAJES RECIBIDOS: 0");
+
     // Aplica el mismo estilo visual a todas las tablas del panel.
     private void estilizarTabla(JTable tabla) {
         tabla.getTableHeader().setBackground(Colores.CABECERA_TABLA);
@@ -70,6 +74,10 @@ public class Ventana_Principal_Admin extends JFrame {
                 usr.getEmail(),
                 Administrator.esAdmin(usr.getNombreUsuario()) ? "Admin" : "Usuario"
             });
+
+        lblIncidencias.setText("INCIDENCIAS: " + modeloIncidencias.getRowCount());
+        lblUsuarios.setText("USUARIOS: " + modeloUsuarios.getRowCount());
+        lblMensajes.setText("MENSAJES RECIBIDOS: " + modeloMensajes.getRowCount());
     }
 
     public Ventana_Principal_Admin(Ventana_Inicio v, Usuario u) {
@@ -144,7 +152,7 @@ public class Ventana_Principal_Admin extends JFrame {
 
         // ── COLUMNA 1: INCIDENCIAS ────────────────────────────────────
 
-        JLabel lblIncidencias = new JLabel("📋 INCIDENCIAS");
+        lblIncidencias.setText("INCIDENCIAS: 0");
         lblIncidencias.setFont(new Font("Britannic Bold", Font.PLAIN, 14));
         lblIncidencias.setForeground(Colores.VERDE_OSCURO);
         lblIncidencias.setBounds(10, 82, 300, 24);
@@ -203,7 +211,7 @@ public class Ventana_Principal_Admin extends JFrame {
 
         // ── COLUMNA 2: USUARIOS ───────────────────────────────────────
 
-        JLabel lblUsuarios = new JLabel("👤 USUARIOS");
+        lblUsuarios.setText("USUARIOS: 0");
         lblUsuarios.setFont(new Font("Britannic Bold", Font.PLAIN, 14));
         lblUsuarios.setForeground(Colores.VERDE_OSCURO);
         lblUsuarios.setBounds(330, 82, 310, 24);
@@ -263,7 +271,7 @@ public class Ventana_Principal_Admin extends JFrame {
 
         // ── COLUMNA 3: MENSAJES ───────────────────────────────────────
 
-        JLabel lblMensajes = new JLabel("✉ MENSAJES RECIBIDOS");
+        lblMensajes.setText("MENSAJES RECIBIDOS: 0");
         lblMensajes.setFont(new Font("Britannic Bold", Font.PLAIN, 14));
         lblMensajes.setForeground(Colores.VERDE_OSCURO);
         lblMensajes.setBounds(660, 82, 310, 24);

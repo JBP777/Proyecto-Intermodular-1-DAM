@@ -169,9 +169,7 @@ public class UsuarioDAO {
 			st.executeQuery();
 			conn.close();
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null,
-				"No se ha podido eliminar el usuario.",
-				"Error de base de datos", JOptionPane.ERROR_MESSAGE);
+			System.out.println(e);
 		}
 	}
 }

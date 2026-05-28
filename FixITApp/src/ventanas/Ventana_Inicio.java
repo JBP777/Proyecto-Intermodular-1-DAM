@@ -124,10 +124,22 @@ public class Ventana_Inicio extends JFrame {
         JButton boton_Iniciar = new JButton("Iniciar Sesion");
         boton_Iniciar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Comprueba credenciales y abre la ventana segun el rol.
-                usuarioActual = UsuarioDAO.obtenerUsuario(
-                    input_usuario.getText(),
-                    new String(input_contrasena.getPassword()));
+
+                String usuario = input_usuario.getText().trim();
+                String contrasena = new String(input_contrasena.getPassword()).trim();
+
+                if (usuario.isEmpty() || contrasena.isEmpty()) {
+                    JOptionPane.showMessageDialog(contentPane,
+                        "Por favor, rellena todos los campos.",
+                        "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                usuarioActual = UsuarioDAO.obtenerUsuario(usuario, contrasena);
+
+                input_usuario.setText("");
+                input_contrasena.setText("");
+
                 if (usuarioActual != null) {
                     if (Administrator.esAdmin(usuarioActual.getNombreUsuario())) {
                         setVisible(false);

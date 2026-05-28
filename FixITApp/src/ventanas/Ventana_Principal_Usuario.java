@@ -147,7 +147,7 @@ public class Ventana_Principal_Usuario extends JFrame {
         boton_agregarIncidencia.setBounds(142, 334, 260, 58);
         contentPane.add(boton_agregarIncidencia);
 
-        JButton boton_enviarMensaje = new JButton("Enviar Mensaje");
+        JButton boton_enviarMensaje = new JButton("Contactar Admin");
         boton_enviarMensaje.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Abre el formulario de contacto con administracion.
