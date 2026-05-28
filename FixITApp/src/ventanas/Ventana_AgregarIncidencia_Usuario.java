@@ -32,15 +32,10 @@ import java.util.ArrayList;
 
 import util.Colores;
 
-/**
- * Formulario para crear una incidencia nueva desde la cuenta de usuario.
- */
 public class Ventana_AgregarIncidencia_Usuario extends JFrame {
 
     private static final long serialVersionUID = 1L;
-    // Componentes principales del formulario.
     private JPanel contentPane;
-
     protected DefaultTableModel modelo;
     private JTextField input_Titulo;
     private JTextArea input_Descripcion;
@@ -48,16 +43,13 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
     private JList<String> lista_Categorias;
     private Usuario usuarioActual;
 
-    // verde oscuro coherente con el resto de ventanas
     private static final Color VERDE_OSCURO_UI = new Color(34, 85, 34);
 
     public Ventana_AgregarIncidencia_Usuario(Ventana_Principal_Usuario v, Usuario u) {
         this.usuarioActual = u;
 
         addWindowListener(new WindowAdapter() {
-            @Override
             public void windowClosing(WindowEvent e) {
-                // Si se cierra, vuelve al menu del usuario.
                 v.setVisible(true);
                 dispose();
             }
@@ -65,7 +57,7 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
 
         setTitle("FIXIT!");
         setResizable(false);
-        setBounds(100, 100, 580, 660);
+        setBounds(100, 100, 620, 700);
         setLocationRelativeTo(null);
 
         contentPane = new JPanel();
@@ -87,43 +79,42 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
         label_IT.setBounds(84, 8, 70, 55);
         contentPane.add(label_IT);
 
-        // TITULO VENTANA — centrado
+        // TÍTULO VENTANA
         JLabel label_titulo_ventana = new JLabel("Nueva Incidencia");
         label_titulo_ventana.setFont(new Font("Britannic Bold", Font.PLAIN, 24));
         label_titulo_ventana.setForeground(VERDE_OSCURO_UI);
         label_titulo_ventana.setHorizontalAlignment(SwingConstants.CENTER);
-        label_titulo_ventana.setBounds(0, 15, 570, 35);
+        label_titulo_ventana.setBounds(0, 15, 610, 35);
         contentPane.add(label_titulo_ventana);
 
-        // SEPARADOR verde
+        // SEPARADOR
         JSeparator separador = new JSeparator();
         separador.setForeground(VERDE_OSCURO_UI);
         separador.setBackground(VERDE_OSCURO_UI);
-        separador.setBounds(0, 72, 580, 3);
+        separador.setBounds(0, 72, 620, 3);
         contentPane.add(separador);
 
-        // ── CAMPO: TÍTULO ─────────────────────────────────────────────
+        // ── TÍTULO ────────────────────────────────────────────────────
 
-        JLabel label_Titulo = new JLabel("Título:");
-        label_Titulo.setFont(new Font("Britannic Bold", Font.PLAIN, 16));
+        JLabel label_Titulo = new JLabel("Título");
+        label_Titulo.setFont(new Font("Britannic Bold", Font.PLAIN, 13));
         label_Titulo.setForeground(VERDE_OSCURO_UI);
-        label_Titulo.setBounds(40, 92, 100, 28);
+        label_Titulo.setBounds(30, 88, 560, 20);
         contentPane.add(label_Titulo);
 
         input_Titulo = new JTextField();
         input_Titulo.setBackground(Color.WHITE);
         input_Titulo.setForeground(new Color(40, 40, 40));
-        input_Titulo.setFont(new Font("SansSerif", Font.PLAIN, 15));
-        input_Titulo.setBounds(155, 92, 370, 30);
-        input_Titulo.setColumns(10);
+        input_Titulo.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        input_Titulo.setBounds(30, 110, 555, 32);
         contentPane.add(input_Titulo);
 
-        // ── CAMPO: DESCRIPCIÓN ────────────────────────────────────────
+        // ── DESCRIPCIÓN ───────────────────────────────────────────────
 
-        JLabel label_Descripcion = new JLabel("Descripción:");
-        label_Descripcion.setFont(new Font("Britannic Bold", Font.PLAIN, 16));
+        JLabel label_Descripcion = new JLabel("Descripción");
+        label_Descripcion.setFont(new Font("Britannic Bold", Font.PLAIN, 13));
         label_Descripcion.setForeground(VERDE_OSCURO_UI);
-        label_Descripcion.setBounds(40, 138, 110, 28);
+        label_Descripcion.setBounds(30, 158, 560, 20);
         contentPane.add(label_Descripcion);
 
         input_Descripcion = new JTextArea();
@@ -133,23 +124,20 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
         input_Descripcion.setForeground(new Color(40, 40, 40));
         input_Descripcion.setFont(new Font("SansSerif", Font.PLAIN, 14));
         JScrollPane scrollDescripcion = new JScrollPane(input_Descripcion);
-        scrollDescripcion.setBounds(155, 138, 370, 100);
+        scrollDescripcion.setBounds(30, 180, 555, 100);
         contentPane.add(scrollDescripcion);
 
-        // ── CAMPO: ZONA ───────────────────────────────────────────────
+        // ── ZONA y CATEGORÍA (lado a lado) ────────────────────────────
 
-        JLabel label_Zona = new JLabel("Zona:");
-        label_Zona.setFont(new Font("Britannic Bold", Font.PLAIN, 16));
+        JLabel label_Zona = new JLabel("Zona");
+        label_Zona.setFont(new Font("Britannic Bold", Font.PLAIN, 13));
         label_Zona.setForeground(VERDE_OSCURO_UI);
-        label_Zona.setBounds(40, 260, 100, 28);
+        label_Zona.setBounds(30, 298, 260, 20);
         contentPane.add(label_Zona);
 
         ArrayList<Zona> zonas = ZonaDAO.obtenerZonas();
         String[] opciones = new String[zonas.size()];
-        for (int i = 0; i < zonas.size(); i++) {
-            // Convierte cada zona en el nombre visible de la lista.
-            opciones[i] = zonas.get(i).getNombre();
-        }
+        for (int i = 0; i < zonas.size(); i++) opciones[i] = zonas.get(i).getNombre();
 
         lista_Zonas = new JList<>(opciones);
         lista_Zonas.setBackground(Color.WHITE);
@@ -158,23 +146,18 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
         lista_Zonas.setSelectionBackground(new Color(80, 160, 80));
         lista_Zonas.setSelectionForeground(Color.WHITE);
         JScrollPane scrollZonas = new JScrollPane(lista_Zonas);
-        scrollZonas.setBounds(155, 256, 370, 85);
+        scrollZonas.setBounds(30, 320, 265, 110);
         contentPane.add(scrollZonas);
 
-        // ── CAMPO: CATEGORÍA ──────────────────────────────────────────
-
-        JLabel label_Categoria = new JLabel("Categoría:");
-        label_Categoria.setFont(new Font("Britannic Bold", Font.PLAIN, 16));
+        JLabel label_Categoria = new JLabel("Categoría");
+        label_Categoria.setFont(new Font("Britannic Bold", Font.PLAIN, 13));
         label_Categoria.setForeground(VERDE_OSCURO_UI);
-        label_Categoria.setBounds(40, 368, 110, 28);
+        label_Categoria.setBounds(320, 298, 260, 20);
         contentPane.add(label_Categoria);
 
         ArrayList<Categoria> categorias = CategoriaDAO.obtenerCategorias();
         String[] opcionesCategorias = new String[categorias.size()];
-        for (int i = 0; i < categorias.size(); i++) {
-            // Convierte cada categoria en el nombre visible de la lista.
-            opcionesCategorias[i] = categorias.get(i).getNombre();
-        }
+        for (int i = 0; i < categorias.size(); i++) opcionesCategorias[i] = categorias.get(i).getNombre();
 
         lista_Categorias = new JList<>(opcionesCategorias);
         lista_Categorias.setBackground(Color.WHITE);
@@ -183,8 +166,16 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
         lista_Categorias.setSelectionBackground(new Color(80, 160, 80));
         lista_Categorias.setSelectionForeground(Color.WHITE);
         JScrollPane scrollCategorias = new JScrollPane(lista_Categorias);
-        scrollCategorias.setBounds(155, 362, 370, 85);
+        scrollCategorias.setBounds(320, 320, 265, 110);
         contentPane.add(scrollCategorias);
+
+        // ── SEPARADOR INFERIOR ────────────────────────────────────────
+
+        JSeparator sep2 = new JSeparator();
+        sep2.setForeground(VERDE_OSCURO_UI);
+        sep2.setBackground(VERDE_OSCURO_UI);
+        sep2.setBounds(0, 452, 620, 2);
+        contentPane.add(sep2);
 
         // ── BOTONES ───────────────────────────────────────────────────
 
@@ -199,13 +190,12 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
         boton_cancelar.setBackground(Colores.AMARILLO_PASTEL);
         boton_cancelar.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
         boton_cancelar.setFocusPainted(false);
-        boton_cancelar.setBounds(90, 570, 165, 45);
+        boton_cancelar.setBounds(30, 470, 165, 45);
         contentPane.add(boton_cancelar);
 
         JButton boton_agregar = new JButton("Agregar Incidencia");
         boton_agregar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Recoge datos del formulario y valida campos obligatorios.
                 String titulo      = input_Titulo.getText();
                 String descripcion = input_Descripcion.getText();
                 String reportador  = usuarioActual.getNombreUsuario();
@@ -236,7 +226,7 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
         boton_agregar.setBackground(Colores.VERDE_BRILLANTE);
         boton_agregar.setFont(new Font("Britannic Bold", Font.PLAIN, 15));
         boton_agregar.setFocusPainted(false);
-        boton_agregar.setBounds(320, 570, 165, 45);
+        boton_agregar.setBounds(420, 470, 165, 45);
         contentPane.add(boton_agregar);
     }
 }
