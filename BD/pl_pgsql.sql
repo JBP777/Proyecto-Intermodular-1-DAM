@@ -154,20 +154,27 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION eliminar_usuario(p_usuario VARCHAR)
 RETURNS VOID AS $$
 BEGIN
-    DELETE FROM VALORAR       WHERE reportador = p_usuario;
-    DELETE FROM RESOLVER      WHERE colaborador = p_usuario;
-    DELETE FROM TENER         WHERE comentario IN (SELECT id FROM COMENTARIO WHERE usuario = p_usuario);
-    DELETE FROM COMENTARIO    WHERE usuario = p_usuario;
-    DELETE FROM CLASIFICAR    WHERE incidencia IN (SELECT id FROM INCIDENCIA WHERE reportador = p_usuario);
-    DELETE FROM RECOMPENSAR   WHERE incidencia IN (SELECT id FROM INCIDENCIA WHERE reportador = p_usuario);
-    DELETE FROM INCIDENCIA    WHERE reportador = p_usuario;
-    DELETE FROM ESTAR_ESPECIALIZADO WHERE usuario = p_usuario;
-    DELETE FROM SER_DE        WHERE usuario = p_usuario;
-    DELETE FROM SEGUIR        WHERE usuario1 = p_usuario OR usuario2 = p_usuario;
-    DELETE FROM MENSAJE       WHERE usuario_envia = p_usuario OR usuario_recibe = p_usuario;
-    DELETE FROM COLABORADOR   WHERE usuario = p_usuario;
-    DELETE FROM REPORTADOR    WHERE usuario = p_usuario;
-    DELETE FROM USUARIO       WHERE nombre_usuario = p_usuario;
+    -- 1. Borrar registros en RESOLVER que apuntan a incidencias del usuario
+    DELETE FROM RESOLVER
+    WHERE incidencia IN (
+        SELECT id FROM INCIDENCIA WHERE reportador = p_usuario
+    );
+
+    -- 2. Borrar clasificaciones de esas incidencias
+    DELETE FROM CLASIFICAR
+    WHERE incidencia IN (
+        SELECT id FROM INCIDENCIA WHERE reportador = p_usuario
+    );
+
+    -- 3. Borrar las incidencias del usuario
+    DELETE FROM INCIDENCIA WHERE reportador = p_usuario;
+
+    -- 4. Borrar el usuario de REPORTADOR y COLABORADOR
+    DELETE FROM REPORTADOR WHERE usuario = p_usuario;
+    DELETE FROM COLABORADOR WHERE usuario = p_usuario;
+
+    -- 5. Borrar el usuario principal
+    DELETE FROM USUARIO WHERE nombre_usuario = p_usuario;
 END;
 $$ LANGUAGE plpgsql;
 
