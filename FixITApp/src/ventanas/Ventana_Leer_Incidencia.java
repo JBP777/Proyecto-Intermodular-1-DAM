@@ -33,6 +33,7 @@ public class Ventana_Leer_Incidencia extends JFrame {
         setTitle("FIXIT! - Incidencia");
         setResizable(false);
         setBounds(200, 150, 400, 490); 
+        setLocationRelativeTo(null);
         // DISPOSE_ON_CLOSE cierra solo esta ventana, sin cerrar toda la aplicacion
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -170,8 +171,7 @@ public class Ventana_Leer_Incidencia extends JFrame {
         btnCerrar.setBounds(195, 375, 175, 28); // MODIFICADO — bajado 30px por el nuevo campo
         contentPane.add(btnCerrar);
 
-        // CARGAR
-        //                
+        // Carga los datos recibidos en los campos de solo lectura.
         txtEstado.setText(incidencia.getEstado());
         txtTitulo.setText(incidencia.getTitulo());
         txtReportador.setText(incidencia.getReportador());

@@ -9,10 +9,13 @@ import modelo.Incidencia;
 import modelo.Usuario;
 import util.ConexionBD;
 
+/**
+ * Acceso a datos de las soluciones propuestas para incidencias.
+ */
 public class SolucionDAO {
 
+    // Inserta la solucion y la relaciona con el colaborador y la incidencia.
     public static boolean insertarSolucion(String descripcion, Usuario u, Incidencia i) {
-
         Connection conn = ConexionBD.getConexion();
 
         try {
@@ -34,7 +37,6 @@ public class SolucionDAO {
 
             conn.close();
             return true;
-
         } catch (SQLException e) {
             System.out.println("NO SE HA PODIDO INSERTAR LA SOLUCION: " + e);
             return false;

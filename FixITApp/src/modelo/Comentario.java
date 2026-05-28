@@ -1,10 +1,14 @@
 package modelo;
 
+/**
+ * Comentario escrito por un usuario.
+ */
 public class Comentario {
 	private int id, fecha;
 	private String texto;
 	private Usuario usuario;
 
+	// Constructor con todos los datos del comentario.
 	public Comentario(int id, int fecha, String texto, Usuario usuario) {
 		super();
 		this.id = id;
@@ -13,6 +17,7 @@ public class Comentario {
 		this.usuario = usuario;
 	}
 
+	// Getters y setters.
 	public int getId() {
 		return id;
 	}
@@ -44,5 +49,4 @@ public class Comentario {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-
 }

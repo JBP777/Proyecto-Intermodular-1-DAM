@@ -1,9 +1,13 @@
 package modelo;
 
+/**
+ * Logro que puede asociarse al progreso de un usuario.
+ */
 public class Logro {
 	private int id;
 	private String nombre, descripcion;
 
+	// Constructor con todos los datos del logro.
 	public Logro(int id, String nombre, String descripcion) {
 		super();
 		this.id = id;
@@ -11,6 +15,7 @@ public class Logro {
 		this.descripcion = descripcion;
 	}
 
+	// Getters y setters.
 	public int getId() {
 		return id;
 	}
@@ -34,5 +39,4 @@ public class Logro {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-
 }

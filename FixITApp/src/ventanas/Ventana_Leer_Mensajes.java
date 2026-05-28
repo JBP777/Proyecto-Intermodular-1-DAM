@@ -7,9 +7,13 @@ import util.Colores;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * Ventana de solo lectura para consultar un mensaje recibido.
+ */
 public class Ventana_Leer_Mensajes extends JFrame {
 
     private static final long serialVersionUID = 1L;
+    // Panel principal donde se colocan los campos del mensaje.
     private JPanel contentPane;
 
     public Ventana_Leer_Mensajes(Contacto c) {
@@ -17,6 +21,7 @@ public class Ventana_Leer_Mensajes extends JFrame {
         setTitle("FIXIT! - Mensaje");
         setResizable(false);
         setBounds(200, 150, 400, 342);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         contentPane = new JPanel();
@@ -88,6 +93,7 @@ public class Ventana_Leer_Mensajes extends JFrame {
         btnCerrar.setBounds(285, 275, 85, 26);
         contentPane.add(btnCerrar);
     
+        // Carga los datos del mensaje seleccionado en campos no editables.
         txtNombre.setText(c.getNombre());
         txtEmail.setText(c.getEmail());
         txtAsunto.setText(c.getAsunto());

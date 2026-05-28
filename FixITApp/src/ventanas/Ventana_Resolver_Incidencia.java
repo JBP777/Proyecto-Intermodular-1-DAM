@@ -12,9 +12,13 @@ import modelo.Incidencia;
 import modelo.Usuario;
 import util.Colores;
 
+/**
+ * Ventana donde un colaborador escribe y envia una solucion para una incidencia.
+ */
 public class Ventana_Resolver_Incidencia extends JFrame {
 
     private static final long serialVersionUID = 1L;
+    // Panel principal y color comun de la ventana.
     private JPanel contentPane;
     private static final Color VERDE_OSCURO_UI = new Color(34, 85, 34);
 
@@ -23,6 +27,7 @@ public class Ventana_Resolver_Incidencia extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                // Devuelve al listado de incidencias al cerrar.
                 v.setVisible(true);
                 dispose();
             }
@@ -31,6 +36,7 @@ public class Ventana_Resolver_Incidencia extends JFrame {
         setTitle("FIXIT!");
         setResizable(false);
         setBounds(100, 100, 560, 620);
+        setLocationRelativeTo(null);
 
         contentPane = new JPanel();
         contentPane.setBackground(Colores.AMARILLO_FONDO);
@@ -174,6 +180,7 @@ public class Ventana_Resolver_Incidencia extends JFrame {
         btnEnviar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
+                // No se envia nada a BD si el texto de solucion esta vacio.
                 String solucion = txt_solucion.getText().trim();
 
                 if (solucion.isEmpty()) {
@@ -186,6 +193,7 @@ public class Ventana_Resolver_Incidencia extends JFrame {
                 boolean ok = SolucionDAO.insertarSolucion(solucion, u, i);
 
                 if (ok) {
+                    // Si se guarda la solucion, tambien se cierra la incidencia.
                 	IncidenciaDAO.cerrarIncidencia(i);
                     JOptionPane.showMessageDialog(contentPane,
                         "Solución enviada correctamente.",

@@ -19,18 +19,24 @@ import java.awt.event.WindowEvent;
 import modelo.Usuario;
 import util.Colores;
 
+/**
+ * Muestra los datos personales y estadisticas del usuario conectado.
+ */
 public class Ventana_VerPerfil_Usuario extends JFrame {
 
     private static final long serialVersionUID = 1L;
+    // Panel principal de la ventana.
     private JPanel contentPane;
 
     private static final Color VERDE_OSCURO_UI = new Color(34, 85, 34);
 
     public Ventana_VerPerfil_Usuario(Ventana_Principal_Usuario v, Usuario u) {
+    	// Estadisticas calculadas desde la base de datos.
     	String[] stats = UsuarioDAO.obtenerEstadisticas(u);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                // Al cerrar se regresa al menu del usuario.
                 v.setVisible(true);
                 dispose();
             }
@@ -39,6 +45,7 @@ public class Ventana_VerPerfil_Usuario extends JFrame {
         setTitle("FIXIT!");
         setResizable(false);
         setBounds(100, 100, 520, 580);
+        setLocationRelativeTo(null);
 
         contentPane = new JPanel();
         contentPane.setBackground(Colores.AMARILLO_FONDO);
@@ -173,31 +180,11 @@ public class Ventana_VerPerfil_Usuario extends JFrame {
         s4.setBounds(40, 362, 430, 1);
         contentPane.add(s4);
 
-        // VALORACIÓN MEDIA
-        JLabel lbl_valoracionTitulo = new JLabel("Valoración media:");
-        lbl_valoracionTitulo.setFont(new Font("Britannic Bold", Font.PLAIN, 16));
-        lbl_valoracionTitulo.setForeground(VERDE_OSCURO_UI);
-        lbl_valoracionTitulo.setBounds(50, 370, 220, 30);
-        contentPane.add(lbl_valoracionTitulo);
-
-
-
-        JLabel lbl_valoracionValor = new JLabel(stats[2]); // valor del array
-        lbl_valoracionValor.setFont(new Font("SansSerif", Font.BOLD, 16));
-        lbl_valoracionValor.setForeground(Colores.VERDE_BRILLANTE);
-        lbl_valoracionValor.setBounds(280, 370, 190, 30);
-        contentPane.add(lbl_valoracionValor);
-
-        // SEPARADOR antes del botón
-        JSeparator sep3 = new JSeparator();
-        sep3.setForeground(new Color(180, 210, 180));
-        sep3.setBounds(40, 412, 430, 2);
-        contentPane.add(sep3);
-
         // BOTÓN VOLVER
         JButton boton_volver = new JButton("Volver");
         boton_volver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Vuelve a la ventana principal del usuario.
                 v.setVisible(true);
                 dispose();
             }

@@ -23,9 +23,13 @@ import javax.swing.SwingConstants;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 
+/**
+ * Ventana preparada para gestionar borrado de usuarios desde administracion.
+ */
 public class Ventana_BorrarUsuario_Admin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	// Tabla y modelo usados para mostrar usuarios.
 	private JPanel contentPane;
 	private JTable table;
 	protected DefaultTableModel modelo;
@@ -34,6 +38,7 @@ public class Ventana_BorrarUsuario_Admin extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
+				// Vuelve al panel administrador al cerrar.
 				v.setVisible(true);
 				dispose();
 			}
@@ -43,6 +48,7 @@ public class Ventana_BorrarUsuario_Admin extends JFrame {
 		
 		setTitle("FIXIT!");
 		setBounds(100, 100, 800, 528);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(Colores.AMARILLO_FONDO);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -94,6 +100,7 @@ public class Ventana_BorrarUsuario_Admin extends JFrame {
 		JButton boton_borrarIncidencia = new JButton("Borrar Incidencia");
 		boton_borrarIncidencia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// Boton de vuelta al panel principal.
 				v.setVisible(true);
 				dispose();
 			}

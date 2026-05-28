@@ -10,9 +10,13 @@ import java.awt.event.*;
 import modelo.Usuario;
 import util.Colores;
 
+/**
+ * Vista de administrador para consultar el perfil de un usuario.
+ */
 public class Ventana_Ver_Usuario_Admin extends JFrame {
 
     private static final long serialVersionUID = 1L;
+    // Panel principal de la ventana.
     private JPanel contentPane;
     private static final Color VERDE_OSCURO_UI = new Color(34, 85, 34);
 
@@ -21,6 +25,7 @@ public class Ventana_Ver_Usuario_Admin extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                // Al cerrar se devuelve el control al panel admin.
                 v.setVisible(true);
                 dispose();
             }
@@ -29,6 +34,7 @@ public class Ventana_Ver_Usuario_Admin extends JFrame {
         setTitle("FIXIT! — Perfil de usuario");
         setResizable(false);
         setBounds(100, 100, 520, 580);
+        setLocationRelativeTo(null);
 
         contentPane = new JPanel();
         contentPane.setBackground(Colores.AMARILLO_FONDO);
@@ -125,6 +131,7 @@ public class Ventana_Ver_Usuario_Admin extends JFrame {
         lbl_creadasTitulo.setBounds(50, 290, 220, 30);
         contentPane.add(lbl_creadasTitulo);
 
+        // Estadisticas compartidas con la pantalla de perfil de usuario.
         String[] stats = UsuarioDAO.obtenerEstadisticas(u);
         
         JLabel lbl_creadasValor = new JLabel(stats[0]);
@@ -156,29 +163,11 @@ public class Ventana_Ver_Usuario_Admin extends JFrame {
         s4.setBounds(40, 362, 430, 1);
         contentPane.add(s4);
 
-        // VALORACIÓN MEDIA
-        JLabel lbl_valoracionTitulo = new JLabel("Valoración media:");
-        lbl_valoracionTitulo.setFont(new Font("Britannic Bold", Font.PLAIN, 16));
-        lbl_valoracionTitulo.setForeground(VERDE_OSCURO_UI);
-        lbl_valoracionTitulo.setBounds(50, 370, 220, 30);
-        contentPane.add(lbl_valoracionTitulo);
-
-        JLabel lbl_valoracionValor = new JLabel(stats[2] + " ⭐");
-        lbl_valoracionValor.setFont(new Font("SansSerif", Font.BOLD, 16));
-        lbl_valoracionValor.setForeground(Colores.VERDE_BRILLANTE);
-        lbl_valoracionValor.setBounds(280, 370, 190, 30);
-        contentPane.add(lbl_valoracionValor);
-
-        // SEPARADOR
-        JSeparator sep3 = new JSeparator();
-        sep3.setForeground(new Color(180, 210, 180));
-        sep3.setBounds(40, 412, 430, 2);
-        contentPane.add(sep3);
-
         // BOTÓN VOLVER
         JButton boton_volver = new JButton("Volver");
         boton_volver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Refresca las tablas por si se han producido cambios.
                 v.cargarTablas(); 
                 v.setVisible(true);
                 dispose();

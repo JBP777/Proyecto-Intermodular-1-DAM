@@ -1,11 +1,15 @@
 package modelo;
 
+/**
+ * Recompensa asociada a un tipo y a un valor concreto.
+ */
 public class Recompensa {
 	private double valor;
 	private int id;
 	private String descripcion;
 	private TipoRecompensa tipoRecompensa;
 
+	// Constructor con todos los datos de la recompensa.
 	public Recompensa(double valor, int id, String descripcion, TipoRecompensa tipoRecompensa) {
 		super();
 		this.valor = valor;
@@ -14,6 +18,7 @@ public class Recompensa {
 		this.tipoRecompensa = tipoRecompensa;
 	}
 
+	// Getters y setters.
 	public double getValor() {
 		return valor;
 	}
@@ -45,5 +50,4 @@ public class Recompensa {
 	public void setTipoRecompensa(TipoRecompensa tipoRecompensa) {
 		this.tipoRecompensa = tipoRecompensa;
 	}
-
 }

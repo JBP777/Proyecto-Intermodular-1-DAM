@@ -1,10 +1,14 @@
 package modelo;
 
+/**
+ * Usuario que puede resolver incidencias.
+ */
 public class Colaborador extends Usuario {
 
 	private double valoracionMedia;
 	private int totalResueltas;
 
+	// Mantiene los datos de Usuario y anade estadisticas de colaborador.
 	public Colaborador(String nombreUsuario, String email, String contrasenya, String fechaRegistro,
 			double valoracionMedia, int totalResueltas) {
 		super(nombreUsuario, email, contrasenya, fechaRegistro);
@@ -12,6 +16,7 @@ public class Colaborador extends Usuario {
 		this.totalResueltas = totalResueltas;
 	}
 
+	// Getters y setters.
 	public double getValoracionMedia() {
 		return valoracionMedia;
 	}

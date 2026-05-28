@@ -1,19 +1,24 @@
 package modelo;
 
+/**
+ * Datos basicos de un usuario registrado en la aplicacion.
+ */
 public class Usuario {
 
 	private String nombreUsuario, email, contrasenya, fechaRegistro;
 
-	public String getNombreUsuario() {
-		return nombreUsuario;
-	}
-
+	// Constructor usado al cargar o registrar usuarios.
 	public Usuario(String nombreUsuario, String email, String contrasenya, String fechaRegistro) {
 		super();
 		this.nombreUsuario = nombreUsuario;
 		this.email = email;
 		this.contrasenya = contrasenya;
 		this.fechaRegistro = fechaRegistro;
+	}
+
+	// Getters y setters.
+	public String getNombreUsuario() {
+		return nombreUsuario;
 	}
 
 	public void setNombreUsuario(String nombreUsuario) {

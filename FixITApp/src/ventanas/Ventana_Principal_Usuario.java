@@ -22,9 +22,13 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 
+/**
+ * Menu principal para usuarios normales tras iniciar sesion.
+ */
 public class Ventana_Principal_Usuario extends JFrame {
 
     private static final long serialVersionUID = 1L;
+    // Usuario conectado y panel principal.
     private JPanel contentPane;
     private Usuario usuarioActual;
 
@@ -34,6 +38,7 @@ public class Ventana_Principal_Usuario extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                // Cierra solo esta ventana.
                 dispose();
             }
         });
@@ -41,6 +46,7 @@ public class Ventana_Principal_Usuario extends JFrame {
         setTitle("FIXIT!");
         setBounds(100, 100, 560, 640);
         setResizable(false);
+        setLocationRelativeTo(null);
 
         // MENU — verde oscuro como la ventana admin
         JMenuBar menuBar = new JMenuBar();
@@ -54,6 +60,7 @@ public class Ventana_Principal_Usuario extends JFrame {
         JMenuItem mntmCerrarSesion = new JMenuItem("Cerrar Sesion");
         mntmCerrarSesion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Vuelve a la ventana de inicio manteniendo el flujo original.
                 dispose();
                 v.setVisible(true);
             }
@@ -129,9 +136,10 @@ public class Ventana_Principal_Usuario extends JFrame {
         JButton boton_agregarIncidencia = new JButton("Crear nueva Incidencia");
         boton_agregarIncidencia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Abre el formulario de nueva incidencia.
                 Ventana_AgregarIncidencia_Usuario va = new Ventana_AgregarIncidencia_Usuario(
                     Ventana_Principal_Usuario.this, usuarioActual);
-                va.setLocationRelativeTo(Ventana_Principal_Usuario.this);
+                va.setLocationRelativeTo(null);
                 va.setVisible(true);
                 dispose();
             }
@@ -146,8 +154,9 @@ public class Ventana_Principal_Usuario extends JFrame {
         JButton boton_enviarMensaje = new JButton("Enviar Mensaje");
         boton_enviarMensaje.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Abre el formulario de contacto con administracion.
                 Ventana_Enviar_Mensaje vm = new Ventana_Enviar_Mensaje(usuarioActual);
-                vm.setLocationRelativeTo(Ventana_Principal_Usuario.this);
+                vm.setLocationRelativeTo(null);
                 vm.setVisible(true);
             }
         });
@@ -161,6 +170,7 @@ public class Ventana_Principal_Usuario extends JFrame {
         JButton boton_verPerfil = new JButton("Ver Perfil");
         boton_verPerfil.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Muestra datos y estadisticas del usuario conectado.
                 Ventana_VerPerfil_Usuario vp = new Ventana_VerPerfil_Usuario(
                     Ventana_Principal_Usuario.this, usuarioActual);
                 vp.setVisible(true);
@@ -176,6 +186,7 @@ public class Ventana_Principal_Usuario extends JFrame {
     }
 
     public void cargarIncidencias() {
+        // Metodo preparado para futuras recargas desde esta ventana.
         ArrayList<Incidencia> incidencias = IncidenciaDAO.obtenerIncidencias();
     }
 }

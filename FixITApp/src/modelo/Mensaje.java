@@ -1,5 +1,8 @@
 package modelo;
 
+/**
+ * Mensaje enviado entre usuarios de la aplicacion.
+ */
 public class Mensaje {
 	private int id, fechaEnvio;
 	private String contenido;
@@ -7,6 +10,7 @@ public class Mensaje {
 	private Usuario usuarioRecibe;
 	private boolean leido;
 
+	// Constructor con todos los datos del mensaje.
 	public Mensaje(int id, int fechaEnvio, String contenido, Usuario usuarioEnvia, Usuario usuarioRecibe,
 			boolean leido) {
 		super();
@@ -18,6 +22,7 @@ public class Mensaje {
 		this.leido = leido;
 	}
 
+	// Getters y setters.
 	public int getId() {
 		return id;
 	}
@@ -65,5 +70,4 @@ public class Mensaje {
 	public void setLeido(boolean leido) {
 		this.leido = leido;
 	}
-
 }

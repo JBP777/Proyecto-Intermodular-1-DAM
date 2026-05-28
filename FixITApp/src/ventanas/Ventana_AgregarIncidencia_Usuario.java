@@ -32,9 +32,13 @@ import java.util.ArrayList;
 
 import util.Colores;
 
+/**
+ * Formulario para crear una incidencia nueva desde la cuenta de usuario.
+ */
 public class Ventana_AgregarIncidencia_Usuario extends JFrame {
 
     private static final long serialVersionUID = 1L;
+    // Componentes principales del formulario.
     private JPanel contentPane;
 
     protected DefaultTableModel modelo;
@@ -53,6 +57,7 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                // Si se cierra, vuelve al menu del usuario.
                 v.setVisible(true);
                 dispose();
             }
@@ -61,6 +66,7 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
         setTitle("FIXIT!");
         setResizable(false);
         setBounds(100, 100, 580, 660);
+        setLocationRelativeTo(null);
 
         contentPane = new JPanel();
         contentPane.setBackground(Colores.AMARILLO_FONDO);
@@ -141,6 +147,7 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
         ArrayList<Zona> zonas = ZonaDAO.obtenerZonas();
         String[] opciones = new String[zonas.size()];
         for (int i = 0; i < zonas.size(); i++) {
+            // Convierte cada zona en el nombre visible de la lista.
             opciones[i] = zonas.get(i).getNombre();
         }
 
@@ -165,6 +172,7 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
         ArrayList<Categoria> categorias = CategoriaDAO.obtenerCategorias();
         String[] opcionesCategorias = new String[categorias.size()];
         for (int i = 0; i < categorias.size(); i++) {
+            // Convierte cada categoria en el nombre visible de la lista.
             opcionesCategorias[i] = categorias.get(i).getNombre();
         }
 
@@ -197,6 +205,7 @@ public class Ventana_AgregarIncidencia_Usuario extends JFrame {
         JButton boton_agregar = new JButton("Agregar Incidencia");
         boton_agregar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Recoge datos del formulario y valida campos obligatorios.
                 String titulo      = input_Titulo.getText();
                 String descripcion = input_Descripcion.getText();
                 String reportador  = usuarioActual.getNombreUsuario();

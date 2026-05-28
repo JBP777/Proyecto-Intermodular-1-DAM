@@ -12,9 +12,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
+/**
+ * Lista las incidencias abiertas que el usuario puede resolver.
+ */
 public class Ventana_Lista_Incidencias extends JFrame {
 
     private static final long serialVersionUID = 1L;
+    // Usuario conectado y tabla de incidencias disponibles.
     private JPanel contentPane;
     private Usuario usuarioActual;
 
@@ -24,6 +28,7 @@ public class Ventana_Lista_Incidencias extends JFrame {
     };
     private JTable tableIncidencias = new JTable(modeloTabla);
 
+    // Recarga solo incidencias abiertas y que no pertenecen al usuario actual.
     private void cargarTabla() {
         modeloTabla.setRowCount(0);
         for (Incidencia i : IncidenciaDAO.obtenerIncidencias()) {
@@ -41,6 +46,7 @@ public class Ventana_Lista_Incidencias extends JFrame {
 
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
+                // Al cerrar se vuelve al menu del usuario.
                 v.setVisible(true);
                 dispose();
             }
@@ -49,6 +55,7 @@ public class Ventana_Lista_Incidencias extends JFrame {
         setTitle("FIXIT!");
         setResizable(false);
         setBounds(100, 100, 820, 600);
+        setLocationRelativeTo(null);
 
         contentPane = new JPanel();
         contentPane.setBackground(Colores.AMARILLO_FONDO);
@@ -123,6 +130,7 @@ public class Ventana_Lista_Incidencias extends JFrame {
         btnResolver.setBounds(280, 508, 260, 50);
         btnResolver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Busca la incidencia real por ID antes de abrir la solucion.
                 int sel = tableIncidencias.getSelectedRow();
                 if (sel != -1) {
                     int idSeleccionado = (int) modeloTabla.getValueAt(sel, 0);
@@ -151,6 +159,7 @@ public class Ventana_Lista_Incidencias extends JFrame {
         btnVolver.setBounds(20, 508, 120, 50);
         btnVolver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Vuelve al menu principal del usuario.
                 v.setVisible(true);
                 dispose();
             }

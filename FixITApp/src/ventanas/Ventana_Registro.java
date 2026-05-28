@@ -25,9 +25,13 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.JPasswordField;
 import javax.swing.JSeparator;
 
+/**
+ * Ventana para registrar nuevos usuarios.
+ */
 public class Ventana_Registro extends JFrame {
 
     private static final long serialVersionUID = 1L;
+    // Campos del formulario de registro.
     private JPanel contentPane;
     private JTextField input_usuario;
     private JTextField input_correo;
@@ -40,6 +44,7 @@ public class Ventana_Registro extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                // Al cerrar se vuelve al inicio de sesion.
                 v.setVisible(true);
                 dispose();
             }
@@ -48,6 +53,7 @@ public class Ventana_Registro extends JFrame {
         setTitle("FIXIT!");
         setResizable(false);
         setBounds(100, 100, 700, 580);
+        setLocationRelativeTo(null);
 
         contentPane = new JPanel();
         contentPane.setBackground(Colores.AMARILLO_FONDO);
@@ -154,6 +160,7 @@ public class Ventana_Registro extends JFrame {
                 String email         = input_correo.getText().trim();
                 String contrasenya   = new String(input_contrasena.getPassword()).trim();
 
+                // Validaciones previas antes de crear el usuario.
                 // VALIDACIÓN — campos vacíos
                 if (nombreUsuario.isEmpty() || email.isEmpty() || contrasenya.isEmpty()) {
                     JOptionPane.showMessageDialog(contentPane,
@@ -202,6 +209,7 @@ public class Ventana_Registro extends JFrame {
         JButton boton_volver = new JButton("Volver");
         boton_volver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Cancela el registro y muestra de nuevo la ventana inicial.
                 v.setVisible(true);
                 dispose();
             }

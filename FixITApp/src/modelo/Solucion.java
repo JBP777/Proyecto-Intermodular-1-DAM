@@ -1,10 +1,14 @@
 package modelo;
 
+/**
+ * Solucion propuesta para resolver una incidencia.
+ */
 public class Solucion {
 	private int id;
 	private String descripcion;
 	private boolean esAceptada;
 
+	// Constructor con todos los datos de la solucion.
 	public Solucion(int id, String descripcion, boolean esAceptada) {
 		super();
 		this.id = id;
@@ -12,6 +16,7 @@ public class Solucion {
 		this.esAceptada = esAceptada;
 	}
 
+	// Getters y setters.
 	public int getId() {
 		return id;
 	}
@@ -35,5 +40,4 @@ public class Solucion {
 	public void setEsAceptada(boolean esAceptada) {
 		this.esAceptada = esAceptada;
 	}
-
 }

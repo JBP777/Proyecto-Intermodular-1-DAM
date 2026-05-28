@@ -14,9 +14,13 @@ import util.Colores;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * Panel principal del administrador con incidencias, usuarios y mensajes.
+ */
 public class Ventana_Principal_Admin extends JFrame {
 
     private static final long serialVersionUID = 1L;
+    // Usuario conectado y panel principal.
     private JPanel contentPane;
     private Usuario usuarioActual;
 
@@ -34,6 +38,7 @@ public class Ventana_Principal_Admin extends JFrame {
     private JTable tableUsuarios    = new JTable(modeloUsuarios);
     private JTable tableMensajes    = new JTable(modeloMensajes);
 
+    // Aplica el mismo estilo visual a todas las tablas del panel.
     private void estilizarTabla(JTable tabla) {
         tabla.getTableHeader().setBackground(Colores.CABECERA_TABLA);
         tabla.getTableHeader().setForeground(Color.WHITE);
@@ -47,7 +52,8 @@ public class Ventana_Principal_Admin extends JFrame {
         tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
-  protected void cargarTablas() {
+    protected void cargarTablas() {
+        // Limpia y recarga datos desde los DAO.
         modeloMensajes.setRowCount(0);
         modeloUsuarios.setRowCount(0);
         modeloIncidencias.setRowCount(0);
@@ -73,6 +79,7 @@ public class Ventana_Principal_Admin extends JFrame {
         setTitle("FIXIT! — Admin");
         setResizable(false);
         setBounds(100, 100, 1000, 660);
+        setLocationRelativeTo(null);
 
         // MENÚ
         JMenuBar menuBar = new JMenuBar();
@@ -84,6 +91,7 @@ public class Ventana_Principal_Admin extends JFrame {
         JMenuItem mntmCerrarSesion = new JMenuItem("Cerrar Sesion");
         mntmCerrarSesion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Cierra la sesion actual y vuelve al login.
                 dispose();
                 new Ventana_Inicio().setVisible(true);
             }
@@ -155,6 +163,7 @@ public class Ventana_Principal_Admin extends JFrame {
         btnVerInc.setBounds(10, 510, 145, 34);
         btnVerInc.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Abre el detalle de la incidencia seleccionada.
                 int sel = tableIncidencias.getSelectedRow();
                 if (sel != -1) {
                     new Ventana_Leer_Incidencia(IncidenciaDAO.obtenerIncidencias().get(sel)).setVisible(true);
@@ -173,6 +182,7 @@ public class Ventana_Principal_Admin extends JFrame {
         btnElimInc.setBounds(165, 510, 145, 34);
         btnElimInc.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Elimina la incidencia seleccionada y refresca la tabla.
                 int sel = tableIncidencias.getSelectedRow();
                 if (sel != -1) {
                     IncidenciaDAO.eliminarIncidencia(IncidenciaDAO.obtenerIncidencias().get(sel));
@@ -206,6 +216,7 @@ public class Ventana_Principal_Admin extends JFrame {
         btnVerUsr.setBounds(330, 510, 150, 34);
         btnVerUsr.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Abre el perfil del usuario seleccionado.
                 int sel = tableUsuarios.getSelectedRow();
                 if (sel != -1) {
                     new Ventana_Ver_Usuario_Admin(Ventana_Principal_Admin.this, UsuarioDAO.obtenerUsuarios().get(sel)).setVisible(true);
@@ -225,6 +236,7 @@ public class Ventana_Principal_Admin extends JFrame {
         btnEliminarUsr.setBounds(490, 510, 150, 34);
         btnEliminarUsr.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Pide confirmacion antes de borrar un usuario.
                 int sel = tableUsuarios.getSelectedRow();
                 if (sel != -1) {
                     Usuario uSel = UsuarioDAO.obtenerUsuarios().get(sel);
@@ -264,6 +276,7 @@ public class Ventana_Principal_Admin extends JFrame {
         btnLeerMensaje.setBounds(660, 510, 310, 34);
         btnLeerMensaje.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Muestra el contenido completo del mensaje seleccionado.
                 int sel = tableMensajes.getSelectedRow();
                 if (sel != -1) {
                     new Ventana_Leer_Mensajes(ContactoDAO.obtenerMensajesContacto().get(sel)).setVisible(true);

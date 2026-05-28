@@ -1,9 +1,13 @@
 package modelo;
 
+/**
+ * Incidencia mostrada y gestionada por la aplicacion.
+ */
 public class Incidencia {
 	private int id;
 	private String estado, titulo, descripcion, reportador, zona, fechaCreacion, categorias;
-	
+
+	// Constructor con todos los datos que llegan desde la vista de incidencias.
 	public Incidencia(int id, String estado, String titulo, String descripcion, String reportador, String zona,
 			String fechaCreacion, String categorias) {
 		this.id = id;
@@ -16,6 +20,7 @@ public class Incidencia {
 		this.categorias = categorias;
 	}
 
+	// Getters.
 	public int getId() {
 		return id;
 	}
@@ -48,6 +53,7 @@ public class Incidencia {
 		return categorias;
 	}
 
+	// Setters.
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -79,10 +85,4 @@ public class Incidencia {
 	public void setCategorias(String categorias) {
 		this.categorias = categorias;
 	}
-	
-	
-	
-	
-
-	
 }

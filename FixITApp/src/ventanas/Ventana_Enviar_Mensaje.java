@@ -10,9 +10,13 @@ import util.Colores;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * Formulario para enviar un mensaje de contacto al administrador.
+ */
 public class Ventana_Enviar_Mensaje extends JFrame {
 
     private static final long serialVersionUID = 1L;
+    // Usuario remitente y panel del formulario.
     private JPanel contentPane;
     private Usuario usuarioActual;
     public Ventana_Enviar_Mensaje(Usuario u) {
@@ -20,6 +24,7 @@ public class Ventana_Enviar_Mensaje extends JFrame {
         setTitle("FIXIT! - Enviar Mensaje");
         setResizable(false);
         setBounds(200, 150, 400, 370);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         contentPane = new JPanel();
@@ -70,11 +75,13 @@ public class Ventana_Enviar_Mensaje extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 // comprobar que ningún campo esté vacío antes de enviar
+                // Valida el formulario antes de crear el Contacto.
                 if (txtAsunto.getText().isEmpty() || areaMensaje.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(contentPane, "Por favor, rellena todos los campos.");
                     
                 }else {
 
+	                // Guarda el mensaje con los datos del usuario conectado.
 	                ContactoDAO.enviarMensaje(new Contacto(usuarioActual.getNombreUsuario(),usuarioActual.getEmail(),txtAsunto.getText(),areaMensaje.getText()));
 	
 	                // limpiar campos tras enviar

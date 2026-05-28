@@ -20,9 +20,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
 
+/**
+ * Ventana de inicio de sesion y punto de entrada de la aplicacion.
+ */
 public class Ventana_Inicio extends JFrame {
 
     private static final long serialVersionUID = 1L;
+    // Estado de la ventana y usuario que ha iniciado sesion.
     private JPanel contentPane;
     private Usuario usuarioActual;
 
@@ -49,6 +53,7 @@ public class Ventana_Inicio extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setBounds(100, 100, 671, 620);
+        setLocationRelativeTo(null);
 
         contentPane = new JPanel();
         contentPane.setBackground(Colores.AMARILLO_FONDO);
@@ -117,6 +122,7 @@ public class Ventana_Inicio extends JFrame {
         JButton boton_Iniciar = new JButton("Iniciar Sesion");
         boton_Iniciar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Comprueba credenciales y abre la ventana segun el rol.
                 usuarioActual = UsuarioDAO.obtenerUsuario(
                     input_usuario.getText(),
                     new String(input_contrasena.getPassword()));
@@ -153,6 +159,7 @@ public class Ventana_Inicio extends JFrame {
         JButton boton_registrarse = new JButton("Registrarse");
         boton_registrarse.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Oculta el login mientras se muestra el formulario de registro.
                 Ventana_Registro v = new Ventana_Registro(Ventana_Inicio.this);
                 v.setVisible(true);
                 setVisible(false);
