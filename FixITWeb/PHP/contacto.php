@@ -1,4 +1,5 @@
 <?php
+// Endpoint del formulario de contacto: recibe POST y responde JSON.
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
@@ -14,12 +15,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// Configuración BD
+// Datos de conexion a PostgreSQL.
 $host     = 'localhost';
 $dbname   = 'incidencias';
 $port     = '7777';
 $username = 'postgres';
-$password = '12345';   
+$password = '12345';
 
 try {
     $conexion = new PDO(
@@ -32,20 +33,19 @@ try {
     exit;
 }
 
-// Recoger y limpiar los datos del formulario
+// Limpieza basica de los campos recibidos antes de validarlos.
 $nombre  = isset($_POST['nombre'])  ? htmlspecialchars(strip_tags(trim($_POST['nombre'])))  : '';
 $email   = isset($_POST['email'])   ? htmlspecialchars(strip_tags(trim($_POST['email'])))   : '';
 $asunto  = isset($_POST['asunto'])  ? htmlspecialchars(strip_tags(trim($_POST['asunto'])))  : '';
 $mensaje = isset($_POST['mensaje']) ? htmlspecialchars(strip_tags(trim($_POST['mensaje']))) : '';
 
-// Validar que no estén vacíos
+// No se guarda nada si falta algun campo o el correo no es valido.
 if (empty($nombre) || empty($email) || empty($asunto) || empty($mensaje)) {
     http_response_code(400);
     echo json_encode(["error" => "Todos los campos son obligatorios"]);
     exit;
 }
 
-// Validar formato de email
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     http_response_code(400);
     echo json_encode(["error" => "El email no tiene un formato válido"]);

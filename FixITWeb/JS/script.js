@@ -1,23 +1,15 @@
-// ============================================================
-// Ruta base al PHP
-// ============================================================
 const API_URL = 'PHP/api_incidencias.php';
 
-// ============================================================
-// TRADUCCIONES — todo el texto del HTML
-// ============================================================
+// Textos que cambia el boton de idioma.
 const traducciones = {
     es: {
-        // Navbar
         nav: ['Inicio', 'Quiénes somos', 'Categorías', 'Ranking', 'App'],
         btnIdioma: '🌐 EN',
         btnContacto: 'Contacto',
 
-        // Hero
         heroTitle: 'Encuentra técnicos,\n            soluciona problemas,\n            gana recompensas',
         verCategorias: 'Ver categorías',
 
-        // Nosotros
         nosotrosTitle: '¿Qué es FIXIT?',
         nosotrosIntro: 'Un proyecto creado por Khaled, Thiago y Jesús para facilitar la ayuda técnica y comunitaria de forma rápida y organizada.',
         cards: [
@@ -26,7 +18,6 @@ const traducciones = {
             { h3: 'Reputación', p: 'Gana valoraciones, logros y recompensas por ayudar.' }
         ],
 
-        // Categorías
         categoriasTitle: 'Categorías populares',
         catCards: [
             { h3: 'Infraestructura', p: 'Baches, alumbrado, mobiliario urbano.' },
@@ -35,7 +26,6 @@ const traducciones = {
             { h3: 'Seguridad',       p: 'Alertas y avisos preventivos.' }
         ],
 
-        // Ranking
         rankingTitle: '🏆 Ranking de Colaboradores',
         rankingIntro: 'Los técnicos más destacados de nuestra comunidad',
         statLabels: ['Incidencias activas', 'Colaboradores activos', 'Problemas resueltos'],
@@ -44,12 +34,10 @@ const traducciones = {
         sinDatos: 'No hay datos disponibles',
         errorRanking: '❌ Error al cargar el ranking.',
 
-        // Descarga
         descargaTitle: 'Instala FIXIT hoy mismo dandole aqui!',
         descargaSubtitle: 'Disponible para ordenadores de sobremesa y para portatiles.',
         descargaBtn: 'Descarga',
 
-        // Contacto
         contactoTitle: '📧 Contacto',
         contactoSubtitle: '¿Tienes alguna pregunta? Escríbenos',
         labels: ['Nombre', 'Correo electrónico', 'Asunto', 'Mensaje'],
@@ -58,20 +46,16 @@ const traducciones = {
         successMsg: '¡Mensaje enviado con éxito!',
         successSub: 'Te responderemos pronto',
 
-        // Footer
         footer: ['© 2025 · IES Pere Maria Orts · CFGS DAM', 'Desarrollado por Khaled, Thiago y Jesús']
     },
     en: {
-        // Navbar
         nav: ['Home', 'About us', 'Categories', 'Ranking', 'App'],
         btnIdioma: '🌐 ES',
         btnContacto: 'Contact',
 
-        // Hero
         heroTitle: 'Find technicians,\n            solve problems,\n            earn rewards',
         verCategorias: 'View categories',
 
-        // Nosotros
         nosotrosTitle: 'What is FIXIT?',
         nosotrosIntro: 'A project created by Khaled, Thiago and Jesús to facilitate fast and organized technical and community support.',
         cards: [
@@ -80,7 +64,6 @@ const traducciones = {
             { h3: 'Reputation',  p: 'Earn ratings, achievements and rewards for helping.' }
         ],
 
-        // Categorías
         categoriasTitle: 'Popular categories',
         catCards: [
             { h3: 'Infrastructure', p: 'Potholes, lighting, street furniture.' },
@@ -89,7 +72,6 @@ const traducciones = {
             { h3: 'Security',       p: 'Alerts and preventive notices.' }
         ],
 
-        // Ranking
         rankingTitle: '🏆 Collaborator Ranking',
         rankingIntro: 'The most outstanding technicians in our community',
         statLabels: ['Total incidents', 'Active collaborators', 'Problems solved'],
@@ -98,12 +80,10 @@ const traducciones = {
         sinDatos: 'No data available',
         errorRanking: '❌ Error loading ranking.',
 
-        // Descarga
         descargaTitle: 'Install FIXIT today by clicking here!',
         descargaSubtitle: 'Available for desktop computers and laptops.',
         descargaBtn: 'Download',
 
-        // Contacto
         contactoTitle: '📧 Contact',
         contactoSubtitle: 'Do you have a question? Write to us',
         labels: ['Name', 'Email', 'Subject', 'Message'],
@@ -112,36 +92,29 @@ const traducciones = {
         successMsg: 'Message sent successfully!',
         successSub: 'We will get back to you soon',
 
-        // Footer
         footer: ['© 2025 · IES Pere Maria Orts · CFGS DAM', 'Developed by Khaled, Thiago and Jesús']
     }
 };
 
 let idiomaActual = 'es';
 
-// ============================================================
-// CAMBIAR IDIOMA
-// ============================================================
+// Actualiza el contenido visible sin recargar la pagina.
 function cambiarIdioma() {
     idiomaActual = idiomaActual === 'es' ? 'en' : 'es';
     const t = traducciones[idiomaActual];
 
-    // Navbar links
     const navLinks = document.querySelectorAll('.nav-links a');
     navLinks.forEach((a, i) => { if (t.nav[i]) a.textContent = t.nav[i]; });
 
-    // Botones navbar (primero = idioma, segundo = contacto)
     const botonesNav = document.querySelectorAll('.btn-nav');
     if (botonesNav[0]) botonesNav[0].textContent = t.btnIdioma;
     if (botonesNav[1]) botonesNav[1].textContent = t.btnContacto;
 
-    // Hero
     const heroH1 = document.querySelector('.hero h1');
     if (heroH1) heroH1.textContent = t.heroTitle;
     const btnGhost = document.querySelector('.btn-ghost');
     if (btnGhost) btnGhost.textContent = t.verCategorias;
 
-    // Nosotros
     setText('.about h2', t.nosotrosTitle);
     setText('.about-intro', t.nosotrosIntro);
     document.querySelectorAll('.about-card').forEach((card, i) => {
@@ -151,7 +124,6 @@ function cambiarIdioma() {
         }
     });
 
-    // Categorías
     setText('.categories h2', t.categoriasTitle);
     document.querySelectorAll('.category-card').forEach((card, i) => {
         if (t.catCards[i]) {
@@ -160,7 +132,6 @@ function cambiarIdioma() {
         }
     });
 
-    // Ranking
     setText('.ranking-section h2', t.rankingTitle);
     setText('.ranking-intro', t.rankingIntro);
     document.querySelectorAll('.stat-label').forEach((el, i) => {
@@ -169,21 +140,17 @@ function cambiarIdioma() {
     const rankHeaderCols = document.querySelectorAll('.ranking-header div');
     rankHeaderCols.forEach((el, i) => { if (t.rankHeader[i]) el.textContent = t.rankHeader[i]; });
 
-    // Descarga
     setText('.download-box h2', t.descargaTitle);
     setText('.download-box p', t.descargaSubtitle);
     const dlBtn = document.querySelector('.download-buttons button');
     if (dlBtn) dlBtn.textContent = t.descargaBtn;
 
-    // Contacto
     setText('.form-contacto h2', t.contactoTitle);
     setText('.form-subtitle', t.contactoSubtitle);
 
-    // Labels del formulario
     const labels = document.querySelectorAll('.form-group label');
     labels.forEach((el, i) => { if (t.labels[i]) el.textContent = t.labels[i]; });
 
-    // Placeholders
     const inputs = [
         document.getElementById('nombre'),
         document.getElementById('email'),
@@ -192,35 +159,28 @@ function cambiarIdioma() {
     ];
     inputs.forEach((el, i) => { if (el && t.placeholders[i]) el.placeholder = t.placeholders[i]; });
 
-    // Botón enviar
     const btnText = document.querySelector('.btn-text');
     if (btnText) btnText.textContent = t.btnEnviar;
 
-    // Mensaje éxito
     setText('.success-message p', t.successMsg);
     setText('.success-message small', t.successSub);
 
-    // Footer
     const footerPs = document.querySelectorAll('.footer p');
     footerPs.forEach((el, i) => { if (t.footer[i]) el.textContent = t.footer[i]; });
 }
 
-// Helper para setText con selector global o dentro de un elemento padre
+// Permite cambiar texto con un selector global o dentro de una tarjeta concreta.
 function setText(parentOrSelector, selectorOrText, text) {
     if (text === undefined) {
-        // Llamada con (selector, texto)
         const el = document.querySelector(parentOrSelector);
         if (el) el.textContent = selectorOrText;
     } else {
-        // Llamada con (elemento, selector, texto)
         const el = parentOrSelector.querySelector(selectorOrText);
         if (el) el.textContent = text;
     }
 }
 
-// ============================================================
-// RANKING
-// ============================================================
+// Pide al PHP el top de colaboradores y pinta las filas del ranking.
 async function cargarRanking() {
     const rankingList = document.getElementById('rankingList');
     const t = traducciones[idiomaActual];
@@ -266,9 +226,7 @@ async function cargarRanking() {
     }
 }
 
-// ============================================================
-// ESTADÍSTICAS
-// ============================================================
+// Carga los contadores superiores del ranking.
 async function cargarEstadisticas() {
     try {
         const response = await fetch(`${API_URL}?accion=stats`);
@@ -289,9 +247,7 @@ async function cargarEstadisticas() {
     }
 }
 
-// ============================================================
-// Animación de conteo
-// ============================================================
+// Anima los numeros para que no aparezcan de golpe.
 function animarNumero(elementId, valorFinal, duracion = 1000) {
     const el = document.getElementById(elementId);
     if (!el) return;
@@ -310,9 +266,7 @@ function animarNumero(elementId, valorFinal, duracion = 1000) {
     }, intervalo);
 }
 
-// ============================================================
-// Formulario de contacto — envía los datos a contacto.php
-// ============================================================
+// Envia el formulario de contacto al backend PHP.
 async function handleSubmit(event) {
     event.preventDefault();
 
@@ -359,16 +313,11 @@ async function handleSubmit(event) {
     }
 }
 
-// ============================================================
-// Scroll suave al contacto
-// ============================================================
 function scrollToContact() {
     document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
 }
 
-// ============================================================
-// Inicialización
-// ============================================================
+// Primera carga y refresco periodico de los datos dinamicos.
 window.addEventListener('DOMContentLoaded', () => {
     cargarRanking();
     cargarEstadisticas();

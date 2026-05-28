@@ -1,5 +1,5 @@
 <?php
-// Cabeceras CORS y JSON
+// Respuestas JSON para las llamadas fetch del frontend.
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
@@ -9,12 +9,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit(0);
 }
 
-// Configuración de la base de datos — cámbiala por tus datos de XAMPP
+// Datos de conexion a PostgreSQL.
 $host     = 'localhost';
 $dbname   = 'incidencias';
 $port     = '7777';
 $username = 'postgres';
-$password = '12345';              // <-- tu contraseña (vacía por defecto en XAMPP)
+$password = '12345';
 
 try {
     $conexion = new PDO(
@@ -28,14 +28,11 @@ try {
     exit;
 }
 
-// Leer el parámetro "accion" de la URL: ?accion=ranking o ?accion=stats
 $accion = isset($_GET['accion']) ? $_GET['accion'] : '';
 
 switch ($accion) {
 
-    // -------------------------------------------------------------------
-    // RANKING: colaboradores ordenados por total de incidencias resueltas
-    // -------------------------------------------------------------------
+// Devuelve los tres colaboradores con mas incidencias resueltas.
 case 'ranking':
     try {
         $query = "
@@ -52,22 +49,17 @@ case 'ranking':
     }
     break;
 
-    // -------------------------------------------------------------------
-    // STATS: totales para las tarjetas de estadísticas
-    // -------------------------------------------------------------------
+    // Devuelve los totales que se muestran en las tarjetas del ranking.
     case 'stats':
         try {
-            // Total de incidencias
             $stmtTotal = $conexion->prepare("SELECT COUNT(*) AS total FROM INCIDENCIA WHERE estado = 'Abierta'");
             $stmtTotal->execute();
             $totalIncidencias = $stmtTotal->fetch()['total'];
 
-            // Total de colaboradores activos
             $stmtColab = $conexion->prepare("SELECT COUNT(*) AS total FROM COLABORADOR");
             $stmtColab->execute();
             $totalColaboradores = $stmtColab->fetch()['total'];
 
-            // Incidencias cerradas (estado = 'Cerrada')
             $stmtCerradas = $conexion->prepare("SELECT COUNT(*) AS total FROM INCIDENCIA WHERE estado = 'Cerrada'");
             $stmtCerradas->execute();
             $incidenciasCerradas = $stmtCerradas->fetch()['total'];
@@ -84,9 +76,7 @@ case 'ranking':
         }
         break;
 
-    // -------------------------------------------------------------------
-    // Acción no reconocida
-    // -------------------------------------------------------------------
+    // Cualquier otra accion se considera una peticion incorrecta.
     default:
         http_response_code(400);
         echo json_encode(["error" => "Acción no válida. Usa ?accion=ranking o ?accion=stats"]);

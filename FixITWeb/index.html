@@ -10,7 +10,6 @@
 </head>
 <body>
 
-<!-- NAVBAR -->
 <nav class="navbar">
     <ul class="nav-links">
         <li><a href="#inicio">Inicio</a></li>
@@ -23,7 +22,6 @@
     <button class="btn-nav" onclick="scrollToContact()">Contacto</button>
 </nav>
 
-<!-- HERO -->
 <header id="inicio" class="hero">
     <div class="hero-text">
         <div class="logo">FIX<span>IT</span></div>
@@ -39,7 +37,6 @@
     </div>
 </header>
 
-<!-- NOSOTROS -->
 <section id="nosotros" class="about">
     <h2>¿Qué es FIXIT?</h2>
     <p class="about-intro">
@@ -65,7 +62,6 @@
     </div>
 </section>
 
-<!-- CATEGORIAS -->
 <section id="categorias" class="categories">
     <h2>Categorías populares</h2>
 
@@ -92,11 +88,10 @@
     </div>
 </section>
 
-<!-- RANKING -->
 <section id="ranking" class="ranking-section">
     <h2>🏆 Ranking de Colaboradores</h2>
     <p class="ranking-intro">Los técnicos más destacados de nuestra comunidad</p>
-    
+
     <div class="stats-container">
         <div class="stat-card">
             <div class="stat-number" id="totalIncidencias">-</div>
@@ -121,14 +116,13 @@
                 <div class="solved-col">Resueltas</div>
             </div>
             <div id="rankingList" class="ranking-body">
-                <!-- El ranking se cargará aquí dinámicamente -->
+                <!-- El ranking se rellena desde JS con los datos del PHP. -->
                 <div class="loading">Cargando ranking...</div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- DESCARGA -->
 <section id="descarga" class="download">
     <div class="download-box">
         <h2>Instala FIXIT hoy mismo dandole aqui!</h2>
@@ -146,39 +140,38 @@
     </div>
 </section>
 
-<!-- FORMULARIO DE CONTACTO -->
 <section id="contacto" class="contact-section">
     <div class="form-contacto">
         <h2>Contacto</h2>
         <p class="form-subtitle">¿Tienes alguna pregunta? Escríbenos</p>
-        
+
         <form id="contactForm" onsubmit="handleSubmit(event)">
             <div class="form-group">
                 <label for="nombre">Nombre</label>
                 <input type="text" id="nombre" placeholder="Tu nombre completo" required>
             </div>
-            
+
             <div class="form-group">
                 <label for="email">Correo electrónico</label>
                 <input type="email" id="email" placeholder="tu@email.com" required>
             </div>
-            
+
             <div class="form-group">
                 <label for="asunto">Asunto</label>
                 <input type="text" id="asunto" placeholder="¿En qué podemos ayudarte?" required>
             </div>
-            
+
             <div class="form-group">
                 <label for="mensaje">Mensaje</label>
                 <textarea id="mensaje" rows="5" placeholder="Cuéntanos más detalles..." required></textarea>
             </div>
-            
+
             <button type="submit" class="btn-submit">
                 <span class="btn-text">Enviar mensaje</span>
                 <span class="btn-icon">✉️</span>
             </button>
         </form>
-        
+
         <div id="successMessage" class="success-message" style="display: none;">
             <div class="success-icon">✓</div>
             <p>¡Mensaje enviado con éxito!</p>
@@ -195,4 +188,4 @@
 <script src="js/script.js"></script>
 
 </body>
-</html> 
+</html>

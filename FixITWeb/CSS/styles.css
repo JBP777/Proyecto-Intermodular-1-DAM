@@ -1,5 +1,6 @@
 
 :root {
+    /* Colores principales reutilizados en toda la web. */
     --primary: #ffcf4b;
     --secondary: #00A082;
     --dark: #2D333D;
@@ -19,7 +20,7 @@ body {
     color: var(--dark);
 }
 
-/* Barra de navegacion */
+/* Navegacion y portada. */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -90,7 +91,6 @@ body {
     box-shadow: 0 5px 15px rgba(0, 160, 130, 0.3);
 }
 
-/* Logo */
 .logo {
     font-weight: 800;
     font-size: 12.4rem;
@@ -101,7 +101,6 @@ body {
     margin-bottom: 100px;
 }
 
-/* Hero */
 .hero {
     display: flex;
     margin-top: -200px;
@@ -110,7 +109,6 @@ body {
     text-align: center;
     padding: 350px 150px;
     background: var(--primary);
-    /* border-radius: 0 0 50px 50px; */
 }
 
 .hero-text {
@@ -165,7 +163,7 @@ body {
     border-radius: 20px;
 }
 
-/* Sobre nosotros */
+/* Bloques informativos principales. */
 .about {
     padding: 90px 8%;
     text-align: center;
@@ -209,7 +207,6 @@ body {
     margin-bottom: 10px;
 }
 
-/* Categorias */
 .categories {
     padding: 80px 8%;
     background: var(--primary);
@@ -247,7 +244,7 @@ body {
     box-shadow: 0 10px 30px rgba(0, 160, 130, 0.3);
 }
 
-/* RANKING SECTION */
+/* Ranking y tarjetas de estadisticas. */
 .ranking-section {
     padding: 80px 8%;
     background: var(--white);
@@ -266,7 +263,6 @@ body {
     margin-bottom: 50px;
 }
 
-/* Estadísticas */
 .stats-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -302,7 +298,6 @@ body {
     opacity: 0.9;
 }
 
-/* Tabla de ranking */
 .ranking-container {
     max-width: 1000px;
     margin: 0 auto;
@@ -344,17 +339,14 @@ body {
 }
 
 .ranking-row.top-1 {
-    /* background: linear-gradient(90deg, rgba(255, 215, 0, 0.1) 0%, transparent 100%); */
     border-left: 4px solid #FFD700;
 }
 
 .ranking-row.top-2 {
-    /* background: linear-gradient(90deg, rgba(192, 192, 192, 0.1) 0%, transparent 100%); */
     border-left: 4px solid #C0C0C0;
 }
 
 .ranking-row.top-3 {
-     /* background: linear-gradient(90deg, rgba(205, 127, 50, 0.1) 0%, transparent 100%); */
     border-left: 4px solid #CD7F32;
 }
 
@@ -397,7 +389,7 @@ body {
     color: #e74c3c;
 }
 
-/* Descarga */
+/* Descarga, contacto y pie de pagina. */
 .download {
     padding: 100px 8%;
     background: var(--light);
@@ -435,7 +427,6 @@ body {
     color: var(--white);
 }
 
-/* FORMULARIO DE CONTACTO MEJORADO */
 .contact-section {
     padding: 80px 8%;
     background: var(--white);
@@ -447,7 +438,6 @@ body {
     border-radius: 30px;
     max-width: 600px;
     margin: 0 auto;
-    /* box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1); */
     border: 2px solid var(--primary);
 }
 
@@ -493,7 +483,6 @@ body {
 .form-contacto textarea:focus {
     border-color: var(--primary);
     outline: none;
-    /* box-shadow: 0 0 0 4px rgba(0, 160, 130, 0.1); */
     background: var(--white);
 }
 
@@ -517,19 +506,16 @@ body {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    /* box-shadow: 0 5px 20px rgba(0, 160, 130, 0.3); */
 }
 
 .btn-submit:hover {
     transform: translateY(-2px);
-    /* box-shadow: 0 8px 30px rgba(0, 160, 130, 0.4); */
 }
 
 .btn-submit:active {
     transform: translateY(0);
 }
 
-/* Mensaje de éxito */
 .success-message {
     text-align: center;
     padding: 40px;
@@ -575,7 +561,6 @@ body {
     font-size: 0.95rem;
 }
 
-/* Pie de pagina */
 .footer {
     text-align: center;
     padding: 10px;
