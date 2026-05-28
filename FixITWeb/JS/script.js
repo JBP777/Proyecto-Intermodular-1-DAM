@@ -211,7 +211,7 @@ async function cargarRanking() {
                 <div class="rank-col">${medal}</div>
                 <div class="user-col">${usuario.usuario}</div>
                 <div class="email-col">${usuario.email}</div>
-                <div class="solved-col"><span class="badge">${usuario.incidenciasresueltas}</span></div>
+                <div class="solved-col"><span class="badge">${usuario.incidencias_resueltas}</span></div>
             `;
             rankingList.appendChild(rankingItem);
         });
