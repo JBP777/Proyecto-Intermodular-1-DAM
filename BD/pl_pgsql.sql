@@ -154,26 +154,29 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION eliminar_usuario(p_usuario VARCHAR)
 RETURNS VOID AS $$
 BEGIN
-    -- 1. Borrar registros en RESOLVER que apuntan a incidencias del usuario
+    -- 1. Borrar RESOLVER donde el colaborador es el usuario
+    DELETE FROM RESOLVER WHERE colaborador = p_usuario;
+
+    -- 2. Borrar RESOLVER que apuntan a incidencias del usuario
     DELETE FROM RESOLVER
     WHERE incidencia IN (
         SELECT id FROM INCIDENCIA WHERE reportador = p_usuario
     );
 
-    -- 2. Borrar clasificaciones de esas incidencias
+    -- 3. Borrar CLASIFICAR de sus incidencias
     DELETE FROM CLASIFICAR
     WHERE incidencia IN (
         SELECT id FROM INCIDENCIA WHERE reportador = p_usuario
     );
 
-    -- 3. Borrar las incidencias del usuario
+    -- 4. Borrar las incidencias del usuario
     DELETE FROM INCIDENCIA WHERE reportador = p_usuario;
 
-    -- 4. Borrar el usuario de REPORTADOR y COLABORADOR
+    -- 5. Borrar de REPORTADOR y COLABORADOR
     DELETE FROM REPORTADOR WHERE usuario = p_usuario;
     DELETE FROM COLABORADOR WHERE usuario = p_usuario;
 
-    -- 5. Borrar el usuario principal
+    -- 6. Borrar el usuario principal
     DELETE FROM USUARIO WHERE nombre_usuario = p_usuario;
 END;
 $$ LANGUAGE plpgsql;
