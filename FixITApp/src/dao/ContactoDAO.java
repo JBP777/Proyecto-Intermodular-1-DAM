@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import modelo.Contacto;
 import util.ConexionBD;
 
@@ -34,7 +36,9 @@ public class ContactoDAO {
 
 			conn.close();
 		} catch (SQLException e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null,
+				"No se han podido cargar los mensajes.",
+				"Error de base de datos", JOptionPane.ERROR_MESSAGE);
 		}
 
 		return mensajes;
@@ -55,7 +59,9 @@ public class ContactoDAO {
 			ps.executeUpdate();
 			conn.close();
 		} catch (SQLException e) {
-			System.out.println("NO SE HA PODIDO ENVIAR EL MENSAJE" + e);
+			JOptionPane.showMessageDialog(null,
+				"No se ha podido enviar el mensaje.",
+				"Error de base de datos", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }

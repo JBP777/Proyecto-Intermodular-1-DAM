@@ -4,10 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import modelo.Usuario;
-import modelo.Incidencia;
-import dao.IncidenciaDAO;
 import util.Colores;
-import java.util.ArrayList;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -120,7 +117,6 @@ public class Ventana_Principal_Usuario extends JFrame {
         JButton boton_verIncidencias = new JButton("Ver Incidencias");
         boton_verIncidencias.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // TODO: abrir ventana de lista de incidencias cuando esté creada
             	Ventana_Lista_Incidencias vli = new Ventana_Lista_Incidencias(Ventana_Principal_Usuario.this, usuarioActual);
             	vli.setVisible(true);
             	setVisible(false);
@@ -185,8 +181,4 @@ public class Ventana_Principal_Usuario extends JFrame {
         contentPane.add(boton_verPerfil);
     }
 
-    public void cargarIncidencias() {
-        // Metodo preparado para futuras recargas desde esta ventana.
-        ArrayList<Incidencia> incidencias = IncidenciaDAO.obtenerIncidencias();
-    }
 }

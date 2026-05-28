@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import modelo.TipoRecompensa;
 import util.ConexionBD;
 
@@ -32,7 +34,9 @@ public class TipoRecompensaDAO {
 				lista.add(tr);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null,
+				"No se han podido cargar los tipos de recompensa.",
+				"Error de base de datos", JOptionPane.ERROR_MESSAGE);
 		}
 
 		return lista;

@@ -21,7 +21,7 @@ public class Ventana_Enviar_Mensaje extends JFrame {
     private Usuario usuarioActual;
     public Ventana_Enviar_Mensaje(Usuario u) {
     		usuarioActual = u;
-        setTitle("FIXIT! - Enviar Mensaje");
+        setTitle("FIXIT!");
         setResizable(false);
         setBounds(200, 150, 400, 370);
         setLocationRelativeTo(null);
@@ -67,6 +67,13 @@ public class Ventana_Enviar_Mensaje extends JFrame {
 
         // BOTONES
         JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        btnCancelar.setBackground(Colores.AMARILLO_PASTEL);
+        btnCancelar.setForeground(Colores.AMARILLO_OSCURO);
         btnCancelar.setBounds(190, 295, 85, 26);
         contentPane.add(btnCancelar);
 

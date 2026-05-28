@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import javax.swing.JOptionPane;
+
 import modelo.Incidencia;
 import util.ConexionBD;
 
@@ -40,7 +42,9 @@ public class IncidenciaDAO {
 
 			conn.close();
 		} catch (SQLException e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null,
+				"No se han podido cargar las incidencias.",
+				"Error de base de datos", JOptionPane.ERROR_MESSAGE);
 		}
 
 		// Ordena por ID para que la tabla sea estable al recargar.
@@ -64,7 +68,9 @@ public class IncidenciaDAO {
 
 			conn.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null,
+				"No se ha podido eliminar la incidencia.",
+				"Error de base de datos", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -85,8 +91,9 @@ public class IncidenciaDAO {
 			exito = true;
 			conn.close();
 		} catch (SQLException e) {
-			System.out.println("Error al insertar incidencia: " + e.getMessage());
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null,
+				"No se ha podido crear la incidencia.",
+				"Error de base de datos", JOptionPane.ERROR_MESSAGE);
 		}
 
 		return exito;
@@ -108,7 +115,9 @@ public class IncidenciaDAO {
 
 			conn.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null,
+				"No se ha podido abrir la incidencia.",
+				"Error de base de datos", JOptionPane.ERROR_MESSAGE);
 		}
 
 		return actualizada;
@@ -130,7 +139,9 @@ public class IncidenciaDAO {
 
 			conn.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null,
+				"No se ha podido cerrar la incidencia.",
+				"Error de base de datos", JOptionPane.ERROR_MESSAGE);
 		}
 
 		return actualizada;

@@ -30,7 +30,7 @@ public class Ventana_Leer_Incidencia extends JFrame {
 
     public Ventana_Leer_Incidencia(Incidencia incidencia) {
 
-        setTitle("FIXIT! - Incidencia");
+        setTitle("FIXIT!");
         setResizable(false);
         setBounds(200, 150, 400, 490); 
         setLocationRelativeTo(null);

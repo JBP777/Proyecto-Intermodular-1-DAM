@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import modelo.Zona;
 import util.ConexionBD;
 
@@ -33,7 +35,9 @@ public class ZonaDAO {
 
             conn.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,
+                "No se han podido cargar las zonas.",
+                "Error de base de datos", JOptionPane.ERROR_MESSAGE);
         }
 
         return lista;

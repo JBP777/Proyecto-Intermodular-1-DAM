@@ -113,7 +113,7 @@ public class Ventana_VerPerfil_Usuario extends JFrame {
         lbl_emailTitulo.setBounds(50, 210, 220, 30);
         contentPane.add(lbl_emailTitulo);
 
-        JLabel lbl_emailValor = new JLabel(u.getEmail()); // TODO: ajusta al getter real
+        JLabel lbl_emailValor = new JLabel(u.getEmail());
         lbl_emailValor.setFont(new Font("SansSerif", Font.PLAIN, 15));
         lbl_emailValor.setForeground(new Color(40, 40, 40));
         lbl_emailValor.setBounds(280, 210, 190, 30);
@@ -131,7 +131,7 @@ public class Ventana_VerPerfil_Usuario extends JFrame {
         lbl_fechaTitulo.setBounds(50, 250, 220, 30);
         contentPane.add(lbl_fechaTitulo);
 
-        JLabel lbl_fechaValor = new JLabel(u.getFechaRegistro().toString()); // TODO: ajusta al getter real
+        JLabel lbl_fechaValor = new JLabel(u.getFechaRegistro().toString());
         lbl_fechaValor.setFont(new Font("SansSerif", Font.PLAIN, 15));
         lbl_fechaValor.setForeground(new Color(40, 40, 40));
         lbl_fechaValor.setBounds(280, 250, 190, 30);

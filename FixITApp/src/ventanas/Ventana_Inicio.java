@@ -38,7 +38,9 @@ public class Ventana_Inicio extends JFrame {
                     Ventana_Inicio frame = new Ventana_Inicio();
                     frame.setVisible(true);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null,
+                        "No se ha podido iniciar la aplicación.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

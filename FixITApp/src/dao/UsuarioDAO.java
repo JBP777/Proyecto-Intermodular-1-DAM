@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import modelo.Usuario;
 import util.ConexionBD;
 
@@ -37,7 +39,9 @@ public class UsuarioDAO {
 
 			conn.close();
 		} catch (SQLException e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null,
+				"No se han podido cargar los usuarios.",
+				"Error de base de datos", JOptionPane.ERROR_MESSAGE);
 		}
 
 		return usuarios;
@@ -61,7 +65,9 @@ public class UsuarioDAO {
 			ps.executeUpdate();
 			conn.close();
 		} catch (SQLException e) {
-			System.out.println("NO SE HA PODIDO INSERTAR EL NUEVO USUARIO" + e);
+			JOptionPane.showMessageDialog(null,
+				"No se ha podido registrar el usuario.",
+				"Error de base de datos", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -86,7 +92,9 @@ public class UsuarioDAO {
 				return new Usuario(nombreUsuario, email, contrasenya, fechaRegistro);
 			}
 		} catch (SQLException e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null,
+				"No se ha podido comprobar el usuario.",
+				"Error de base de datos", JOptionPane.ERROR_MESSAGE);
 		}
 
 		return null;
@@ -112,7 +120,9 @@ public class UsuarioDAO {
 				return new Usuario(nombreUsuario, email, contrasenya, fechaRegistro);
 			}
 		} catch (SQLException e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null,
+				"No se ha podido comprobar el usuario.",
+				"Error de base de datos", JOptionPane.ERROR_MESSAGE);
 		}
 
 		return null;
@@ -141,7 +151,9 @@ public class UsuarioDAO {
 
 			conn.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null,
+				"No se han podido cargar las estadísticas.",
+				"Error de base de datos", JOptionPane.ERROR_MESSAGE);
 		}
 
 		return stats;
@@ -157,7 +169,9 @@ public class UsuarioDAO {
 			st.executeQuery();
 			conn.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null,
+				"No se ha podido eliminar el usuario.",
+				"Error de base de datos", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }

@@ -18,7 +18,7 @@ public class Ventana_Leer_Mensajes extends JFrame {
 
     public Ventana_Leer_Mensajes(Contacto c) {
 
-        setTitle("FIXIT! - Mensaje");
+        setTitle("FIXIT!");
         setResizable(false);
         setBounds(200, 150, 400, 342);
         setLocationRelativeTo(null);
@@ -90,6 +90,13 @@ public class Ventana_Leer_Mensajes extends JFrame {
         contentPane.add(scroll);
 
         JButton btnCerrar = new JButton("Cerrar");
+        btnCerrar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        btnCerrar.setBackground(Colores.AMARILLO_PASTEL);
+        btnCerrar.setForeground(Colores.AMARILLO_OSCURO);
         btnCerrar.setBounds(285, 275, 85, 26);
         contentPane.add(btnCerrar);
     

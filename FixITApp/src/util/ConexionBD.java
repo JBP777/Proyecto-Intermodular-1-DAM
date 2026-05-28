@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 /**
  * Centraliza los datos de conexion y crea conexiones nuevas a PostgreSQL.
  */
@@ -30,7 +32,9 @@ public class ConexionBD {
 		try {
 			conn = DriverManager.getConnection(url, user, password);
 		} catch (SQLException e) {
-			System.out.println("ERROR CON LA CONEXION A LA BASE DE DATOS: " + e);
+			JOptionPane.showMessageDialog(null,
+				"No se ha podido conectar con la base de datos.",
+				"Error de conexión", JOptionPane.ERROR_MESSAGE);
 		}
 
 		return conn;

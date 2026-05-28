@@ -76,7 +76,7 @@ public class Ventana_Principal_Admin extends JFrame {
         usuarioActual = u;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("FIXIT! — Admin");
+        setTitle("FIXIT!");
         setResizable(false);
         setBounds(100, 100, 1000, 660);
         setLocationRelativeTo(null);
@@ -185,9 +185,15 @@ public class Ventana_Principal_Admin extends JFrame {
                 // Elimina la incidencia seleccionada y refresca la tabla.
                 int sel = tableIncidencias.getSelectedRow();
                 if (sel != -1) {
-                    IncidenciaDAO.eliminarIncidencia(IncidenciaDAO.obtenerIncidencias().get(sel));
-                    cargarTablas();
-                    JOptionPane.showMessageDialog(contentPane, "Incidencia eliminada.");
+                    Incidencia incSel = IncidenciaDAO.obtenerIncidencias().get(sel);
+                    int confirmacion = JOptionPane.showConfirmDialog(contentPane,
+                        "¿Seguro que quieres eliminar la incidencia \"" + incSel.getTitulo() + "\"?",
+                        "Confirmar eliminación", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                    if (confirmacion == JOptionPane.YES_OPTION) {
+                        IncidenciaDAO.eliminarIncidencia(incSel);
+                        cargarTablas();
+                        JOptionPane.showMessageDialog(contentPane, "Incidencia eliminada.");
+                    }
                 } else {
                     JOptionPane.showMessageDialog(contentPane, "Selecciona una incidencia.", "Error", JOptionPane.ERROR_MESSAGE);
                 }

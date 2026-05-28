@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 import modelo.Incidencia;
 import modelo.Usuario;
 import util.ConexionBD;
@@ -38,7 +40,9 @@ public class SolucionDAO {
             conn.close();
             return true;
         } catch (SQLException e) {
-            System.out.println("NO SE HA PODIDO INSERTAR LA SOLUCION: " + e);
+            JOptionPane.showMessageDialog(null,
+                "No se ha podido enviar la solución.",
+                "Error de base de datos", JOptionPane.ERROR_MESSAGE);
             return false;
         }
     }

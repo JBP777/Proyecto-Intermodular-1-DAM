@@ -31,7 +31,7 @@ public class Ventana_Ver_Usuario_Admin extends JFrame {
             }
         });
 
-        setTitle("FIXIT! — Perfil de usuario");
+        setTitle("FIXIT!");
         setResizable(false);
         setBounds(100, 100, 520, 580);
         setLocationRelativeTo(null);
