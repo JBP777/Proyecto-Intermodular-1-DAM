@@ -30,14 +30,23 @@ public class Ventana_VerPerfil_Usuario extends JFrame {
 
     private static final Color VERDE_OSCURO_UI = new Color(34, 85, 34);
 
+    public Ventana_VerPerfil_Usuario() {
+        this(null, new Usuario("Usuario demo", "usuario@demo.com", "", "2026-05-30"), new String[] {"0", "0"});
+    }
+
     public Ventana_VerPerfil_Usuario(Ventana_Principal_Usuario v, Usuario u) {
     	// Estadisticas calculadas desde la base de datos.
-    	String[] stats = UsuarioDAO.obtenerEstadisticas(u);
+    	this(v, u, UsuarioDAO.obtenerEstadisticas(u));
+    }
+
+    private Ventana_VerPerfil_Usuario(Ventana_Principal_Usuario v, Usuario u, String[] stats) {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 // Al cerrar se regresa al menu del usuario.
-                v.setVisible(true);
+                if (v != null) {
+                    v.setVisible(true);
+                }
                 dispose();
             }
         });
@@ -81,12 +90,7 @@ public class Ventana_VerPerfil_Usuario extends JFrame {
         separador.setBounds(0, 72, 520, 3);
         contentPane.add(separador);
 
-        // ── ICONO DE USUARIO (círculo decorativo) ─────────────────────
-        JLabel iconoUsuario = new JLabel("👤");
-        iconoUsuario.setFont(new Font("Britannic Bold", Font.PLAIN, 52));
-        iconoUsuario.setHorizontalAlignment(SwingConstants.CENTER);
-        iconoUsuario.setBounds(0, 85, 510, 65);
-        contentPane.add(iconoUsuario);
+  
 
         // NOMBRE DE USUARIO grande y verde
         JLabel lblNombreUsuario = new JLabel(u.getNombreUsuario());
@@ -185,7 +189,9 @@ public class Ventana_VerPerfil_Usuario extends JFrame {
         boton_volver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Vuelve a la ventana principal del usuario.
-                v.setVisible(true);
+                if (v != null) {
+                    v.setVisible(true);
+                }
                 dispose();
             }
         });

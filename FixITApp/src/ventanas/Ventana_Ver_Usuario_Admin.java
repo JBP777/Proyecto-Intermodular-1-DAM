@@ -68,13 +68,6 @@ public class Ventana_Ver_Usuario_Admin extends JFrame {
         sep.setBounds(0, 72, 520, 3);
         contentPane.add(sep);
 
-        // ICONO
-        JLabel iconoUsuario = new JLabel("👤");
-        iconoUsuario.setFont(new Font("Britannic Bold", Font.PLAIN, 52));
-        iconoUsuario.setHorizontalAlignment(SwingConstants.CENTER);
-        iconoUsuario.setBounds(0, 85, 504, 65);
-        contentPane.add(iconoUsuario);
-
         // NOMBRE
         JLabel lblNombre = new JLabel(u.getNombreUsuario());
         lblNombre.setFont(new Font("Britannic Bold", Font.PLAIN, 30));
