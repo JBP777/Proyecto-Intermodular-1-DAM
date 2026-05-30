@@ -88,7 +88,6 @@ public class Ventana_Lista_Incidencias extends JFrame {
         JButton btnRecargar = new JButton("🔄");
         btnRecargar.setBackground(Colores.AMARILLO_PASTEL);
         btnRecargar.setForeground(Colores.AMARILLO_OSCURO);
-        btnRecargar.setFont(new Font("Britannic Bold", Font.PLAIN, 14));
         btnRecargar.setFocusPainted(false);
         btnRecargar.setBounds(736, 20, 60, 30);
         btnRecargar.addActionListener(new ActionListener() {
