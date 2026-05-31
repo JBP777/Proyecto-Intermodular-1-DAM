@@ -41,7 +41,7 @@ public class Ventana_Principal_Usuario extends JFrame {
         });
 
         setTitle("FIXIT!");
-        setBounds(100, 100, 560, 640);
+        setBounds(100, 100, 560, 720); // altura aumentada para el nuevo boton
         setResizable(false);
         setLocationRelativeTo(null);
 
@@ -117,9 +117,9 @@ public class Ventana_Principal_Usuario extends JFrame {
         JButton boton_verIncidencias = new JButton("Ver Incidencias");
         boton_verIncidencias.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	Ventana_Lista_Incidencias vli = new Ventana_Lista_Incidencias(Ventana_Principal_Usuario.this, usuarioActual);
-            	vli.setVisible(true);
-            	setVisible(false);
+                Ventana_Lista_Incidencias vli = new Ventana_Lista_Incidencias(Ventana_Principal_Usuario.this, usuarioActual);
+                vli.setVisible(true);
+                setVisible(false);
             }
         });
         boton_verIncidencias.setForeground(Colores.VERDE_OSCURO);
@@ -163,6 +163,24 @@ public class Ventana_Principal_Usuario extends JFrame {
         boton_enviarMensaje.setBounds(142, 410, 260, 58);
         contentPane.add(boton_enviarMensaje);
 
+        JButton boton_misSoluciones = new JButton("Mis Incidencias Resueltas");
+        boton_misSoluciones.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Muestra las incidencias propias ya cerradas con su solucion.
+                Ventana_MisSoluciones vms = new Ventana_MisSoluciones(
+                    Ventana_Principal_Usuario.this, usuarioActual);
+                vms.setLocationRelativeTo(null);
+                vms.setVisible(true);
+                setVisible(false);
+            }
+        });
+        boton_misSoluciones.setForeground(Colores.VERDE_OSCURO);
+        boton_misSoluciones.setBackground(Colores.VERDE_BRILLANTE);
+        boton_misSoluciones.setFont(new Font("Britannic Bold", Font.PLAIN, 17));
+        boton_misSoluciones.setFocusPainted(false);
+        boton_misSoluciones.setBounds(142, 486, 260, 58);
+        contentPane.add(boton_misSoluciones);
+
         JButton boton_verPerfil = new JButton("Ver Perfil");
         boton_verPerfil.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -177,7 +195,7 @@ public class Ventana_Principal_Usuario extends JFrame {
         boton_verPerfil.setBackground(Colores.VERDE_BRILLANTE);
         boton_verPerfil.setFont(new Font("Britannic Bold", Font.PLAIN, 17));
         boton_verPerfil.setFocusPainted(false);
-        boton_verPerfil.setBounds(142, 486, 260, 58);
+        boton_verPerfil.setBounds(142, 562, 260, 58);
         contentPane.add(boton_verPerfil);
     }
 

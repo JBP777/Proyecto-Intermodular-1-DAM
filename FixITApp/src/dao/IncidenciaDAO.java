@@ -10,6 +10,7 @@ import java.util.Comparator;
 import javax.swing.JOptionPane;
 
 import modelo.Incidencia;
+import modelo.Usuario;
 import util.ConexionBD;
 
 /**
@@ -51,13 +52,56 @@ public class IncidenciaDAO {
 		incidencias.sort(Comparator.comparingInt(Incidencia::getId));
 		return incidencias;
 	}
+	
+	
+	// Obtiene las incidencias cerradas cuyo reportador es el usuario indicado.
+	public static ArrayList<Incidencia> obtenerIncidenciasCerradasDeUsuario(Usuario u) {
+	    Connection conn = ConexionBD.getConexion();
+	    ArrayList<Incidencia> incidencias = new ArrayList<>();
+
+	    try {
+	        PreparedStatement st = conn.prepareStatement(
+	            "SELECT * FROM vista_incidencias_con_zona_categoria " +
+	            "WHERE estado = 'Cerrada' AND reportador = ?");
+	        st.setString(1, u.getNombreUsuario());
+	        ResultSet rs = st.executeQuery();
+
+	        while (rs.next()) {
+	            int id = rs.getInt("id");
+	            String estado = rs.getString("estado");
+	            String titulo = rs.getString("titulo");
+	            String descripcion = rs.getString("descripcion");
+	            String fechaCreacion = rs.getString("fecha_creacion");
+	            String reportador = rs.getString("reportador");
+	            String zona = rs.getString("nombre_zona");
+	            String categorias = rs.getString("categorias");
+
+	            incidencias.add(new Incidencia(id, estado, titulo, descripcion,
+	                reportador, zona, fechaCreacion, categorias));
+	        }
+
+	        conn.close();
+	    } catch (SQLException e) {
+	        JOptionPane.showMessageDialog(null,
+	            "No se han podido cargar las incidencias resueltas.",
+	            "Error de base de datos", JOptionPane.ERROR_MESSAGE);
+	    }
+
+	    incidencias.sort(Comparator.comparingInt(Incidencia::getId));
+	    return incidencias;
+	}
+	
 
 	// Elimina primero las clasificaciones relacionadas y despues la incidencia.
 	public static void eliminarIncidencia(Incidencia i) {
 		Connection conn = ConexionBD.getConexion();
 
 		try {
-			PreparedStatement stClasificar = conn.prepareStatement(
+			
+			//borrar solución antes de borrar la incidencia
+	        SolucionDAO.eliminarSolucionPorIncidencia(i);
+			
+	        PreparedStatement stClasificar = conn.prepareStatement(
 				"DELETE FROM clasificar WHERE incidencia = ?");
 			stClasificar.setInt(1, i.getId());
 			stClasificar.executeUpdate();
@@ -68,9 +112,7 @@ public class IncidenciaDAO {
 
 			conn.close();
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null,
-				"No se ha podido eliminar la incidencia.",
-				"Error de base de datos", JOptionPane.ERROR_MESSAGE);
+			System.out.println(e);
 		}
 	}
 

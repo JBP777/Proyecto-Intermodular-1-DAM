@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import dao.IncidenciaDAO;
+import dao.SolucionDAO;
 import modelo.Incidencia;
 import util.Colores;
 import java.awt.*;
@@ -25,14 +26,15 @@ public class Ventana_Leer_Incidencia extends JFrame {
     private JTextField txtReportador;
     private JTextField txtZona;
     private JTextField txtFecha;
-    private JTextField txtCategorias; // AÑADIDO
+    private JTextField txtCategorias;
     private JTextArea areaDescripcion;
+    private JTextArea areaSolucion; // AÑADIDO — muestra la solucion recibida si existe
 
     public Ventana_Leer_Incidencia(Incidencia incidencia) {
 
         setTitle("FIXIT!");
         setResizable(false);
-        setBounds(200, 150, 400, 490); 
+        setBounds(200, 150, 400, 610); // altura aumentada para el bloque solucion
         setLocationRelativeTo(null);
         // DISPOSE_ON_CLOSE cierra solo esta ventana, sin cerrar toda la aplicacion
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -63,7 +65,7 @@ public class Ventana_Leer_Incidencia extends JFrame {
         contentPane.add(label_admin);
 
         // CAMPOS — todos setEditable(false) porque esta ventana es solo de lectura y gestion de estado,
-        //          no de edicion de datos
+        // no de edicion de datos
 
         JLabel lblEstado = new JLabel("Estado:");
         lblEstado.setBounds(10, 65, 80, 20);
@@ -121,17 +123,31 @@ public class Ventana_Leer_Incidencia extends JFrame {
         contentPane.add(txtCategorias);
 
         JLabel lblDescripcion = new JLabel("Descripcion:");
-        lblDescripcion.setBounds(10, 245, 80, 20); // MODIFICADO — bajado 30px por el nuevo campo
+        lblDescripcion.setBounds(10, 245, 80, 20);
         contentPane.add(lblDescripcion);
 
         // JTextArea con scroll, la descripcion puede ser larga
         areaDescripcion = new JTextArea();
-        areaDescripcion.setLineWrap(true);       // salta de linea automaticamente
-        areaDescripcion.setWrapStyleWord(true);  // corta por palabras, no por caracteres
+        areaDescripcion.setLineWrap(true);
+        areaDescripcion.setWrapStyleWord(true);
         areaDescripcion.setEditable(false);
-        JScrollPane scroll = new JScrollPane(areaDescripcion);
-        scroll.setBounds(10, 265, 360, 100); // MODIFICADO — bajado 30px por el nuevo campo
-        contentPane.add(scroll);
+        JScrollPane scrollDesc = new JScrollPane(areaDescripcion);
+        scrollDesc.setBounds(10, 265, 360, 80);
+        contentPane.add(scrollDesc);
+
+        // SOLUCION — se consulta al DAO y se muestra si existe, si no aparece un mensaje informativo
+        JLabel lblSolucion = new JLabel("Solución:");
+        lblSolucion.setBounds(10, 355, 80, 20);
+        contentPane.add(lblSolucion);
+
+        areaSolucion = new JTextArea();
+        areaSolucion.setLineWrap(true);
+        areaSolucion.setWrapStyleWord(true);
+        areaSolucion.setEditable(false);
+        areaSolucion.setBackground(new Color(240, 255, 240)); // fondo verde muy suave para distinguirla
+        JScrollPane scrollSol = new JScrollPane(areaSolucion);
+        scrollSol.setBounds(10, 375, 360, 80);
+        contentPane.add(scrollSol);
 
         // BOTONES DE CAMBIO DE ESTADO
         // El DAO devuelve true si el UPDATE se ha ejecutado, false si la incidencia ya tenia ese estado.
@@ -141,17 +157,19 @@ public class Ventana_Leer_Incidencia extends JFrame {
         btnAbrir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (IncidenciaDAO.abrirIncidencia(incidencia)) {
-                    // actualizar el campo visual para reflejar el nuevo estado sin recargar la ventana
+                    SolucionDAO.eliminarSolucionPorIncidencia(incidencia);
+                    areaSolucion.setText("Esta incidencia aún no tiene solución registrada.");
                     txtEstado.setText("Abierta");
-                    JOptionPane.showMessageDialog(contentPane, "Incidencia Abierta");
+                    JOptionPane.showMessageDialog(contentPane,
+                        "Incidencia abierta y solución eliminada.");
                 } else {
-                    JOptionPane.showMessageDialog(contentPane, "La incidencia ya esta abierta");
+                    JOptionPane.showMessageDialog(contentPane,
+                        "La incidencia ya esta abierta.");
                 }
             }
-        });
-        btnAbrir.setBackground(Colores.VERDE_BRILLANTE);
+        });        btnAbrir.setBackground(Colores.VERDE_BRILLANTE);
         btnAbrir.setForeground(Colores.VERDE_OSCURO);
-        btnAbrir.setBounds(10, 375, 175, 28); // MODIFICADO — bajado 30px por el nuevo campo
+        btnAbrir.setBounds(10, 470, 175, 28);
         contentPane.add(btnAbrir);
 
         JButton btnCerrar = new JButton("Marcar como cerrada");
@@ -168,7 +186,7 @@ public class Ventana_Leer_Incidencia extends JFrame {
         });
         btnCerrar.setBackground(Colores.AMARILLO_PASTEL);
         btnCerrar.setForeground(Colores.AMARILLO_OSCURO);
-        btnCerrar.setBounds(195, 375, 175, 28); // MODIFICADO — bajado 30px por el nuevo campo
+        btnCerrar.setBounds(195, 470, 175, 28);
         contentPane.add(btnCerrar);
 
         // Carga los datos recibidos en los campos de solo lectura.
@@ -177,8 +195,12 @@ public class Ventana_Leer_Incidencia extends JFrame {
         txtReportador.setText(incidencia.getReportador());
         txtZona.setText(incidencia.getZona());
         txtFecha.setText(incidencia.getFechaCreacion());
-        //si no tiene categorias asignadas muestra "Sin categoria"
+        // si no tiene categorias asignadas muestra "Sin categoria"
         txtCategorias.setText(incidencia.getCategorias() == null ? "Sin categoria" : incidencia.getCategorias());
         areaDescripcion.setText(incidencia.getDescripcion());
+
+        // Carga la solucion desde la BD; si no existe muestra aviso en el campo.
+        String solucion = SolucionDAO.obtenerDescripcionPorIncidencia(incidencia);
+        areaSolucion.setText(solucion != null ? solucion : "Esta incidencia aún no tiene solución registrada.");
     }
 }
