@@ -108,13 +108,12 @@ public class SolucionDAO {
 	    Connection conn = ConexionBD.getConexion();
 
 	    try {
-	        // Paso 1 — obtener el id de la solucion ligada a esta incidencia via RESOLVER.
+	        // Paso 1 — obtener el id de la solucion.
 	        PreparedStatement psSelect = conn.prepareStatement(
 	            "SELECT solucion FROM RESOLVER WHERE incidencia = ?");
 	        psSelect.setInt(1, (int) i.getId());
 	        ResultSet rs = psSelect.executeQuery();
 
-	        // Si no hay solucion registrada no hay nada que borrar.
 	        if (!rs.next()) {
 	            conn.close();
 	            return false;
@@ -122,13 +121,25 @@ public class SolucionDAO {
 
 	        int idSolucion = rs.getInt("solucion");
 
-	        // Paso 2 — borrar primero la fila de RESOLVER (tiene FK hacia SOLUCION).
+	        // Paso 2 — borrar VALORAR (FK hacia RESOLVER).
+	        PreparedStatement psValorar = conn.prepareStatement(
+	            "DELETE FROM VALORAR WHERE incidencia = ?");
+	        psValorar.setInt(1, (int) i.getId());
+	        psValorar.executeUpdate();
+
+	        // Paso 3 — borrar TENER (FK hacia SOLUCION).
+	        PreparedStatement psTener = conn.prepareStatement(
+	            "DELETE FROM TENER WHERE solucion = ?");
+	        psTener.setInt(1, idSolucion);
+	        psTener.executeUpdate();
+
+	        // Paso 4 — borrar RESOLVER (FK hacia SOLUCION).
 	        PreparedStatement psResolver = conn.prepareStatement(
 	            "DELETE FROM RESOLVER WHERE incidencia = ?");
 	        psResolver.setInt(1, (int) i.getId());
 	        psResolver.executeUpdate();
 
-	        // Paso 3 — borrar la solucion de la tabla SOLUCION.
+	        // Paso 5 — borrar SOLUCION.
 	        PreparedStatement psSolucion = conn.prepareStatement(
 	            "DELETE FROM SOLUCION WHERE id = ?");
 	        psSolucion.setInt(1, idSolucion);
