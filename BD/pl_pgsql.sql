@@ -154,29 +154,71 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION eliminar_usuario(p_usuario VARCHAR)
 RETURNS VOID AS $$
 BEGIN
-    -- 1. Borrar RESOLVER donde el colaborador es el usuario
+    -- 1. Borrar VALORAR que referencian a RESOLVER del colaborador
+    DELETE FROM VALORAR
+    WHERE (incidencia, solucion) IN (
+        SELECT incidencia, solucion FROM RESOLVER WHERE colaborador = p_usuario
+    );
+
+    -- 2. Borrar VALORAR de incidencias del usuario como reportador
+    DELETE FROM VALORAR
+    WHERE incidencia IN (
+        SELECT id FROM INCIDENCIA WHERE reportador = p_usuario
+    );
+
+    -- 3. Borrar TENER que referencian a soluciones del colaborador
+    DELETE FROM TENER
+    WHERE solucion IN (
+        SELECT solucion FROM RESOLVER WHERE colaborador = p_usuario
+    );
+
+    -- 4. Borrar RESOLVER donde el colaborador es el usuario
     DELETE FROM RESOLVER WHERE colaborador = p_usuario;
 
-    -- 2. Borrar RESOLVER que apuntan a incidencias del usuario
+    -- 5. Borrar RESOLVER que apuntan a incidencias del usuario
     DELETE FROM RESOLVER
     WHERE incidencia IN (
         SELECT id FROM INCIDENCIA WHERE reportador = p_usuario
     );
 
-    -- 3. Borrar CLASIFICAR de sus incidencias
+    -- 6. Borrar CLASIFICAR de sus incidencias
     DELETE FROM CLASIFICAR
     WHERE incidencia IN (
         SELECT id FROM INCIDENCIA WHERE reportador = p_usuario
     );
 
-    -- 4. Borrar las incidencias del usuario
+    -- 7. Borrar RECOMPENSAR de sus incidencias
+    DELETE FROM RECOMPENSAR
+    WHERE incidencia IN (
+        SELECT id FROM INCIDENCIA WHERE reportador = p_usuario
+    );
+
+    -- 8. Borrar las incidencias del usuario
     DELETE FROM INCIDENCIA WHERE reportador = p_usuario;
 
-    -- 5. Borrar de REPORTADOR y COLABORADOR
+    -- 9. Borrar SER_DE del usuario (zonas asignadas)
+    DELETE FROM SER_DE WHERE usuario = p_usuario;
+
+    -- 10. Borrar ESTAR_ESPECIALIZADO del usuario
+    DELETE FROM ESTAR_ESPECIALIZADO WHERE usuario = p_usuario;
+
+    -- 11. Borrar SEGUIR donde aparece el usuario (como seguidor o seguido)
+    DELETE FROM SEGUIR WHERE usuario1 = p_usuario OR usuario2 = p_usuario;
+
+    -- 12. Borrar MENSAJE donde aparece el usuario
+    DELETE FROM MENSAJE WHERE usuario_envia = p_usuario OR usuario_recibe = p_usuario;
+
+    -- 13. Borrar OBTENER del usuario (logros)
+    DELETE FROM OBTENER WHERE usuario = p_usuario;
+
+    -- 14. Borrar COMENTARIO del usuario
+    DELETE FROM COMENTARIO WHERE usuario = p_usuario;
+
+    -- 15. Borrar de REPORTADOR y COLABORADOR
     DELETE FROM REPORTADOR WHERE usuario = p_usuario;
     DELETE FROM COLABORADOR WHERE usuario = p_usuario;
 
-    -- 6. Borrar el usuario principal
+    -- 16. Borrar el usuario principal
     DELETE FROM USUARIO WHERE nombre_usuario = p_usuario;
 END;
 $$ LANGUAGE plpgsql;
