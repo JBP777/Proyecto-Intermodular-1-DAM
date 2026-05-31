@@ -1,0 +1,31 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="yhi3m3JMk86KCEXO7u33">
+    <mxGraphModel dx="2054" dy="1061" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="HzC0Fty2XDvLbhR-q4Bm-1" edge="1" parent="1" source="HzC0Fty2XDvLbhR-q4Bm-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="HzC0Fty2XDvLbhR-q4Bm-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HzC0Fty2XDvLbhR-q4Bm-2" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="INICIO" vertex="1">
+          <mxGeometry height="80" width="120" x="354" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HzC0Fty2XDvLbhR-q4Bm-3" edge="1" parent="1" source="HzC0Fty2XDvLbhR-q4Bm-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="HzC0Fty2XDvLbhR-q4Bm-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HzC0Fty2XDvLbhR-q4Bm-4" parent="1" style="shape=display;whiteSpace=wrap;html=1;" value="VENTANA_PRINCIPAL_ADMIN" vertex="1">
+          <mxGeometry height="60" width="190" x="319" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="HzC0Fty2XDvLbhR-q4Bm-5" parent="1" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" value="VER&amp;nbsp; MENSAJE" vertex="1">
+          <mxGeometry height="60" width="120" x="354" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="HzC0Fty2XDvLbhR-q4Bm-6" parent="1" style="shape=display;whiteSpace=wrap;html=1;" value="VENTANA_LEER_MENSAJES" vertex="1">
+          <mxGeometry height="60" width="190" x="310" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="HzC0Fty2XDvLbhR-q4Bm-7" edge="1" parent="1" source="HzC0Fty2XDvLbhR-q4Bm-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0;entryDx=103.75;entryDy=0;entryPerimeter=0;" target="HzC0Fty2XDvLbhR-q4Bm-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

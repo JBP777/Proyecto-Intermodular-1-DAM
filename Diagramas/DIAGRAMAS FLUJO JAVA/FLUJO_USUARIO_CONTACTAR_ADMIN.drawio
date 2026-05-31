@@ -1,0 +1,61 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="kP4TvbYgpqFACuK_VpS-">
+    <mxGraphModel dx="2054" dy="1061" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="W91rKtEU-ytZjguM-BMw-1" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="INICIO" vertex="1">
+          <mxGeometry height="80" width="120" x="330" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="W91rKtEU-ytZjguM-BMw-2" edge="1" parent="1" source="W91rKtEU-ytZjguM-BMw-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="W91rKtEU-ytZjguM-BMw-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="W91rKtEU-ytZjguM-BMw-3" parent="1" style="shape=display;whiteSpace=wrap;html=1;" value="VENTANA_PRINCIPAL_USUARIO" vertex="1">
+          <mxGeometry height="60" width="130" x="325" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="W91rKtEU-ytZjguM-BMw-4" edge="1" parent="1" source="W91rKtEU-ytZjguM-BMw-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0;entryDx=66.25;entryDy=0;entryPerimeter=0;" target="W91rKtEU-ytZjguM-BMw-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="W91rKtEU-ytZjguM-BMw-5" edge="1" parent="1" source="W91rKtEU-ytZjguM-BMw-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="W91rKtEU-ytZjguM-BMw-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="W91rKtEU-ytZjguM-BMw-6" parent="1" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" value="CONTACTAR ADMIN" vertex="1">
+          <mxGeometry height="60" width="120" x="330" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="W91rKtEU-ytZjguM-BMw-7" edge="1" parent="1" source="W91rKtEU-ytZjguM-BMw-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="W91rKtEU-ytZjguM-BMw-12">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="390" y="625" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="W91rKtEU-ytZjguM-BMw-8" parent="1" style="shape=display;whiteSpace=wrap;html=1;" value="VENTANA_ENVIAR_MENSAJE" vertex="1">
+          <mxGeometry height="60" width="130" x="325" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="W91rKtEU-ytZjguM-BMw-16" edge="1" parent="1" source="W91rKtEU-ytZjguM-BMw-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="W91rKtEU-ytZjguM-BMw-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="W91rKtEU-ytZjguM-BMw-12" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="CAMPOS RELLENADOS" vertex="1">
+          <mxGeometry height="100" width="90" x="345" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="W91rKtEU-ytZjguM-BMw-13" parent="1" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" value="ENVIAR MENSAJE" vertex="1">
+          <mxGeometry height="60" width="120" x="530" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="W91rKtEU-ytZjguM-BMw-17" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="SI" vertex="1">
+          <mxGeometry height="30" width="60" x="460" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="W91rKtEU-ytZjguM-BMw-18" edge="1" parent="1" source="W91rKtEU-ytZjguM-BMw-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="W91rKtEU-ytZjguM-BMw-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="305" y="720" />
+              <mxPoint x="305" y="530" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="W91rKtEU-ytZjguM-BMw-19" connectable="0" parent="W91rKtEU-ytZjguM-BMw-18" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="NO&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.0888" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

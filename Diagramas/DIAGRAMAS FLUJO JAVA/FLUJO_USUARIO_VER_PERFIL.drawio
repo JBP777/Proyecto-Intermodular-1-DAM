@@ -1,0 +1,31 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="VncOYAdCKgq1TQ-lGZre">
+    <mxGraphModel dx="2054" dy="1061" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="u-yNgCCvTvo0En7D1MeT-3" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="INICIO" vertex="1">
+          <mxGeometry height="80" width="120" x="370" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="u-yNgCCvTvo0En7D1MeT-4" edge="1" parent="1" source="u-yNgCCvTvo0En7D1MeT-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="u-yNgCCvTvo0En7D1MeT-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u-yNgCCvTvo0En7D1MeT-5" parent="1" style="shape=display;whiteSpace=wrap;html=1;" value="VENTANA_PRINCIPAL_USUARIO" vertex="1">
+          <mxGeometry height="60" width="130" x="365" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="u-yNgCCvTvo0En7D1MeT-6" edge="1" parent="1" source="u-yNgCCvTvo0En7D1MeT-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0;entryDx=66.25;entryDy=0;entryPerimeter=0;" target="u-yNgCCvTvo0En7D1MeT-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u-yNgCCvTvo0En7D1MeT-7" edge="1" parent="1" source="u-yNgCCvTvo0En7D1MeT-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="u-yNgCCvTvo0En7D1MeT-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u-yNgCCvTvo0En7D1MeT-8" parent="1" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" value="VER PERFIL" vertex="1">
+          <mxGeometry height="60" width="120" x="370" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="u-yNgCCvTvo0En7D1MeT-10" parent="1" style="shape=display;whiteSpace=wrap;html=1;" value="VENTANA_VER_PERFIL_USUARIO" vertex="1">
+          <mxGeometry height="60" width="130" x="365" y="510" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

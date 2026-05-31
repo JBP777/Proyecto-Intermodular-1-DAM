@@ -1,0 +1,65 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="10ra2PyaGz6FfKi0-ZAM">
+    <mxGraphModel dx="2054" dy="1061" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="WM_rVDuY6hbS6016w5zu-1" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="INICIO" vertex="1">
+          <mxGeometry height="80" width="120" x="350" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="WM_rVDuY6hbS6016w5zu-6" edge="1" parent="1" source="WM_rVDuY6hbS6016w5zu-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="WM_rVDuY6hbS6016w5zu-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WM_rVDuY6hbS6016w5zu-3" parent="1" style="shape=display;whiteSpace=wrap;html=1;" value="VENTANA_PRINCIPAL_USUARIO" vertex="1">
+          <mxGeometry height="60" width="130" x="345" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="WM_rVDuY6hbS6016w5zu-4" edge="1" parent="1" source="WM_rVDuY6hbS6016w5zu-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0;entryDx=66.25;entryDy=0;entryPerimeter=0;" target="WM_rVDuY6hbS6016w5zu-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WM_rVDuY6hbS6016w5zu-8" edge="1" parent="1" source="WM_rVDuY6hbS6016w5zu-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="WM_rVDuY6hbS6016w5zu-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WM_rVDuY6hbS6016w5zu-5" parent="1" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" value="CREAR INCIDENCIA" vertex="1">
+          <mxGeometry height="60" width="120" x="350" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="WM_rVDuY6hbS6016w5zu-11" edge="1" parent="1" source="WM_rVDuY6hbS6016w5zu-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="WM_rVDuY6hbS6016w5zu-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WM_rVDuY6hbS6016w5zu-7" parent="1" style="shape=display;whiteSpace=wrap;html=1;" value="VENTANA_AGREGARINCIDENCIA_USUARIO" vertex="1">
+          <mxGeometry height="60" width="130" x="345" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="WM_rVDuY6hbS6016w5zu-13" edge="1" parent="1" source="WM_rVDuY6hbS6016w5zu-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="WM_rVDuY6hbS6016w5zu-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WM_rVDuY6hbS6016w5zu-10" parent="1" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" value="ENVIAR INCIDENCIA" vertex="1">
+          <mxGeometry height="60" width="120" x="350" y="585" as="geometry" />
+        </mxCell>
+        <mxCell id="WM_rVDuY6hbS6016w5zu-15" edge="1" parent="1" source="WM_rVDuY6hbS6016w5zu-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="WM_rVDuY6hbS6016w5zu-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WM_rVDuY6hbS6016w5zu-16" connectable="0" parent="WM_rVDuY6hbS6016w5zu-15" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="SI" vertex="1">
+          <mxGeometry relative="1" x="-0.152" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WM_rVDuY6hbS6016w5zu-18" edge="1" parent="1" source="WM_rVDuY6hbS6016w5zu-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="WM_rVDuY6hbS6016w5zu-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WM_rVDuY6hbS6016w5zu-19" connectable="0" parent="WM_rVDuY6hbS6016w5zu-18" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="NO" vertex="1">
+          <mxGeometry relative="1" x="-0.0105" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WM_rVDuY6hbS6016w5zu-12" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="CAMPOS COMPLETADO?" vertex="1">
+          <mxGeometry height="110" width="110" x="355" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="WM_rVDuY6hbS6016w5zu-14" parent="1" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" value="PUBLICAR INCIDENCIA" vertex="1">
+          <mxGeometry height="60" width="120" x="580" y="725" as="geometry" />
+        </mxCell>
+        <mxCell id="WM_rVDuY6hbS6016w5zu-17" parent="1" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" value="AVISO COMPLETAR CAMPOS" vertex="1">
+          <mxGeometry height="60" width="120" x="150" y="725" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
